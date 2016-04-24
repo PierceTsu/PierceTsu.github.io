@@ -3,21 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | PierceTsu&#39;s Blog</title>
+  <title>PierceTsu&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="1.短信的操作1.1短信解析(广播接收中完成)
+参考网站:www.grepcode.com,搜索android.provider.Telephony
+在网中查找SMS_RECEIVED_ACTION
+解析步骤:
+Object[]messages = (Object[]) intent.getSerializableExtra(&amp;quot;pdus&amp;quot;);
+for (int i = 0; i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/04/21/hello-world/index.html">
+<meta property="og:title" content="PierceTsu's Blog">
+<meta property="og:url" content="http://yoursite.com/2016/04/24/短信和电话的操作/index.html">
 <meta property="og:site_name" content="PierceTsu's Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-04-21T14:33:10.776Z">
+<meta property="og:description" content="1.短信的操作1.1短信解析(广播接收中完成)
+参考网站:www.grepcode.com,搜索android.provider.Telephony
+在网中查找SMS_RECEIVED_ACTION
+解析步骤:
+Object[]messages = (Object[]) intent.getSerializableExtra(&amp;quot;pdus&amp;quot;);
+for (int i = 0; i">
+<meta property="og:updated_time" content="2016-04-24T13:23:28.076Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="PierceTsu's Blog">
+<meta name="twitter:description" content="1.短信的操作1.1短信解析(广播接收中完成)
+参考网站:www.grepcode.com,搜索android.provider.Telephony
+在网中查找SMS_RECEIVED_ACTION
+解析步骤:
+Object[]messages = (Object[]) intent.getSerializableExtra(&amp;quot;pdus&amp;quot;);
+for (int i = 0; i">
   
     <link rel="alternative" href="/atom.xml" title="PierceTsu&#39;s Blog" type="application/atom+xml">
   
@@ -182,7 +194,7 @@ Quick">
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">专注移动开发</div>
                 </section>
                 
             </div>
@@ -235,11 +247,11 @@ Quick">
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-短信和电话的操作" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/21/hello-world/" class="article-date">
-      <time datetime="2016-04-21T14:33:10.776Z" itemprop="datePublished">2016-04-21</time>
+      <a href="/2016/04/24/短信和电话的操作/" class="article-date">
+      <time datetime="2016-04-24T13:23:36.477Z" itemprop="datePublished">2016-04-24</time>
 </a>
     </div>
   
@@ -248,36 +260,131 @@ Quick">
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Hello World
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="1-短信的操作"><a href="#1-短信的操作" class="headerlink" title="1.短信的操作"></a>1.短信的操作</h3><h4 id="1-1短信解析-广播接收中完成"><a href="#1-1短信解析-广播接收中完成" class="headerlink" title="1.1短信解析(广播接收中完成)"></a>1.1短信解析(广播接收中完成)</h4><ul>
+<li>参考网站:www.grepcode.com,搜索android.provider.Telephony</li>
+<li>在网中查找SMS_RECEIVED_ACTION</li>
+<li><p>解析步骤:</p>
+<pre><code>Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);
+for (int i = 0; i &lt; messages.length; i++) {
+    byte[] pdu = (byte[]) messages[i];
+    SmsMessage message = SmsMessage.createFromPdu(pdu);
+    //获取短信内容
+    String body = message.getMessageBody();
+    //获取收到短信的号码
+    String address = message.getOriginatingAddress();
+}
+</code></pre></li>
+<li><p>动态注册:</p>
+<pre><code>//动态注册
+mReceiver = new SmsReceiver();
+IntentFilter filter = new IntentFilter();
+filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+filter.addAction(&quot;android.provider.Telephony.SMS_RECEIVED&quot;);
+registerReceiver(mReceiver, filter);
+</code></pre></li>
+</ul>
+<h4 id="1-2-短信的拦截"><a href="#1-2-短信的拦截" class="headerlink" title="1.2 短信的拦截"></a>1.2 短信的拦截</h4><ul>
+<li>终止广播即可</li>
+</ul>
+<h4 id="1-3-短信的备份"><a href="#1-3-短信的备份" class="headerlink" title="1.3 短信的备份"></a>1.3 短信的备份</h4><ul>
+<li>备份:<ul>
+<li>使用内容提供者,从数据库中查询数据</li>
+<li>将数据转化成xml文件进行储存</li>
+</ul>
+</li>
+<li>还原:<ul>
+<li>解析之前的xml文件</li>
+<li>将数据插入数据库 </li>
+</ul>
+</li>
+</ul>
+<h4 id="1-4-启动发送短信意图-附短信内容"><a href="#1-4-启动发送短信意图-附短信内容" class="headerlink" title="1.4 启动发送短信意图(附短信内容)"></a>1.4 启动发送短信意图(附短信内容)</h4><ul>
+<li><p>参照系统上层应用的意图过滤器:(activity的name为:”.ui.ComposeMessageActivity”)</p>
+<pre><code>&lt;intent-filter&gt;
+    &lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;
+    &lt;action android:name=&quot;android.intent.action.SENDTO&quot; /&gt;
+    &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+    &lt;category android:name=&quot;android.intent.category.BROWSABLE&quot; /&gt;
+    &lt;data android:scheme=&quot;sms&quot; /&gt;
+    &lt;data android:scheme=&quot;smsto&quot; /&gt;
+&lt;/intent-filter&gt; 
+</code></pre></li>
+<li><p>附加短信内容:(ComposeMessageActivity.java中getStringExtra的类型)</p>
+<ul>
+<li>可知短信内容为:sms_body(<code>mWorkingMessage.setText(intent.getStringExtra(&quot;sms_body&quot;));</code>)<br>  Intent intent = new Intent();<br>  intent.setAction(“android.intent.action.SENDTO”);<br>  intent.setData(Uri.parse(“sms:”));<br>  intent.putExtra(“sms_body”, “…”);</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-5-直接发送短信"><a href="#1-5-直接发送短信" class="headerlink" title="1.5 直接发送短信"></a>1.5 直接发送短信</h4><pre><code>SmsManager sm = SmsManager.getDefault();
+sm.sendTextMessage(&quot;电话号码&quot;, null, &quot;短信内容&quot;, null, null);
+</code></pre><h3 id="2-电话"><a href="#2-电话" class="headerlink" title="2. 电话"></a>2. 电话</h3><h4 id="2-1-获取SIM卡的序列号"><a href="#2-1-获取SIM卡的序列号" class="headerlink" title="2.1 获取SIM卡的序列号"></a>2.1 获取SIM卡的序列号</h4><ul>
+<li>需要添加权限<br>  android.permission.READ_PHONE_STATE</li>
+<li>调用系统服务获取电话管理者<br>  TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);<br>  String simSerialNumber = tm.getSimSerialNumber();</li>
+<li>可用于判断是否有sim卡<br>  if (TextUtils.isEmpty(simSerialNumber)) {<pre><code>Toast.makeText(this, &quot;请插入sim卡&quot;, Toast.LENGTH_LONG).show();
+return;
+</code></pre>  }</li>
+</ul>
+<h4 id="2-2-启动拨打电话的意图-隐式意图"><a href="#2-2-启动拨打电话的意图-隐式意图" class="headerlink" title="2.2 启动拨打电话的意图(隐式意图)"></a>2.2 启动拨打电话的意图(隐式意图)</h4><pre><code>Intent intent = new Intent();
+//拨打电话的界面
+intent.setAction(Intent.ACTION_DIAL);
+//直接打电话
+//intent.setAction(Intent.ACTION_CALL);
+intent.setData(Uri.parse(&quot;tel://&quot;+childInfo.number));
+startActivity(intent);    
+</code></pre><h4 id="2-3-获取电话的状态"><a href="#2-3-获取电话的状态" class="headerlink" title="2.3 获取电话的状态"></a>2.3 获取电话的状态</h4><ul>
+<li><p>来电:</p>
+<ul>
+<li>一般在服务中进行</li>
+<li><p>思路:</p>
+<ul>
+<li>调用系统服务获取TelephonyManager</li>
+<li>调用listen方法</li>
+<li>设置监听事件,在PhoneStateListener中复写onCallStateChanged方法</li>
+<li>获取三种状态</li>
+</ul>
+</li>
+<li><p>挂断电话:(AIDL远程服务)</p>
+<ul>
+<li><p>查看源码(aidl文件sourceInsight无法查看)</p>
+<ul>
+<li>TelephonyManager–&gt;getITelephony(); —android.jar包中没有该方法</li>
+<li>找到aidl文件的路径:com.android.internal.telephony.ITelephony</li>
+<li>文件夹路径: android4.0\frameworks\base\telephony\java\com\android\internal\telephony\ITelephony.aidl</li>
+<li>网站查询:www.grepcode.com–&gt;TelephonyManager–&gt;getITelephony()</li>
+<li>ITelephony接口下有endCall方法</li>
+<li>查找:NeighboringCellInfo.aidl<ul>
+<li>android4.0\frameworks\base\telephony\java\android\telephony\NeighboringCellInfo.aidl</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>思路: </p>
+<ul>
+<li>ITelephony接口中才有endCall的方法</li>
+<li>ITelephony接口类型实例的获取可调用getITelephony()方法</li>
+<li>而ITelephony.aidl中提供了获取ITelephony的方法<br>  ITelephony telephony = ITelephony.Stub.asInterface(ServiceManager.getService(Context.TELEPHONY_SERVICE));</li>
+<li>ServiceManager未暴露出来,故需使用反射的手段获取其中的getService方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>去电:</p>
+<ul>
+<li>通过广播接受者获取<ul>
+<li>思路:<ul>
+<li>在onReceive方法中调用getResultData方法来获取数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -286,13 +393,13 @@ Quick">
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/04/21/hello-world/">Hello World</a></p>
+        <p><span>本文标题:</span><a href="/2016/04/24/短信和电话的操作/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Pierce Tsu</a></p>
-        <p><span>发布时间:</span>2016-04-21, 22:33:10</p>
-        <p><span>最后更新:</span>2016-04-21, 22:33:10</p>
+        <p><span>发布时间:</span>2016-04-24, 21:23:36</p>
+        <p><span>最后更新:</span>2016-04-24, 21:23:28</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/04/21/hello-world/" title="Hello World">http://yoursite.com/2016/04/21/hello-world/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/04/21/hello-world/　　作者: Pierce Tsu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/04/24/短信和电话的操作/" title="">http://yoursite.com/2016/04/24/短信和电话的操作/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/04/24/短信和电话的操作/　　作者: Pierce Tsu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -302,12 +409,23 @@ Quick">
 
 
 
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/04/21/Hexo使用简介/">
+                    Hello World
+                </a>
+            </div>
+        
+    </nav>
+
   
 </article>
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-短信的操作"><span class="toc-number">1.</span> <span class="toc-text">1.短信的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1短信解析-广播接收中完成"><span class="toc-number">1.1.</span> <span class="toc-text">1.1短信解析(广播接收中完成)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-短信的拦截"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 短信的拦截</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-短信的备份"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 短信的备份</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-启动发送短信意图-附短信内容"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 启动发送短信意图(附短信内容)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-直接发送短信"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 直接发送短信</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-电话"><span class="toc-number">2.</span> <span class="toc-text">2. 电话</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-获取SIM卡的序列号"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 获取SIM卡的序列号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-启动拨打电话的意图-隐式意图"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 启动拨打电话的意图(隐式意图)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-获取电话的状态"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 获取电话的状态</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -364,7 +482,7 @@ Quick">
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Hello World　| PierceTsu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"　| PierceTsu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -390,11 +508,13 @@ Quick">
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/04/21/Hexo使用简介/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/21/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/短信和电话的操作/">短信和电话的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/21/Hexo使用简介/">Hello World</a></li></ul>
 
 
 

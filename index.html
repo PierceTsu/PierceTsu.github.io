@@ -183,7 +183,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">专注移动开发</div>
                 </section>
                 
             </div>
@@ -238,10 +238,174 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-短信和电话的操作" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/21/hello-world/" class="article-date">
+      <a href="/2016/04/24/短信和电话的操作/" class="article-date">
+      <time datetime="2016-04-24T13:23:36.477Z" itemprop="datePublished">2016-04-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="1-短信的操作"><a href="#1-短信的操作" class="headerlink" title="1.短信的操作"></a>1.短信的操作</h3><h4 id="1-1短信解析-广播接收中完成"><a href="#1-1短信解析-广播接收中完成" class="headerlink" title="1.1短信解析(广播接收中完成)"></a>1.1短信解析(广播接收中完成)</h4><ul>
+<li>参考网站:www.grepcode.com,搜索android.provider.Telephony</li>
+<li>在网中查找SMS_RECEIVED_ACTION</li>
+<li><p>解析步骤:</p>
+<pre><code>Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);
+for (int i = 0; i &lt; messages.length; i++) {
+    byte[] pdu = (byte[]) messages[i];
+    SmsMessage message = SmsMessage.createFromPdu(pdu);
+    //获取短信内容
+    String body = message.getMessageBody();
+    //获取收到短信的号码
+    String address = message.getOriginatingAddress();
+}
+</code></pre></li>
+<li><p>动态注册:</p>
+<pre><code>//动态注册
+mReceiver = new SmsReceiver();
+IntentFilter filter = new IntentFilter();
+filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+filter.addAction(&quot;android.provider.Telephony.SMS_RECEIVED&quot;);
+registerReceiver(mReceiver, filter);
+</code></pre></li>
+</ul>
+<h4 id="1-2-短信的拦截"><a href="#1-2-短信的拦截" class="headerlink" title="1.2 短信的拦截"></a>1.2 短信的拦截</h4><ul>
+<li>终止广播即可</li>
+</ul>
+<h4 id="1-3-短信的备份"><a href="#1-3-短信的备份" class="headerlink" title="1.3 短信的备份"></a>1.3 短信的备份</h4><ul>
+<li>备份:<ul>
+<li>使用内容提供者,从数据库中查询数据</li>
+<li>将数据转化成xml文件进行储存</li>
+</ul>
+</li>
+<li>还原:<ul>
+<li>解析之前的xml文件</li>
+<li>将数据插入数据库 </li>
+</ul>
+</li>
+</ul>
+<h4 id="1-4-启动发送短信意图-附短信内容"><a href="#1-4-启动发送短信意图-附短信内容" class="headerlink" title="1.4 启动发送短信意图(附短信内容)"></a>1.4 启动发送短信意图(附短信内容)</h4><ul>
+<li><p>参照系统上层应用的意图过滤器:(activity的name为:”.ui.ComposeMessageActivity”)</p>
+<pre><code>&lt;intent-filter&gt;
+    &lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;
+    &lt;action android:name=&quot;android.intent.action.SENDTO&quot; /&gt;
+    &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+    &lt;category android:name=&quot;android.intent.category.BROWSABLE&quot; /&gt;
+    &lt;data android:scheme=&quot;sms&quot; /&gt;
+    &lt;data android:scheme=&quot;smsto&quot; /&gt;
+&lt;/intent-filter&gt; 
+</code></pre></li>
+<li><p>附加短信内容:(ComposeMessageActivity.java中getStringExtra的类型)</p>
+<ul>
+<li>可知短信内容为:sms_body(<code>mWorkingMessage.setText(intent.getStringExtra(&quot;sms_body&quot;));</code>)<br>  Intent intent = new Intent();<br>  intent.setAction(“android.intent.action.SENDTO”);<br>  intent.setData(Uri.parse(“sms:”));<br>  intent.putExtra(“sms_body”, “…”);</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-5-直接发送短信"><a href="#1-5-直接发送短信" class="headerlink" title="1.5 直接发送短信"></a>1.5 直接发送短信</h4><pre><code>SmsManager sm = SmsManager.getDefault();
+sm.sendTextMessage(&quot;电话号码&quot;, null, &quot;短信内容&quot;, null, null);
+</code></pre><h3 id="2-电话"><a href="#2-电话" class="headerlink" title="2. 电话"></a>2. 电话</h3><h4 id="2-1-获取SIM卡的序列号"><a href="#2-1-获取SIM卡的序列号" class="headerlink" title="2.1 获取SIM卡的序列号"></a>2.1 获取SIM卡的序列号</h4><ul>
+<li>需要添加权限<br>  android.permission.READ_PHONE_STATE</li>
+<li>调用系统服务获取电话管理者<br>  TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);<br>  String simSerialNumber = tm.getSimSerialNumber();</li>
+<li>可用于判断是否有sim卡<br>  if (TextUtils.isEmpty(simSerialNumber)) {<pre><code>Toast.makeText(this, &quot;请插入sim卡&quot;, Toast.LENGTH_LONG).show();
+return;
+</code></pre>  }</li>
+</ul>
+<h4 id="2-2-启动拨打电话的意图-隐式意图"><a href="#2-2-启动拨打电话的意图-隐式意图" class="headerlink" title="2.2 启动拨打电话的意图(隐式意图)"></a>2.2 启动拨打电话的意图(隐式意图)</h4><pre><code>Intent intent = new Intent();
+//拨打电话的界面
+intent.setAction(Intent.ACTION_DIAL);
+//直接打电话
+//intent.setAction(Intent.ACTION_CALL);
+intent.setData(Uri.parse(&quot;tel://&quot;+childInfo.number));
+startActivity(intent);    
+</code></pre><h4 id="2-3-获取电话的状态"><a href="#2-3-获取电话的状态" class="headerlink" title="2.3 获取电话的状态"></a>2.3 获取电话的状态</h4><ul>
+<li><p>来电:</p>
+<ul>
+<li>一般在服务中进行</li>
+<li><p>思路:</p>
+<ul>
+<li>调用系统服务获取TelephonyManager</li>
+<li>调用listen方法</li>
+<li>设置监听事件,在PhoneStateListener中复写onCallStateChanged方法</li>
+<li>获取三种状态</li>
+</ul>
+</li>
+<li><p>挂断电话:(AIDL远程服务)</p>
+<ul>
+<li><p>查看源码(aidl文件sourceInsight无法查看)</p>
+<ul>
+<li>TelephonyManager–&gt;getITelephony(); —android.jar包中没有该方法</li>
+<li>找到aidl文件的路径:com.android.internal.telephony.ITelephony</li>
+<li>文件夹路径: android4.0\frameworks\base\telephony\java\com\android\internal\telephony\ITelephony.aidl</li>
+<li>网站查询:www.grepcode.com–&gt;TelephonyManager–&gt;getITelephony()</li>
+<li>ITelephony接口下有endCall方法</li>
+<li>查找:NeighboringCellInfo.aidl<ul>
+<li>android4.0\frameworks\base\telephony\java\android\telephony\NeighboringCellInfo.aidl</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>思路: </p>
+<ul>
+<li>ITelephony接口中才有endCall的方法</li>
+<li>ITelephony接口类型实例的获取可调用getITelephony()方法</li>
+<li>而ITelephony.aidl中提供了获取ITelephony的方法<br>  ITelephony telephony = ITelephony.Stub.asInterface(ServiceManager.getService(Context.TELEPHONY_SERVICE));</li>
+<li>ServiceManager未暴露出来,故需使用反射的手段获取其中的getService方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>去电:</p>
+<ul>
+<li>通过广播接受者获取<ul>
+<li>思路:<ul>
+<li>在onReceive方法中调用getResultData方法来获取数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Hexo使用简介" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/21/Hexo使用简介/" class="article-date">
       <time datetime="2016-04-21T14:33:10.776Z" itemprop="datePublished">2016-04-21</time>
 </a>
     </div>
@@ -255,7 +419,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/21/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/04/21/Hexo使用简介/">Hello World</a>
     </h1>
   
 

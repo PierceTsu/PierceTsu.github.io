@@ -33,8 +33,8 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 
 通过提供的API(如getLeft , getTop, getBottom, getRight)可以获得控件在parent中的相对位置.
 获取v">
-<meta property="og:image" content="http://yoursite.com/img/view_coord_sys.png">
-<meta property="og:updated_time" content="2016-07-02T13:12:43.186Z">
+<meta property="og:image" content="http://i2.piimg.com/4851/69df0a2002693cb9.png">
+<meta property="og:updated_time" content="2016-07-02T15:09:30.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义View概述">
 <meta name="twitter:description" content="1.关于坐标系
@@ -49,7 +49,7 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 
 通过提供的API(如getLeft , getTop, getBottom, getRight)可以获得控件在parent中的相对位置.
 获取v">
-<meta name="twitter:image" content="http://yoursite.com/img/view_coord_sys.png">
+<meta name="twitter:image" content="http://i2.piimg.com/4851/69df0a2002693cb9.png">
   
     <link rel="alternative" href="/atom.xml" title="PierceTsu&#39;s Blog" type="application/atom+xml">
   
@@ -146,13 +146,13 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>Friends</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>About Me</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -313,7 +313,7 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 <ul>
 <li>通过提供的API(如getLeft , getTop, getBottom, getRight)可以获得控件在parent中的相对位置.</li>
 <li><p>获取view在屏幕中的位置:需要在onLayout完后获取,通常在监听布局完成后获取</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int[] location = new int[2];</span><br><span class="line">  	view.getLocationOnScreen(location);</span><br><span class="line">  	int x = location[0];</span><br><span class="line">  	int y = location[1];</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] location = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">  	view.getLocationOnScreen(location);</span><br><span class="line">  	<span class="keyword">int</span> x = location[<span class="number">0</span>];</span><br><span class="line">  	<span class="keyword">int</span> y = location[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -323,7 +323,7 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 <li>getRawX()和getRawY()获取触摸点相对于屏幕默认坐标系的坐标 </li>
 </ul>
 </li>
-<li>图解位置:<br>  <img src="/img/view_coord_sys.png" alt=""></li>
+<li>图解位置:<br>  <img src="http://i2.piimg.com/4851/69df0a2002693cb9.png" alt=""></li>
 </ul>
 <h3 id="2-Android中的颜色"><a href="#2-Android中的颜色" class="headerlink" title="2.Android中的颜色"></a>2.Android中的颜色</h3><h4 id="2-1颜色模式"><a href="#2-1颜色模式" class="headerlink" title="2.1颜色模式"></a>2.1颜色模式</h4><ul>
 <li>Android中支持的颜色模式:</li>
@@ -365,7 +365,7 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 <h4 id="3-1-Configuration类"><a href="#3-1-Configuration类" class="headerlink" title="3.1 Configuration类"></a>3.1 Configuration类</h4><ul>
 <li>说明:描述设备的配置信息</li>
 <li><p>获取配置信息: </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Configuration configuration = getResources().getConfiguration();</span><br><span class="line">//获取国家码</span><br><span class="line">int countryCode=configuration.mcc;</span><br><span class="line">//获取网络码</span><br><span class="line">int networkCode=configuration.mnc;</span><br><span class="line">//判断横竖屏</span><br><span class="line">if(configuration.orientation==Configuration.ORIENTATION_PORTRAIT)&#123;</span><br><span class="line"></span><br><span class="line">&#125;else &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Configuration configuration = getResources().getConfiguration();</span><br><span class="line"><span class="comment">//获取国家码</span></span><br><span class="line"><span class="keyword">int</span> countryCode=configuration.mcc;</span><br><span class="line"><span class="comment">//获取网络码</span></span><br><span class="line"><span class="keyword">int</span> networkCode=configuration.mnc;</span><br><span class="line"><span class="comment">//判断横竖屏</span></span><br><span class="line"><span class="keyword">if</span>(configuration.orientation==Configuration.ORIENTATION_PORTRAIT)&#123;</span><br><span class="line">	<span class="comment">//<span class="doctag">TODO:</span></span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="comment">//<span class="doctag">TODO:</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="3-2-ViewConfiguration类"><a href="#3-2-ViewConfiguration类" class="headerlink" title="3.2 ViewConfiguration类"></a>3.2 ViewConfiguration类</h4><ul>
@@ -375,10 +375,10 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 </ul>
 </li>
 <li><p>相关的静态方法:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//双击间隔时间.在该时间内是双击，否则是单击</span><br><span class="line">int doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout();</span><br><span class="line">//按住状态转变为长按状态需要的时间</span><br><span class="line">int longPressTimeout = ViewConfiguration.getLongPressTimeout();</span><br><span class="line">//重复按键的时间</span><br><span class="line">int keyRepeatTimeout = ViewConfiguration.getKeyRepeatTimeout();</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//双击间隔时间.在该时间内是双击，否则是单击</span></span><br><span class="line"><span class="keyword">int</span> doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout();</span><br><span class="line"><span class="comment">//按住状态转变为长按状态需要的时间</span></span><br><span class="line"><span class="keyword">int</span> longPressTimeout = ViewConfiguration.getLongPressTimeout();</span><br><span class="line"><span class="comment">//重复按键的时间</span></span><br><span class="line"><span class="keyword">int</span> keyRepeatTimeout = ViewConfiguration.getKeyRepeatTimeout();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>通过对象获取的方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//获取touchSlop。该值表示系统所能识别出的被认为是滑动的最小距离</span><br><span class="line">int touchSlop = viewConfiguration.getScaledTouchSlop();</span><br><span class="line">//获取Fling速度的最小值和最大值</span><br><span class="line">int minimumVelocity = viewConfiguration.getScaledMinimumFlingVelocity();</span><br><span class="line">int maximumVelocity = viewConfiguration.getScaledMaximumFlingVelocity();</span><br><span class="line">//判断是否有物理按键</span><br><span class="line">boolean isHavePermanentMenuKey=viewConfiguration.hasPermanentMenuKey();</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取touchSlop。该值表示系统所能识别出的被认为是滑动的最小距离</span></span><br><span class="line"><span class="keyword">int</span> touchSlop = viewConfiguration.getScaledTouchSlop();</span><br><span class="line"><span class="comment">//获取Fling速度的最小值和最大值</span></span><br><span class="line"><span class="keyword">int</span> minimumVelocity = viewConfiguration.getScaledMinimumFlingVelocity();</span><br><span class="line"><span class="keyword">int</span> maximumVelocity = viewConfiguration.getScaledMaximumFlingVelocity();</span><br><span class="line"><span class="comment">//判断是否有物理按键</span></span><br><span class="line"><span class="keyword">boolean</span> isHavePermanentMenuKey=viewConfiguration.hasPermanentMenuKey();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="3-3-GestureDetector类"><a href="#3-3-GestureDetector类" class="headerlink" title="3.3 GestureDetector类"></a>3.3 GestureDetector类</h4><ul>
@@ -396,7 +396,7 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 </li>
 <li>new 一个GestureDetector对象,构造方法中传一个context和第一步创建的类</li>
 <li><p>将Touch事件交给GestureDetector处理 </p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override  </span><br><span class="line">public boolean onTouchEvent(MotionEvent event) &#123;  </span><br><span class="line">   		return mGestureDetector.onTouchEvent(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;  </span><br><span class="line">   		<span class="keyword">return</span> mGestureDetector.onTouchEvent(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -406,13 +406,13 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 <li><p>使用步骤:</p>
 <ol>
 <li><p>开始速度追踪</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private void startVelocityTracker(MotionEvent event) &#123;  </span><br><span class="line">  		if (mVelocityTracker == null) &#123;</span><br><span class="line">		//初始化VelocityTracker  </span><br><span class="line">       		mVelocityTracker = VelocityTracker.obtain();  </span><br><span class="line">   		&#125; </span><br><span class="line">	//把要追踪的MotionEvent注册到VelocityTracker的监听中	 </span><br><span class="line">   		mVelocityTracker.addMovement(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startVelocityTracker</span><span class="params">(MotionEvent event)</span> </span>&#123;  </span><br><span class="line">  		<span class="keyword">if</span> (mVelocityTracker == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="comment">//初始化VelocityTracker  </span></span><br><span class="line">       		mVelocityTracker = VelocityTracker.obtain();  </span><br><span class="line">   		&#125; </span><br><span class="line">	<span class="comment">//把要追踪的MotionEvent注册到VelocityTracker的监听中	 </span></span><br><span class="line">   		mVelocityTracker.addMovement(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>获取追踪到的速度</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private int getScrollVelocity() &#123;  </span><br><span class="line">   		// 设置VelocityTracker单位.1000表示1秒时间内运动的像素（pix/second)  </span><br><span class="line">   		mVelocityTracker.computeCurrentVelocity(1000);  </span><br><span class="line">   		// 获取在1秒内X方向所滑动像素值  </span><br><span class="line">   		int xVelocity = (int) mVelocityTracker.getXVelocity();  </span><br><span class="line">   		return Math.abs(xVelocity);  </span><br><span class="line">  	&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getScrollVelocity</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">   		<span class="comment">// 设置VelocityTracker单位.1000表示1秒时间内运动的像素（pix/second)  </span></span><br><span class="line">   		mVelocityTracker.computeCurrentVelocity(<span class="number">1000</span>);  </span><br><span class="line">   		<span class="comment">// 获取在1秒内X方向所滑动像素值  </span></span><br><span class="line">   		<span class="keyword">int</span> xVelocity = (<span class="keyword">int</span>) mVelocityTracker.getXVelocity();  </span><br><span class="line">   		<span class="keyword">return</span> Math.abs(xVelocity);  </span><br><span class="line">  	&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>解除速度追踪: 在不需要的时候重置并回收内存</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private void stopVelocityTracker() &#123;  </span><br><span class="line">    		if (mVelocityTracker != null) &#123;  </span><br><span class="line">        		mVelocityTracker.recycle();  </span><br><span class="line">        		mVelocityTracker = null;  </span><br><span class="line">    		&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">stopVelocityTracker</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    		<span class="keyword">if</span> (mVelocityTracker != <span class="keyword">null</span>) &#123;  </span><br><span class="line">        		mVelocityTracker.recycle();  </span><br><span class="line">        		mVelocityTracker = <span class="keyword">null</span>;  </span><br><span class="line">    		&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -430,17 +430,18 @@ Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡
 <ol>
 <li>传入context,创建Scroller对象</li>
 <li><p>复写view的computeScroll方法</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">      public void computeScroll() &#123;</span><br><span class="line">          if (mScroller.computeScrollOffset())&#123;   //如果mScroller没有调用startScroll，这里将会返回false。</span><br><span class="line">              scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</span><br><span class="line">              postInvalidate();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (mScroller.computeScrollOffset())&#123;   <span class="comment">//如果mScroller没有调用startScroll，这里将会返回false。</span></span><br><span class="line">              scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</span><br><span class="line">              postInvalidate();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>调用Scroller的startScroll方法,在调用invalidate方法进行重绘</p>
-<pre><code>//封装缓慢滑动到指定位置方法
-private void smoothScrollTo(int desX , int desY){
-    int scrollX = getScrollX();
-    int deltaX = desX - scrollX;
-    //指定1s内滑动到desX
-    mScroller.startScroll(scrollX,0,deltaX,0,1000);
+<pre><code class="java"><span class="comment">//封装缓慢滑动到指定位置方法</span>
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">smoothScrollTo</span><span class="params">(<span class="keyword">int</span> desX , <span class="keyword">int</span> desY)</span></span>{
+    <span class="keyword">int</span> scrollX = getScrollX();
+    <span class="keyword">int</span> deltaX = desX - scrollX;
+    <span class="comment">//指定1s内滑动到desX</span>
+    mScroller.startScroll(scrollX,<span class="number">0</span>,deltaX,<span class="number">0</span>,<span class="number">1000</span>);
 }
-</code></pre></li>
+</code></pre>
+</li>
 </ol>
 </li>
 </ul>
@@ -458,17 +459,17 @@ private void smoothScrollTo(int desX , int desY){
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/07/02/自定义View概述/">自定义View概述</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage">Pierce Tsu</a></p>
-        <p><span>Created:</span>2016-07-02, 21:08:01</p>
-        <p><span>Updated:</span>2016-07-02, 21:12:43</p>
+        <p><span>本文标题:</span><a href="/2016/07/02/自定义View概述/">自定义View概述</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Pierce Tsu</a></p>
+        <p><span>发布时间:</span>2016-07-02, 21:08:01</p>
+        <p><span>最后更新:</span>2016-07-02, 23:09:30</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/07/02/自定义View概述/" title="自定义View概述">http://yoursite.com/2016/07/02/自定义View概述/</a>
-            <span class="copy-path" data-clipboard-text="From http://yoursite.com/2016/07/02/自定义View概述/　　By Pierce Tsu" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/02/自定义View概述/" title="自定义View概述">http://yoursite.com/2016/07/02/自定义View概述/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/07/02/自定义View概述/　　作者: Pierce Tsu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -489,7 +490,7 @@ private void smoothScrollTo(int desX , int desY){
 </article>
 
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">文章目录</strong>
     <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-关于坐标系"><span class="toc-number">1.</span> <span class="toc-text">1.关于坐标系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2获取控件的坐标和触摸点的坐标"><span class="toc-number">1.1.</span> <span class="toc-text">1.2获取控件的坐标和触摸点的坐标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Android中的颜色"><span class="toc-number">2.</span> <span class="toc-text">2.Android中的颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1颜色模式"><span class="toc-number">2.1.</span> <span class="toc-text">2.1颜色模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Android官方提供的操作类"><span class="toc-number">3.</span> <span class="toc-text">3.Android官方提供的操作类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Configuration类"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Configuration类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-ViewConfiguration类"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 ViewConfiguration类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-GestureDetector类"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 GestureDetector类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-VelocityTracker"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 VelocityTracker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-Scroller"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 Scroller</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-OverScroller"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 OverScroller</span></a></li></ol></li></ol>
 </div>
 <style>
@@ -501,10 +502,10 @@ private void smoothScrollTo(int desX , int desY){
     }
 </style>
 
-<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 <script>
-    var valueHide = "Hide";
-    var valueShow = "Show";
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
 
     if ($(".left-col").is(":hidden")) {
         $("#tocButton").attr("value", valueShow);
@@ -567,13 +568,13 @@ private void smoothScrollTo(int desX , int desY){
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/24/短信和电话的操作/" title="Next: 短信和电话的操作">
+            <a href="/2016/04/24/短信和电话的操作/" title="下一篇: 短信和电话的操作">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -596,14 +597,14 @@ private void smoothScrollTo(int desX , int desY){
                 2016 Pierce Tsu
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >Site Visitors: 
+                        <span id="site-visit" >本站到访数: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -613,7 +614,7 @@ private void smoothScrollTo(int desX , int desY){
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">Page Hits: 
+                        <span id="page-visit">本页阅读量: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
@@ -646,9 +647,9 @@ private void smoothScrollTo(int desX , int desY){
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">

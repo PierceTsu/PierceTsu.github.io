@@ -8,7 +8,7 @@
   <meta name="description" content="专注移动开发!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PierceTsu's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yaoyuehome.com/index.html">
 <meta property="og:site_name" content="PierceTsu's Blog">
 <meta property="og:description" content="专注移动开发!">
 <meta name="twitter:card" content="summary">
@@ -238,6 +238,359 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Paint、Canvas和Path" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/27/Paint、Canvas和Path/" class="article-date">
+      <time datetime="2016-08-27T10:53:54.487Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/Paint、Canvas和Path/">Paint、Canvas和Path类的使用介绍</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一、Paint"><a href="#一、Paint" class="headerlink" title="一、Paint"></a>一、Paint</h2><ul>
+<li>Paint类为Android中的画笔类</li>
+<li>Paint集成了所有“画”的属性</li>
+</ul>
+<h3 id="1-1-画笔的初始化"><a href="#1-1-画笔的初始化" class="headerlink" title="1.1 画笔的初始化"></a>1.1 画笔的初始化</h3><ul>
+<li>一般在构造方法中进行初始化,切记不要在onDraw方法中初始化,将会多次创建对象</li>
+<li><p>各种setter方法来设置各种不同的属性</p>
+<blockquote>
+<p>比如setColor()设置画笔颜色，setStrokeWidth()设置描边线条，setStyle()设置画笔的样式：</p>
+</blockquote>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化画笔,抗锯齿</span></span><br><span class="line">mPaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-2-相应API"><a href="#1-2-相应API" class="headerlink" title="1.2 相应API"></a>1.2 相应API</h3><ul>
+<li><code>setStyle(Style style);</code><blockquote>
+<p>画笔样式分三种： </p>
+<ol>
+<li>Paint.Style.STROKE：描边 </li>
+<li>Paint.Style.FILL_AND_STROKE：描边并填充 </li>
+<li>Paint.Style.FILL：填充</li>
+</ol>
+</blockquote>
+</li>
+<li><code>set(Paint src);</code><blockquote>
+<p>顾名思义为当前画笔设置一个画笔，说白了就是把另一个画笔的属性设置Copy给我们的画笔</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="1-2-1-颜色相关操作"><a href="#1-2-1-颜色相关操作" class="headerlink" title="1.2.1 颜色相关操作"></a>1.2.1 颜色相关操作</h4><ul>
+<li><p><code>setColorFilter(ColorFilter filter);</code></p>
+<blockquote>
+<p>设置颜色过滤,传入一个ColorFilter参数同样也会返回一个ColorFilter实例,其子类有三个</p>
+<ul>
+<li>ColorMatrixColorFilter:色彩矩阵颜色过滤器,该构造方法中需要传入ColoMatrix对象<ul>
+<li>ColoMatrix对象定义了一个4x5的float[]类型的矩阵：</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ColorMatrix colorMatrix = <span class="keyword">new</span> ColorMatrix(<span class="keyword">new</span> <span class="keyword">float</span>[]&#123;  </span><br><span class="line">       <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//R</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//G</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//B</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>,  <span class="comment">//A</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+* 这个矩阵不同的位置表示的RGBA值，其范围在0.0F至2.0F之间，1为保持原图的RGB值。每一行的第五列数字表示偏移值
+</code></pre><ul>
+<li>LightingColorFilter:光照颜色过滤,构造方法:<code>LightingColorFilter (int mul, int add)</code>,这两个值都是16进制的色彩值0xAARRGGBB<ul>
+<li>mul全称是colorMultiply意为色彩倍增</li>
+<li>add全称是colorAdd意为色彩添加 </li>
+</ul>
+</li>
+<li>PorterDuffColorFilter:混合模式,构造方法:<code>PorterDuffColorFilter(int color,PorterDuff.Mode mode)</code><ul>
+<li>color:表示16进制的颜色值</li>
+<li>mode:表示PorterDuff内部类Mode中的一个常量值，这个值表示混合模式(该模式不仅仅是应用于图像色彩混合，还应用于图形混合)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>setXfermode(Xfermode xfermode);</code></p>
+<blockquote>
+<p>设置图片混合的过渡模式,与setColorFilter类似,传入一个Xfermode参数同样也会返回一个Xfermode实例,其子类有三个</p>
+<ul>
+<li>AvoidXfermode,这个API因为不支持硬件加速在API 16已经过时了,如需使用在AndroidManifest.xml文件中设置application节点下的android:hardwareAccelerated属性为false来关闭硬件加速</li>
+<li>PixelXorXfermode,与AvoidXfermode一样也在API 16过时了</li>
+<li>PorterDuffXfermode,构造方法:<code>PorterDuffXfermode(PorterDuff.Mode mode)</code></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h5 id="1-2-1-1-颜色混合模式"><a href="#1-2-1-1-颜色混合模式" class="headerlink" title="1.2.1.1 颜色混合模式"></a>1.2.1.1 颜色混合模式</h5><ul>
+<li>不同模式时的混合效果如下:<br><img src="img/mixture.jpg" alt="混合效果"></li>
+<li>说明:<ul>
+<li>Sa全称为Source alpha表示源图的Alpha通道；</li>
+<li>Sc全称为Source color表示源图的颜色；</li>
+<li>Da全称为Destination alpha表示目标图的Alpha通道；</li>
+<li>Dc全称为Destination color表示目标图的颜色</li>
+<li>“[……]”里分为两部分,前部分为计算后的Alpha通道,后部分为计算后的颜色值,图形混合后的图片依靠这个矢量来计算ARGB的值</li>
+</ul>
+</li>
+<li>混合模式的使用场景:<ul>
+<li></li>
+<li>XOR: 在均为不透明情况下可以使用src去切除与dst相交的地方,使两张图片保留空隙</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-2-字体相关操作"><a href="#1-2-2-字体相关操作" class="headerlink" title="1.2.2 字体相关操作"></a>1.2.2 字体相关操作</h4><ul>
+<li>获取文字的相关属性<ul>
+<li>measureText,有三个重载方法,返回文字的宽度(注意，请在设置完文本各项参数后调用)</li>
+<li>getFontMetrics方法,返回一个FontMetrics对象<blockquote>
+<p>FontMetrics字体测量类:Paint的一个内部类,定义了五个参数,可以在绘制文本前获取,与绘制文本的内容无关,仅与绘制文本Paint的size和typeface有关</p>
+<ul>
+<li>top</li>
+<li>ascent:baseline以上的距离,为负</li>
+<li>descent:baseline以下的距离,为正</li>
+<li>bottom,</li>
+<li>leading:上一行字符的descent到该行字符的ascent之间的距离</li>
+</ul>
+</blockquote>
+</li>
+<li>descent()方法:文本绘制中返回baseline以下的距离,为正</li>
+<li>ascent()方法:文本绘制中返回baseline以上的距离,为负</li>
+<li>getFontSpacing()方法:返回字符行间距</li>
+</ul>
+</li>
+<li>breakText,有三个重载方法,设置一个最大宽度在不超过这个宽度的范围内返回实际测量值否则停止测量</li>
+<li>setUnderlineText(boolean underlineText)设置下划线</li>
+<li><p>setTypeface(Typeface typeface)设置字体类型(5种)</p>
+<blockquote>
+<p>Typeface这个类中给我们提供了多个方法去个性化我们的字体</p>
+</blockquote>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字体并设置画笔字体  </span></span><br><span class="line">Typeface typeface = Typeface.createFromAsset(context.getAssets(), <span class="string">"kt.ttf"</span>);  </span><br><span class="line">textPaint.setTypeface(typeface);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>同样TextView中可以获取到TextPaint,设置字体调用setTypeface方法</p>
+<ul>
+<li>setTextSkewX(float skewX)这个方法可以设置文本在水平方向上的倾斜,值为负右倾值为正左倾，默认值为0</li>
+<li>setTextScaleX (float scaleX)将文本沿X轴水平缩放，默认值为1，当值大于1会沿X轴水平放大文本，当值小于1会沿X轴水平缩放文本,不仅放大了文本宽度同时还拉伸了字符</li>
+<li>setTextLocale (Locale locale)设置地理位置</li>
+<li>setTextAlign (Paint.Align align)设置在baseline绘制文本究竟该从何处开始，可供选的方式有三种：CENTER(从文本的中点开始向两端绘制),LEFT和RIGHT</li>
+<li>setStrikeThruText (boolean strikeThruText)文本删除线</li>
+<li>setFakeBoldText (boolean fakeBoldText)设置文本仿粗体</li>
+<li>setDither(boolean dither)这玩意用来设置我们在绘制图像时的抗抖动，也称为递色</li>
+<li>setMaskFilter(MaskFilter maskfilter)<br>MaskFilter有两个子类<ul>
+<li>BlurMaskFilter:模糊遮罩滤镜</li>
+<li>EmbossMaskFilter:浮雕遮罩滤镜</li>
+</ul>
+</li>
+<li>setPathEffect(PathEffect effect)设置路径效果<br>PathEffect有6个子类,具体可查看源码</li>
+<li>setStrokeCap(Paint.Cap cap)设置我们画笔的笔触风格</li>
+<li>setStrokeJoin(Paint.Join join)设置结合处的形态</li>
+<li>setShadowLayer(float radius, float dx, float dy, int shadowColor)该方法为我们绘制的图形添加一个阴影层效果,不支持硬件加速</li>
+<li>setShader(Shader shader)给图像着色<br>Shader,有5个子类<ul>
+<li>BitmapShader:载入一张图片来给图像着色</li>
+<li>LinearGradient:线性渐变</li>
+<li>SweepGradient:梯度(扫描)渐变</li>
+<li>RadialGradient:径向渐变</li>
+<li>ComposeShader:组合Shader</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="1-2-3-TextPaint"><a href="#1-2-3-TextPaint" class="headerlink" title="1.2.3 TextPaint"></a>1.2.3 TextPaint</h4><ul>
+<li>能够在绘制时为文本添加一些额外的信息，这些信息包括:baselineShift,bgColor,density,drawableState,linkColor</li>
+<li>StaticLayout结合TextPaint实现换行</li>
+</ul>
+<h2 id="二、Canvas"><a href="#二、Canvas" class="headerlink" title="二、Canvas"></a>二、Canvas</h2><ul>
+<li>Canvas类为Android中的画布类</li>
+<li>Canvas下的各类drawXXX方法绘制各种不同的东西</li>
+</ul>
+<h3 id="2-1-Canvas介绍"><a href="#2-1-Canvas介绍" class="headerlink" title="2.1 Canvas介绍"></a>2.1 Canvas介绍</h3><ul>
+<li>提供了各种draw方法<blockquote>
+<p>比如绘制一个圆drawCircle()，绘制一个圆弧drawArc()，绘制一张位图drawBitmap()等等</p>
+</blockquote>
+</li>
+<li>在View的onDraw方法会传这个参数过来,该对象拥有一些绘制的上下文关联</li>
+</ul>
+<h3 id="2-2-drawXXX为主的绘制方法"><a href="#2-2-drawXXX为主的绘制方法" class="headerlink" title="2.2 drawXXX为主的绘制方法"></a>2.2 drawXXX为主的绘制方法</h3><h4 id="2-2-1-绘制文字"><a href="#2-2-1-绘制文字" class="headerlink" title="2.2.1 绘制文字"></a>2.2.1 绘制文字</h4><ul>
+<li>指定文本基线位置<ul>
+<li>drawText();</li>
+</ul>
+</li>
+<li>分别指定每个文字的位置(弃用)<ul>
+<li>drawPostText(); </li>
+</ul>
+</li>
+<li>根据路径绘制文字<ul>
+<li>drawTextOnPath();</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-2-clipXXX为主的裁剪方法-设置画布的显示区域"><a href="#2-2-2-clipXXX为主的裁剪方法-设置画布的显示区域" class="headerlink" title="2.2.2 clipXXX为主的裁剪方法(设置画布的显示区域)"></a>2.2.2 clipXXX为主的裁剪方法(设置画布的显示区域)</h4><ul>
+<li><code>clipPath(Path path);</code>,以Path的方式创建更多不规则的裁剪区域</li>
+<li>clipRect方法,有7个重载方法<blockquote>
+<p>Rect和RectF类</p>
+<ul>
+<li>intersect方法,取相交的区域</li>
+<li>union方法,取的是相交区域最远的左上端点作为新区域的左上端点，而取最远的右下端点作为新区域的右下端点</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-2-3-以scale、skew、translate和rotate组成的Canvas变换方法"><a href="#2-2-3-以scale、skew、translate和rotate组成的Canvas变换方法" class="headerlink" title="2.2.3 以scale、skew、translate和rotate组成的Canvas变换方法"></a>2.2.3 以scale、skew、translate和rotate组成的Canvas变换方法</h4><ul>
+<li>平移和旋转: translate和rotate()<ul>
+<li>说明:<ul>
+<li>通过画布的操作可以简化绘制坐标计算 </li>
+<li>画布的平移旋转同样也会影响画布的自身坐标  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>drawBitmapMesh(Bitmap bitmap, int meshWidth, int meshHeight, float[] verts, int vertOffset, int[] colors, int colorOffset, Paint paint);</code>按照meshWidth和meshHeight这两个参数的值将我们的图片划分成一定数量的网格,通过移动这些交点来改变图像</li>
+</ul>
+<h4 id="2-2-4-以saveXXX和restoreXXX构成的画布锁定和还原"><a href="#2-2-4-以saveXXX和restoreXXX构成的画布锁定和还原" class="headerlink" title="2.2.4 以saveXXX和restoreXXX构成的画布锁定和还原"></a>2.2.4 以saveXXX和restoreXXX构成的画布锁定和还原</h4><ul>
+<li>释放和锁定画布:<code>restore();</code>和<code>canvas.save();</code></li>
+</ul>
+<h4 id="2-2-5-set方法"><a href="#2-2-5-set方法" class="headerlink" title="2.2.5 set方法"></a>2.2.5 set方法</h4><ul>
+<li><code>setBitmap();</code>为Canvas指定一个Bitmap对象,需要一个Bitmap对象来保存像素</li>
+</ul>
+<h2 id="三、Path"><a href="#三、Path" class="headerlink" title="三、Path"></a>三、Path</h2><ul>
+<li>封装了由直线和曲线(二次，三次贝塞尔曲线)构成的几何路径。你能用Canvas中的drawPath来把这条路径画出来(同样支持Paint的不同绘制模式)，也可以用于剪裁画布和根据路径绘制文字。我们有时会用Path来描述一个图像的轮廓，所以也会称为轮廓线(轮廓线仅是Path的一种使用方法，两者并不等价)</li>
+</ul>
+<h3 id="3-1-常用方法"><a href="#3-1-常用方法" class="headerlink" title="3.1 常用方法"></a>3.1 常用方法</h3><table>
+<thead>
+<tr>
+<th>作用</th>
+<th>相关方法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>移动起点</td>
+<td>moveTo</td>
+<td>移动下一次操作的起点位置</td>
+</tr>
+<tr>
+<td>设置终点</td>
+<td>setLastPoint</td>
+<td>重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同</td>
+</tr>
+<tr>
+<td>连接直线</td>
+<td>lineTo</td>
+<td>添加上一个点到当前点之间的直线到Path,可以考虑多次调用lineTo方法来绘制更复杂的图形</td>
+</tr>
+<tr>
+<td>闭合路径</td>
+<td>close</td>
+<td>连接第一个点连接到最后一个点，形成一个闭合区域</td>
+</tr>
+<tr>
+<td>添加内容</td>
+<td>addRect, addRoundRect,  addOval, addCircle,     addPath, addArc, arcTo</td>
+<td>添加(矩形， 圆角矩形， 椭圆， 圆， 路径， 圆弧) 到当前Path (注意addArc和arcTo的区别)</td>
+</tr>
+<tr>
+<td>是否为空</td>
+<td>isEmpty</td>
+<td>判断Path是否为空</td>
+</tr>
+<tr>
+<td>是否为矩形</td>
+<td>isRect</td>
+<td>判断path是否是一个矩形</td>
+</tr>
+<tr>
+<td>替换路径</td>
+<td>set</td>
+<td>用新的路径替换到当前路径所有内容</td>
+</tr>
+<tr>
+<td>偏移路径</td>
+<td>offset</td>
+<td>对当前路径之前的操作进行偏移(不会影响之后的操作)</td>
+</tr>
+<tr>
+<td>贝塞尔曲线</td>
+<td>quadTo, cubicTo</td>
+<td>分别为二次和三次贝塞尔曲线的方法</td>
+</tr>
+<tr>
+<td>rXxx方法</td>
+<td>rMoveTo, rLineTo, rQuadTo, rCubicTo</td>
+<td><strong>不带r的方法是基于原点的坐标系(偏移量)， rXxx方法是基于当前点坐标系(偏移量)</strong></td>
+</tr>
+<tr>
+<td>填充模式</td>
+<td>setFillType, getFillType, isInverseFillType, toggleInverseFillType</td>
+<td>设置,获取,判断和切换填充模式</td>
+</tr>
+<tr>
+<td>提示方法</td>
+<td>incReserve</td>
+<td>提示Path还有多少个点等待加入<strong>(这个方法貌似会让Path优化存储结构)</strong></td>
+</tr>
+<tr>
+<td>布尔操作(API19)</td>
+<td>op</td>
+<td>对两个Path进行布尔运算(即取交集、并集等操作)</td>
+</tr>
+<tr>
+<td>计算边界</td>
+<td>computeBounds</td>
+<td>计算Path的边界</td>
+</tr>
+<tr>
+<td>重置路径</td>
+<td>reset, rewind</td>
+<td>清除Path中的内容<br> <strong>reset不保留内部数据结构，但会保留FillType.</strong><br> <strong>rewind会保留内部的数据结构，但不保留FillType</strong></td>
+</tr>
+<tr>
+<td>矩阵操作</td>
+<td>transform</td>
+<td>矩阵变换</td>
+</tr>
+<tr>
+<td>弧线</td>
+<td>arcTo</td>
+<td>生成弧线           </td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-自定义View概述" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -265,19 +618,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="1-关于坐标系"><a href="#1-关于坐标系" class="headerlink" title="1.关于坐标系"></a>1.关于坐标系</h3><ul>
-<li>Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡尔坐标系的y轴方向想反,x轴方向不变。</li>
+        <h2 id="一、关于坐标系"><a href="#一、关于坐标系" class="headerlink" title="一、关于坐标系"></a>一、关于坐标系</h2><ul>
+<li>Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡尔坐标系的y轴方向相反,x轴方向不变。</li>
 <li>角度:从x轴开始,顺时针旋转为正<ul>
 <li>角度与弧度关系: <code>180度 = π弧度</code> </li>
 </ul>
 </li>
 </ul>
-<h4 id="1-2获取控件的坐标和触摸点的坐标"><a href="#1-2获取控件的坐标和触摸点的坐标" class="headerlink" title="1.2获取控件的坐标和触摸点的坐标"></a>1.2获取控件的坐标和触摸点的坐标</h4><ul>
+<h3 id="1-获取控件的坐标和触摸点的坐标"><a href="#1-获取控件的坐标和触摸点的坐标" class="headerlink" title="1.获取控件的坐标和触摸点的坐标"></a>1.获取控件的坐标和触摸点的坐标</h3><ul>
 <li><p>获取控件的坐标</p>
 <ul>
 <li>通过提供的API(如getLeft , getTop, getBottom, getRight)可以获得控件在parent中的相对位置.</li>
 <li><p>获取view在屏幕中的位置:需要在onLayout完后获取,通常在监听布局完成后获取</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] location = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">  	view.getLocationOnScreen(location);</span><br><span class="line">  	<span class="keyword">int</span> x = location[<span class="number">0</span>];</span><br><span class="line">  	<span class="keyword">int</span> y = location[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] location = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line"><span class="comment">// 获取在当前窗口内的绝对坐标</span></span><br><span class="line"><span class="comment">//View.getLocationInWindow() </span></span><br><span class="line"><span class="comment">//获取在整个屏幕内的绝对坐标，注意这个值是要从屏幕顶端算起，也就是包括了通知栏的高度</span></span><br><span class="line">  	view.getLocationOnScreen(location);</span><br><span class="line">  	<span class="keyword">int</span> x = location[<span class="number">0</span>];</span><br><span class="line">  	<span class="keyword">int</span> y = location[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -289,7 +642,7 @@
 </li>
 <li>图解位置:<br>  <img src="http://i2.piimg.com/4851/69df0a2002693cb9.png" alt=""></li>
 </ul>
-<h3 id="2-Android中的颜色"><a href="#2-Android中的颜色" class="headerlink" title="2.Android中的颜色"></a>2.Android中的颜色</h3><h4 id="2-1颜色模式"><a href="#2-1颜色模式" class="headerlink" title="2.1颜色模式"></a>2.1颜色模式</h4><ul>
+<h2 id="二、Android中的颜色"><a href="#二、Android中的颜色" class="headerlink" title="二、Android中的颜色"></a>二、Android中的颜色</h2><h4 id="2-颜色模式"><a href="#2-颜色模式" class="headerlink" title="2. 颜色模式"></a>2. 颜色模式</h4><ul>
 <li>Android中支持的颜色模式:</li>
 </ul>
 <table>
@@ -318,7 +671,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="3-Android官方提供的操作类"><a href="#3-Android官方提供的操作类" class="headerlink" title="3.Android官方提供的操作类"></a>3.Android官方提供的操作类</h3><ul>
+<h2 id="三、Android官方提供的操作类"><a href="#三、Android官方提供的操作类" class="headerlink" title="三、Android官方提供的操作类"></a>三、Android官方提供的操作类</h2><ul>
+<li>操作类: <ul>
 <li>Configuration</li>
 <li>ViewConfiguration</li>
 <li>GestureDetector</li>
@@ -326,13 +680,15 @@
 <li>Scroller</li>
 <li>ViewDragHelper</li>
 </ul>
-<h4 id="3-1-Configuration类"><a href="#3-1-Configuration类" class="headerlink" title="3.1 Configuration类"></a>3.1 Configuration类</h4><ul>
-<li>说明:描述设备的配置信息</li>
-<li><p>获取配置信息: </p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Configuration configuration = getResources().getConfiguration();</span><br><span class="line"><span class="comment">//获取国家码</span></span><br><span class="line"><span class="keyword">int</span> countryCode=configuration.mcc;</span><br><span class="line"><span class="comment">//获取网络码</span></span><br><span class="line"><span class="keyword">int</span> networkCode=configuration.mnc;</span><br><span class="line"><span class="comment">//判断横竖屏</span></span><br><span class="line"><span class="keyword">if</span>(configuration.orientation==Configuration.ORIENTATION_PORTRAIT)&#123;</span><br><span class="line">	<span class="comment">//<span class="doctag">TODO:</span></span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="comment">//<span class="doctag">TODO:</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="3-2-ViewConfiguration类"><a href="#3-2-ViewConfiguration类" class="headerlink" title="3.2 ViewConfiguration类"></a>3.2 ViewConfiguration类</h4><ul>
+<h3 id="3-1-Configuration类"><a href="#3-1-Configuration类" class="headerlink" title="3.1 Configuration类"></a>3.1 Configuration类</h3><ul>
+<li>说明:描述设备的配置信息</li>
+<li><p>获取配置信息: </p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Configuration configuration = getResources().getConfiguration();</span><br><span class="line"><span class="comment">//获取国家码</span></span><br><span class="line"><span class="keyword">int</span> countryCode=configuration.mcc;</span><br><span class="line"><span class="comment">//获取网络码</span></span><br><span class="line"><span class="keyword">int</span> networkCode=configuration.mnc;</span><br><span class="line"><span class="comment">//判断横竖屏</span></span><br><span class="line"><span class="keyword">if</span>(configuration.orientation==Configuration.ORIENTATION_PORTRAIT)&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-2-ViewConfiguration类"><a href="#3-2-ViewConfiguration类" class="headerlink" title="3.2 ViewConfiguration类"></a>3.2 ViewConfiguration类</h3><ul>
 <li>说明:提供了一些自定义控件用到的标准常量，比如尺寸大小，滑动距离，敏感度等等</li>
 <li>获取实例: <ul>
 <li><code>ViewConfiguration viewConfiguration=ViewConfiguration.get(context);</code></li>
@@ -345,7 +701,7 @@
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取touchSlop。该值表示系统所能识别出的被认为是滑动的最小距离</span></span><br><span class="line"><span class="keyword">int</span> touchSlop = viewConfiguration.getScaledTouchSlop();</span><br><span class="line"><span class="comment">//获取Fling速度的最小值和最大值</span></span><br><span class="line"><span class="keyword">int</span> minimumVelocity = viewConfiguration.getScaledMinimumFlingVelocity();</span><br><span class="line"><span class="keyword">int</span> maximumVelocity = viewConfiguration.getScaledMaximumFlingVelocity();</span><br><span class="line"><span class="comment">//判断是否有物理按键</span></span><br><span class="line"><span class="keyword">boolean</span> isHavePermanentMenuKey=viewConfiguration.hasPermanentMenuKey();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="3-3-GestureDetector类"><a href="#3-3-GestureDetector类" class="headerlink" title="3.3 GestureDetector类"></a>3.3 GestureDetector类</h4><ul>
+<h3 id="3-3-GestureDetector类"><a href="#3-3-GestureDetector类" class="headerlink" title="3.3 GestureDetector类"></a>3.3 GestureDetector类</h3><ul>
 <li>说明:手势监听(单击,滑动,长按,双击等)处理的工具类(内部有一个OnGestureListener接口),当然我们也可以在onTouchEvent()中自己处理手势</li>
 <li><p>使用步骤:</p>
 <ol>
@@ -365,7 +721,7 @@
 </ol>
 </li>
 </ul>
-<h4 id="3-4-VelocityTracker"><a href="#3-4-VelocityTracker" class="headerlink" title="3.4 VelocityTracker"></a>3.4 VelocityTracker</h4><ul>
+<h3 id="3-4-VelocityTracker"><a href="#3-4-VelocityTracker" class="headerlink" title="3.4 VelocityTracker"></a>3.4 VelocityTracker</h3><ul>
 <li>说明:用于跟踪触摸屏事件（比如，Flinging及其他Gestures手势事件等）的速率(包括水平和竖直方向)</li>
 <li><p>使用步骤:</p>
 <ol>
@@ -381,7 +737,7 @@
 </ol>
 </li>
 </ul>
-<h4 id="3-5-Scroller"><a href="#3-5-Scroller" class="headerlink" title="3.5 Scroller"></a>3.5 Scroller</h4><ul>
+<h3 id="3-5-Scroller"><a href="#3-5-Scroller" class="headerlink" title="3.5 Scroller"></a>3.5 Scroller</h3><ul>
 <li>说明: <ul>
 <li>用于跟踪View的滑动(view的scrollTo/scrollBy滑动是在瞬间完成,没有过度效果)的轨迹，实现过渡效果的滑动.此类不会移动控件，只移动View的内容</li>
 <li>Scroller本身无法让view滑动,需要和view的computeScroll方法结合使用<blockquote>
@@ -409,10 +765,43 @@
 </ol>
 </li>
 </ul>
-<h4 id="3-6-OverScroller"><a href="#3-6-OverScroller" class="headerlink" title="3.6 OverScroller"></a>3.6 OverScroller</h4><ul>
+<h3 id="3-6-OverScroller"><a href="#3-6-OverScroller" class="headerlink" title="3.6 OverScroller"></a>3.6 OverScroller</h3><ul>
 <li>官方说明:<blockquote>
 <p>This class encapsulates scrolling with the ability to overshoot the bounds of a scrolling operation. This class is a drop-in replacement for Scroller in most cases.   </p>
 </blockquote>
+</li>
+</ul>
+<h2 id="四、自定义View的分类"><a href="#四、自定义View的分类" class="headerlink" title="四、自定义View的分类"></a>四、自定义View的分类</h2><ul>
+<li>说明:根据有无子view可以分为2类<ul>
+<li>继承自View</li>
+<li>继承自ViewGroup</li>
+</ul>
+</li>
+<li>关于构造函数:有四种重载<ul>
+<li>一个参数:一般在直接New一个View的时候调用</li>
+<li>两个参数:一般在layout文件中使用的时候会调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="继承自View"><a href="#继承自View" class="headerlink" title="继承自View"></a>继承自View</h3><ul>
+<li>第一种:实现不规则的效果,需重写onDraw方法(view中的onDraw方法为空实现)</li>
+<li>第二种:扩展某种已有的View功能(如<a href="https://github.com/chrisbanes/PhotoView" target="_blank" rel="external">PhotoView</a>扩展了ImageView,支持缩放)</li>
+</ul>
+<h3 id="继承ViewGroup"><a href="#继承ViewGroup" class="headerlink" title="继承ViewGroup"></a>继承ViewGroup</h3><ul>
+<li><p>分类:</p>
+<ul>
+<li>第一种:实现自定义的布局,即除系统的布局之外,重新定义的布局(<a href="https://github.com/nuptboyzhb/SuperSwipeRefreshLayout" target="_blank" rel="external">SuperSwipeRefreshLayout</a>继承自ViewGroup)<ul>
+<li>需要合适地处理ViewGroup和子view的测量和布局过程</li>
+</ul>
+</li>
+<li>第二种:继承特定的ViewGroup(如<a href="https://github.com/hongyangAndroid/Android-StickyNavLayout" target="_blank" rel="external">StickyNavLayout</a>继承自LinearLayout)<ul>
+<li>用于几种View的组合,一般来说不需要处理测量和布局的过程</li>
+<li>相对于第一种方式简单 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>说明: 如果嵌套的View可以滑动,需要合适地处理滑动冲突</p>
 </li>
 </ul>
 
@@ -632,6 +1021,7 @@
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h3 id="Deployment-Procedures"><a href="#Deployment-Procedures" class="headerlink" title="Deployment Procedures"></a>Deployment Procedures</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
       
     </div>

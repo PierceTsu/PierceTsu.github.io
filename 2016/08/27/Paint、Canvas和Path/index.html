@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  
+  <title>Paint、Canvas和Path类的使用介绍 | PierceTsu&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、Paint
+Paint类为Android中的画笔类
+Paint集成了所有“画”的属性
+
+1.1 画笔的初始化
+一般在构造方法中进行初始化,切记不要在onDraw方法中初始化,将会多次创建对象
+各种setter方法来设置各种不同的属性
+
+比如setColor()设置画笔颜色，setStrokeWidth()设置描边线条，setStyle()设置画笔的样式：
+
+  12//初始化画笔,抗锯齿mPa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paint、Canvas和Path类的使用介绍">
+<meta property="og:url" content="http://yaoyuehome.com/2016/08/27/Paint、Canvas和Path/index.html">
+<meta property="og:site_name" content="PierceTsu's Blog">
+<meta property="og:description" content="一、Paint
+Paint类为Android中的画笔类
+Paint集成了所有“画”的属性
+
+1.1 画笔的初始化
+一般在构造方法中进行初始化,切记不要在onDraw方法中初始化,将会多次创建对象
+各种setter方法来设置各种不同的属性
+
+比如setColor()设置画笔颜色，setStrokeWidth()设置描边线条，setStyle()设置画笔的样式：
+
+  12//初始化画笔,抗锯齿mPa">
+<meta property="og:image" content="http://yaoyuehome.com/img/mixture.jpg">
+<meta property="og:updated_time" content="2016-08-27T10:53:35.623Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paint、Canvas和Path类的使用介绍">
+<meta name="twitter:description" content="一、Paint
+Paint类为Android中的画笔类
+Paint集成了所有“画”的属性
+
+1.1 画笔的初始化
+一般在构造方法中进行初始化,切记不要在onDraw方法中初始化,将会多次创建对象
+各种setter方法来设置各种不同的属性
+
+比如setColor()设置画笔颜色，setStrokeWidth()设置描边线条，setStyle()设置画笔的样式：
+
+  12//初始化画笔,抗锯齿mPa">
+<meta name="twitter:image" content="http://yaoyuehome.com/img/mixture.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="PierceTsu&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Pierce Tsu</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">生命不止,折腾不息!</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:piercetsu@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/PierceTsu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="#" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注移动开发</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Pierce Tsu</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Pierce Tsu</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">生命不止,折腾不息!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:piercetsu@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/PierceTsu" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="#" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Paint、Canvas和Path" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/27/Paint、Canvas和Path/" class="article-date">
+      <time datetime="2016-08-27T10:53:54.487Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Paint、Canvas和Path类的使用介绍
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一、Paint"><a href="#一、Paint" class="headerlink" title="一、Paint"></a>一、Paint</h2><ul>
+<li>Paint类为Android中的画笔类</li>
+<li>Paint集成了所有“画”的属性</li>
+</ul>
+<h3 id="1-1-画笔的初始化"><a href="#1-1-画笔的初始化" class="headerlink" title="1.1 画笔的初始化"></a>1.1 画笔的初始化</h3><ul>
+<li>一般在构造方法中进行初始化,切记不要在onDraw方法中初始化,将会多次创建对象</li>
+<li><p>各种setter方法来设置各种不同的属性</p>
+<blockquote>
+<p>比如setColor()设置画笔颜色，setStrokeWidth()设置描边线条，setStyle()设置画笔的样式：</p>
+</blockquote>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化画笔,抗锯齿</span></span><br><span class="line">mPaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-2-相应API"><a href="#1-2-相应API" class="headerlink" title="1.2 相应API"></a>1.2 相应API</h3><ul>
+<li><code>setStyle(Style style);</code><blockquote>
+<p>画笔样式分三种： </p>
+<ol>
+<li>Paint.Style.STROKE：描边 </li>
+<li>Paint.Style.FILL_AND_STROKE：描边并填充 </li>
+<li>Paint.Style.FILL：填充</li>
+</ol>
+</blockquote>
+</li>
+<li><code>set(Paint src);</code><blockquote>
+<p>顾名思义为当前画笔设置一个画笔，说白了就是把另一个画笔的属性设置Copy给我们的画笔</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="1-2-1-颜色相关操作"><a href="#1-2-1-颜色相关操作" class="headerlink" title="1.2.1 颜色相关操作"></a>1.2.1 颜色相关操作</h4><ul>
+<li><p><code>setColorFilter(ColorFilter filter);</code></p>
+<blockquote>
+<p>设置颜色过滤,传入一个ColorFilter参数同样也会返回一个ColorFilter实例,其子类有三个</p>
+<ul>
+<li>ColorMatrixColorFilter:色彩矩阵颜色过滤器,该构造方法中需要传入ColoMatrix对象<ul>
+<li>ColoMatrix对象定义了一个4x5的float[]类型的矩阵：</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ColorMatrix colorMatrix = <span class="keyword">new</span> ColorMatrix(<span class="keyword">new</span> <span class="keyword">float</span>[]&#123;  </span><br><span class="line">       <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//R</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//G</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//B</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>,  <span class="comment">//A</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+* 这个矩阵不同的位置表示的RGBA值，其范围在0.0F至2.0F之间，1为保持原图的RGB值。每一行的第五列数字表示偏移值
+</code></pre><ul>
+<li>LightingColorFilter:光照颜色过滤,构造方法:<code>LightingColorFilter (int mul, int add)</code>,这两个值都是16进制的色彩值0xAARRGGBB<ul>
+<li>mul全称是colorMultiply意为色彩倍增</li>
+<li>add全称是colorAdd意为色彩添加 </li>
+</ul>
+</li>
+<li>PorterDuffColorFilter:混合模式,构造方法:<code>PorterDuffColorFilter(int color,PorterDuff.Mode mode)</code><ul>
+<li>color:表示16进制的颜色值</li>
+<li>mode:表示PorterDuff内部类Mode中的一个常量值，这个值表示混合模式(该模式不仅仅是应用于图像色彩混合，还应用于图形混合)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>setXfermode(Xfermode xfermode);</code></p>
+<blockquote>
+<p>设置图片混合的过渡模式,与setColorFilter类似,传入一个Xfermode参数同样也会返回一个Xfermode实例,其子类有三个</p>
+<ul>
+<li>AvoidXfermode,这个API因为不支持硬件加速在API 16已经过时了,如需使用在AndroidManifest.xml文件中设置application节点下的android:hardwareAccelerated属性为false来关闭硬件加速</li>
+<li>PixelXorXfermode,与AvoidXfermode一样也在API 16过时了</li>
+<li>PorterDuffXfermode,构造方法:<code>PorterDuffXfermode(PorterDuff.Mode mode)</code></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h5 id="1-2-1-1-颜色混合模式"><a href="#1-2-1-1-颜色混合模式" class="headerlink" title="1.2.1.1 颜色混合模式"></a>1.2.1.1 颜色混合模式</h5><ul>
+<li>不同模式时的混合效果如下:<br><img src="img/mixture.jpg" alt="混合效果"></li>
+<li>说明:<ul>
+<li>Sa全称为Source alpha表示源图的Alpha通道；</li>
+<li>Sc全称为Source color表示源图的颜色；</li>
+<li>Da全称为Destination alpha表示目标图的Alpha通道；</li>
+<li>Dc全称为Destination color表示目标图的颜色</li>
+<li>“[……]”里分为两部分,前部分为计算后的Alpha通道,后部分为计算后的颜色值,图形混合后的图片依靠这个矢量来计算ARGB的值</li>
+</ul>
+</li>
+<li>混合模式的使用场景:<ul>
+<li></li>
+<li>XOR: 在均为不透明情况下可以使用src去切除与dst相交的地方,使两张图片保留空隙</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-2-字体相关操作"><a href="#1-2-2-字体相关操作" class="headerlink" title="1.2.2 字体相关操作"></a>1.2.2 字体相关操作</h4><ul>
+<li>获取文字的相关属性<ul>
+<li>measureText,有三个重载方法,返回文字的宽度(注意，请在设置完文本各项参数后调用)</li>
+<li>getFontMetrics方法,返回一个FontMetrics对象<blockquote>
+<p>FontMetrics字体测量类:Paint的一个内部类,定义了五个参数,可以在绘制文本前获取,与绘制文本的内容无关,仅与绘制文本Paint的size和typeface有关</p>
+<ul>
+<li>top</li>
+<li>ascent:baseline以上的距离,为负</li>
+<li>descent:baseline以下的距离,为正</li>
+<li>bottom,</li>
+<li>leading:上一行字符的descent到该行字符的ascent之间的距离</li>
+</ul>
+</blockquote>
+</li>
+<li>descent()方法:文本绘制中返回baseline以下的距离,为正</li>
+<li>ascent()方法:文本绘制中返回baseline以上的距离,为负</li>
+<li>getFontSpacing()方法:返回字符行间距</li>
+</ul>
+</li>
+<li>breakText,有三个重载方法,设置一个最大宽度在不超过这个宽度的范围内返回实际测量值否则停止测量</li>
+<li>setUnderlineText(boolean underlineText)设置下划线</li>
+<li><p>setTypeface(Typeface typeface)设置字体类型(5种)</p>
+<blockquote>
+<p>Typeface这个类中给我们提供了多个方法去个性化我们的字体</p>
+</blockquote>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字体并设置画笔字体  </span></span><br><span class="line">Typeface typeface = Typeface.createFromAsset(context.getAssets(), <span class="string">"kt.ttf"</span>);  </span><br><span class="line">textPaint.setTypeface(typeface);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>同样TextView中可以获取到TextPaint,设置字体调用setTypeface方法</p>
+<ul>
+<li>setTextSkewX(float skewX)这个方法可以设置文本在水平方向上的倾斜,值为负右倾值为正左倾，默认值为0</li>
+<li>setTextScaleX (float scaleX)将文本沿X轴水平缩放，默认值为1，当值大于1会沿X轴水平放大文本，当值小于1会沿X轴水平缩放文本,不仅放大了文本宽度同时还拉伸了字符</li>
+<li>setTextLocale (Locale locale)设置地理位置</li>
+<li>setTextAlign (Paint.Align align)设置在baseline绘制文本究竟该从何处开始，可供选的方式有三种：CENTER(从文本的中点开始向两端绘制),LEFT和RIGHT</li>
+<li>setStrikeThruText (boolean strikeThruText)文本删除线</li>
+<li>setFakeBoldText (boolean fakeBoldText)设置文本仿粗体</li>
+<li>setDither(boolean dither)这玩意用来设置我们在绘制图像时的抗抖动，也称为递色</li>
+<li>setMaskFilter(MaskFilter maskfilter)<br>MaskFilter有两个子类<ul>
+<li>BlurMaskFilter:模糊遮罩滤镜</li>
+<li>EmbossMaskFilter:浮雕遮罩滤镜</li>
+</ul>
+</li>
+<li>setPathEffect(PathEffect effect)设置路径效果<br>PathEffect有6个子类,具体可查看源码</li>
+<li>setStrokeCap(Paint.Cap cap)设置我们画笔的笔触风格</li>
+<li>setStrokeJoin(Paint.Join join)设置结合处的形态</li>
+<li>setShadowLayer(float radius, float dx, float dy, int shadowColor)该方法为我们绘制的图形添加一个阴影层效果,不支持硬件加速</li>
+<li>setShader(Shader shader)给图像着色<br>Shader,有5个子类<ul>
+<li>BitmapShader:载入一张图片来给图像着色</li>
+<li>LinearGradient:线性渐变</li>
+<li>SweepGradient:梯度(扫描)渐变</li>
+<li>RadialGradient:径向渐变</li>
+<li>ComposeShader:组合Shader</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="1-2-3-TextPaint"><a href="#1-2-3-TextPaint" class="headerlink" title="1.2.3 TextPaint"></a>1.2.3 TextPaint</h4><ul>
+<li>能够在绘制时为文本添加一些额外的信息，这些信息包括:baselineShift,bgColor,density,drawableState,linkColor</li>
+<li>StaticLayout结合TextPaint实现换行</li>
+</ul>
+<h2 id="二、Canvas"><a href="#二、Canvas" class="headerlink" title="二、Canvas"></a>二、Canvas</h2><ul>
+<li>Canvas类为Android中的画布类</li>
+<li>Canvas下的各类drawXXX方法绘制各种不同的东西</li>
+</ul>
+<h3 id="2-1-Canvas介绍"><a href="#2-1-Canvas介绍" class="headerlink" title="2.1 Canvas介绍"></a>2.1 Canvas介绍</h3><ul>
+<li>提供了各种draw方法<blockquote>
+<p>比如绘制一个圆drawCircle()，绘制一个圆弧drawArc()，绘制一张位图drawBitmap()等等</p>
+</blockquote>
+</li>
+<li>在View的onDraw方法会传这个参数过来,该对象拥有一些绘制的上下文关联</li>
+</ul>
+<h3 id="2-2-drawXXX为主的绘制方法"><a href="#2-2-drawXXX为主的绘制方法" class="headerlink" title="2.2 drawXXX为主的绘制方法"></a>2.2 drawXXX为主的绘制方法</h3><h4 id="2-2-1-绘制文字"><a href="#2-2-1-绘制文字" class="headerlink" title="2.2.1 绘制文字"></a>2.2.1 绘制文字</h4><ul>
+<li>指定文本基线位置<ul>
+<li>drawText();</li>
+</ul>
+</li>
+<li>分别指定每个文字的位置(弃用)<ul>
+<li>drawPostText(); </li>
+</ul>
+</li>
+<li>根据路径绘制文字<ul>
+<li>drawTextOnPath();</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-2-clipXXX为主的裁剪方法-设置画布的显示区域"><a href="#2-2-2-clipXXX为主的裁剪方法-设置画布的显示区域" class="headerlink" title="2.2.2 clipXXX为主的裁剪方法(设置画布的显示区域)"></a>2.2.2 clipXXX为主的裁剪方法(设置画布的显示区域)</h4><ul>
+<li><code>clipPath(Path path);</code>,以Path的方式创建更多不规则的裁剪区域</li>
+<li>clipRect方法,有7个重载方法<blockquote>
+<p>Rect和RectF类</p>
+<ul>
+<li>intersect方法,取相交的区域</li>
+<li>union方法,取的是相交区域最远的左上端点作为新区域的左上端点，而取最远的右下端点作为新区域的右下端点</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-2-3-以scale、skew、translate和rotate组成的Canvas变换方法"><a href="#2-2-3-以scale、skew、translate和rotate组成的Canvas变换方法" class="headerlink" title="2.2.3 以scale、skew、translate和rotate组成的Canvas变换方法"></a>2.2.3 以scale、skew、translate和rotate组成的Canvas变换方法</h4><ul>
+<li>平移和旋转: translate和rotate()<ul>
+<li>说明:<ul>
+<li>通过画布的操作可以简化绘制坐标计算 </li>
+<li>画布的平移旋转同样也会影响画布的自身坐标  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>drawBitmapMesh(Bitmap bitmap, int meshWidth, int meshHeight, float[] verts, int vertOffset, int[] colors, int colorOffset, Paint paint);</code>按照meshWidth和meshHeight这两个参数的值将我们的图片划分成一定数量的网格,通过移动这些交点来改变图像</li>
+</ul>
+<h4 id="2-2-4-以saveXXX和restoreXXX构成的画布锁定和还原"><a href="#2-2-4-以saveXXX和restoreXXX构成的画布锁定和还原" class="headerlink" title="2.2.4 以saveXXX和restoreXXX构成的画布锁定和还原"></a>2.2.4 以saveXXX和restoreXXX构成的画布锁定和还原</h4><ul>
+<li>释放和锁定画布:<code>restore();</code>和<code>canvas.save();</code></li>
+</ul>
+<h4 id="2-2-5-set方法"><a href="#2-2-5-set方法" class="headerlink" title="2.2.5 set方法"></a>2.2.5 set方法</h4><ul>
+<li><code>setBitmap();</code>为Canvas指定一个Bitmap对象,需要一个Bitmap对象来保存像素</li>
+</ul>
+<h2 id="三、Path"><a href="#三、Path" class="headerlink" title="三、Path"></a>三、Path</h2><ul>
+<li>封装了由直线和曲线(二次，三次贝塞尔曲线)构成的几何路径。你能用Canvas中的drawPath来把这条路径画出来(同样支持Paint的不同绘制模式)，也可以用于剪裁画布和根据路径绘制文字。我们有时会用Path来描述一个图像的轮廓，所以也会称为轮廓线(轮廓线仅是Path的一种使用方法，两者并不等价)</li>
+</ul>
+<h3 id="3-1-常用方法"><a href="#3-1-常用方法" class="headerlink" title="3.1 常用方法"></a>3.1 常用方法</h3><table>
+<thead>
+<tr>
+<th>作用</th>
+<th>相关方法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>移动起点</td>
+<td>moveTo</td>
+<td>移动下一次操作的起点位置</td>
+</tr>
+<tr>
+<td>设置终点</td>
+<td>setLastPoint</td>
+<td>重置当前path中最后一个点位置，如果在绘制之前调用，效果和moveTo相同</td>
+</tr>
+<tr>
+<td>连接直线</td>
+<td>lineTo</td>
+<td>添加上一个点到当前点之间的直线到Path,可以考虑多次调用lineTo方法来绘制更复杂的图形</td>
+</tr>
+<tr>
+<td>闭合路径</td>
+<td>close</td>
+<td>连接第一个点连接到最后一个点，形成一个闭合区域</td>
+</tr>
+<tr>
+<td>添加内容</td>
+<td>addRect, addRoundRect,  addOval, addCircle,     addPath, addArc, arcTo</td>
+<td>添加(矩形， 圆角矩形， 椭圆， 圆， 路径， 圆弧) 到当前Path (注意addArc和arcTo的区别)</td>
+</tr>
+<tr>
+<td>是否为空</td>
+<td>isEmpty</td>
+<td>判断Path是否为空</td>
+</tr>
+<tr>
+<td>是否为矩形</td>
+<td>isRect</td>
+<td>判断path是否是一个矩形</td>
+</tr>
+<tr>
+<td>替换路径</td>
+<td>set</td>
+<td>用新的路径替换到当前路径所有内容</td>
+</tr>
+<tr>
+<td>偏移路径</td>
+<td>offset</td>
+<td>对当前路径之前的操作进行偏移(不会影响之后的操作)</td>
+</tr>
+<tr>
+<td>贝塞尔曲线</td>
+<td>quadTo, cubicTo</td>
+<td>分别为二次和三次贝塞尔曲线的方法</td>
+</tr>
+<tr>
+<td>rXxx方法</td>
+<td>rMoveTo, rLineTo, rQuadTo, rCubicTo</td>
+<td><strong>不带r的方法是基于原点的坐标系(偏移量)， rXxx方法是基于当前点坐标系(偏移量)</strong></td>
+</tr>
+<tr>
+<td>填充模式</td>
+<td>setFillType, getFillType, isInverseFillType, toggleInverseFillType</td>
+<td>设置,获取,判断和切换填充模式</td>
+</tr>
+<tr>
+<td>提示方法</td>
+<td>incReserve</td>
+<td>提示Path还有多少个点等待加入<strong>(这个方法貌似会让Path优化存储结构)</strong></td>
+</tr>
+<tr>
+<td>布尔操作(API19)</td>
+<td>op</td>
+<td>对两个Path进行布尔运算(即取交集、并集等操作)</td>
+</tr>
+<tr>
+<td>计算边界</td>
+<td>computeBounds</td>
+<td>计算Path的边界</td>
+</tr>
+<tr>
+<td>重置路径</td>
+<td>reset, rewind</td>
+<td>清除Path中的内容<br> <strong>reset不保留内部数据结构，但会保留FillType.</strong><br> <strong>rewind会保留内部的数据结构，但不保留FillType</strong></td>
+</tr>
+<tr>
+<td>矩阵操作</td>
+<td>transform</td>
+<td>矩阵变换</td>
+</tr>
+<tr>
+<td>弧线</td>
+<td>arcTo</td>
+<td>生成弧线           </td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/27/Paint、Canvas和Path/">Paint、Canvas和Path类的使用介绍</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Pierce Tsu</a></p>
+        <p><span>发布时间:</span>2016-08-27, 18:53:54</p>
+        <p><span>最后更新:</span>2016-08-27, 18:53:35</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/27/Paint、Canvas和Path/" title="Paint、Canvas和Path类的使用介绍">http://yaoyuehome.com/2016/08/27/Paint、Canvas和Path/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yaoyuehome.com/2016/08/27/Paint、Canvas和Path/　　作者: Pierce Tsu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/02/自定义View概述/">
+                    自定义View概述
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Paint"><span class="toc-number">1.</span> <span class="toc-text">一、Paint</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-画笔的初始化"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 画笔的初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-相应API"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 相应API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-颜色相关操作"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1 颜色相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-1-1-颜色混合模式"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1.2.1.1 颜色混合模式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-字体相关操作"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2 字体相关操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-3-TextPaint"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3 TextPaint</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Canvas"><span class="toc-number">2.</span> <span class="toc-text">二、Canvas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Canvas介绍"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Canvas介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-drawXXX为主的绘制方法"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 drawXXX为主的绘制方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-绘制文字"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 绘制文字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-clipXXX为主的裁剪方法-设置画布的显示区域"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 clipXXX为主的裁剪方法(设置画布的显示区域)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-以scale、skew、translate和rotate组成的Canvas变换方法"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.2.3 以scale、skew、translate和rotate组成的Canvas变换方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-4-以saveXXX和restoreXXX构成的画布锁定和还原"><span class="toc-number">2.2.4.</span> <span class="toc-text">2.2.4 以saveXXX和restoreXXX构成的画布锁定和还原</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-5-set方法"><span class="toc-number">2.2.5.</span> <span class="toc-text">2.2.5 set方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Path"><span class="toc-number">3.</span> <span class="toc-text">三、Path</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-常用方法"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 常用方法</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Paint、Canvas和Path类的使用介绍　| PierceTsu's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/02/自定义View概述/" title="下一篇: 自定义View概述">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/27/Paint、Canvas和Path/">Paint、Canvas和Path类的使用介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/自定义View概述/">自定义View概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/短信和电话的操作/">短信和电话的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/21/Hexo使用简介/">Hexo使用简介</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Pierce Tsu
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

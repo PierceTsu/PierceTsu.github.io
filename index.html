@@ -618,14 +618,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="一、关于坐标系"><a href="#一、关于坐标系" class="headerlink" title="一、关于坐标系"></a>一、关于坐标系</h2><ul>
+        <h3 id="一、关于坐标系"><a href="#一、关于坐标系" class="headerlink" title="一、关于坐标系"></a>一、关于坐标系</h3><ul>
 <li>Android系统手机屏幕的左上角为坐标系的原点，y轴方向与笛卡尔坐标系的y轴方向相反,x轴方向不变。</li>
 <li>角度:从x轴开始,顺时针旋转为正<ul>
 <li>角度与弧度关系: <code>180度 = π弧度</code> </li>
 </ul>
 </li>
 </ul>
-<h3 id="1-获取控件的坐标和触摸点的坐标"><a href="#1-获取控件的坐标和触摸点的坐标" class="headerlink" title="1.获取控件的坐标和触摸点的坐标"></a>1.获取控件的坐标和触摸点的坐标</h3><ul>
+<h4 id="1-获取控件的坐标和触摸点的坐标"><a href="#1-获取控件的坐标和触摸点的坐标" class="headerlink" title="1.获取控件的坐标和触摸点的坐标"></a>1.获取控件的坐标和触摸点的坐标</h4><ul>
 <li><p>获取控件的坐标</p>
 <ul>
 <li>通过提供的API(如getLeft , getTop, getBottom, getRight)可以获得控件在parent中的相对位置.</li>
@@ -642,7 +642,7 @@
 </li>
 <li>图解位置:<br>  <img src="http://i2.piimg.com/4851/69df0a2002693cb9.png" alt=""></li>
 </ul>
-<h2 id="二、Android中的颜色"><a href="#二、Android中的颜色" class="headerlink" title="二、Android中的颜色"></a>二、Android中的颜色</h2><h4 id="2-颜色模式"><a href="#2-颜色模式" class="headerlink" title="2. 颜色模式"></a>2. 颜色模式</h4><ul>
+<h3 id="二、Android中的颜色"><a href="#二、Android中的颜色" class="headerlink" title="二、Android中的颜色"></a>二、Android中的颜色</h3><h4 id="2-1-颜色模式"><a href="#2-1-颜色模式" class="headerlink" title="2.1 颜色模式"></a>2.1 颜色模式</h4><ul>
 <li>Android中支持的颜色模式:</li>
 </ul>
 <table>
@@ -671,7 +671,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="三、Android官方提供的操作类"><a href="#三、Android官方提供的操作类" class="headerlink" title="三、Android官方提供的操作类"></a>三、Android官方提供的操作类</h2><ul>
+<h3 id="三、Android官方提供的操作类"><a href="#三、Android官方提供的操作类" class="headerlink" title="三、Android官方提供的操作类"></a>三、Android官方提供的操作类</h3><ul>
 <li>操作类: <ul>
 <li>Configuration</li>
 <li>ViewConfiguration</li>
@@ -682,13 +682,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-1-Configuration类"><a href="#3-1-Configuration类" class="headerlink" title="3.1 Configuration类"></a>3.1 Configuration类</h3><ul>
+<h4 id="3-1-Configuration类"><a href="#3-1-Configuration类" class="headerlink" title="3.1 Configuration类"></a>3.1 Configuration类</h4><ul>
 <li>说明:描述设备的配置信息</li>
 <li><p>获取配置信息: </p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Configuration configuration = getResources().getConfiguration();</span><br><span class="line"><span class="comment">//获取国家码</span></span><br><span class="line"><span class="keyword">int</span> countryCode=configuration.mcc;</span><br><span class="line"><span class="comment">//获取网络码</span></span><br><span class="line"><span class="keyword">int</span> networkCode=configuration.mnc;</span><br><span class="line"><span class="comment">//判断横竖屏</span></span><br><span class="line"><span class="keyword">if</span>(configuration.orientation==Configuration.ORIENTATION_PORTRAIT)&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="3-2-ViewConfiguration类"><a href="#3-2-ViewConfiguration类" class="headerlink" title="3.2 ViewConfiguration类"></a>3.2 ViewConfiguration类</h3><ul>
+<h4 id="3-2-ViewConfiguration类"><a href="#3-2-ViewConfiguration类" class="headerlink" title="3.2 ViewConfiguration类"></a>3.2 ViewConfiguration类</h4><ul>
 <li>说明:提供了一些自定义控件用到的标准常量，比如尺寸大小，滑动距离，敏感度等等</li>
 <li>获取实例: <ul>
 <li><code>ViewConfiguration viewConfiguration=ViewConfiguration.get(context);</code></li>
@@ -701,7 +701,7 @@
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取touchSlop。该值表示系统所能识别出的被认为是滑动的最小距离</span></span><br><span class="line"><span class="keyword">int</span> touchSlop = viewConfiguration.getScaledTouchSlop();</span><br><span class="line"><span class="comment">//获取Fling速度的最小值和最大值</span></span><br><span class="line"><span class="keyword">int</span> minimumVelocity = viewConfiguration.getScaledMinimumFlingVelocity();</span><br><span class="line"><span class="keyword">int</span> maximumVelocity = viewConfiguration.getScaledMaximumFlingVelocity();</span><br><span class="line"><span class="comment">//判断是否有物理按键</span></span><br><span class="line"><span class="keyword">boolean</span> isHavePermanentMenuKey=viewConfiguration.hasPermanentMenuKey();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="3-3-GestureDetector类"><a href="#3-3-GestureDetector类" class="headerlink" title="3.3 GestureDetector类"></a>3.3 GestureDetector类</h3><ul>
+<h4 id="3-3-GestureDetector类"><a href="#3-3-GestureDetector类" class="headerlink" title="3.3 GestureDetector类"></a>3.3 GestureDetector类</h4><ul>
 <li>说明:手势监听(单击,滑动,长按,双击等)处理的工具类(内部有一个OnGestureListener接口),当然我们也可以在onTouchEvent()中自己处理手势</li>
 <li><p>使用步骤:</p>
 <ol>
@@ -721,7 +721,7 @@
 </ol>
 </li>
 </ul>
-<h3 id="3-4-VelocityTracker"><a href="#3-4-VelocityTracker" class="headerlink" title="3.4 VelocityTracker"></a>3.4 VelocityTracker</h3><ul>
+<h4 id="3-4-VelocityTracker"><a href="#3-4-VelocityTracker" class="headerlink" title="3.4 VelocityTracker"></a>3.4 VelocityTracker</h4><ul>
 <li>说明:用于跟踪触摸屏事件（比如，Flinging及其他Gestures手势事件等）的速率(包括水平和竖直方向)</li>
 <li><p>使用步骤:</p>
 <ol>
@@ -737,7 +737,7 @@
 </ol>
 </li>
 </ul>
-<h3 id="3-5-Scroller"><a href="#3-5-Scroller" class="headerlink" title="3.5 Scroller"></a>3.5 Scroller</h3><ul>
+<h4 id="3-5-Scroller"><a href="#3-5-Scroller" class="headerlink" title="3.5 Scroller"></a>3.5 Scroller</h4><ul>
 <li>说明: <ul>
 <li>用于跟踪View的滑动(view的scrollTo/scrollBy滑动是在瞬间完成,没有过度效果)的轨迹，实现过渡效果的滑动.此类不会移动控件，只移动View的内容</li>
 <li>Scroller本身无法让view滑动,需要和view的computeScroll方法结合使用<blockquote>
@@ -765,13 +765,13 @@
 </ol>
 </li>
 </ul>
-<h3 id="3-6-OverScroller"><a href="#3-6-OverScroller" class="headerlink" title="3.6 OverScroller"></a>3.6 OverScroller</h3><ul>
+<h4 id="3-6-OverScroller"><a href="#3-6-OverScroller" class="headerlink" title="3.6 OverScroller"></a>3.6 OverScroller</h4><ul>
 <li>官方说明:<blockquote>
 <p>This class encapsulates scrolling with the ability to overshoot the bounds of a scrolling operation. This class is a drop-in replacement for Scroller in most cases.   </p>
 </blockquote>
 </li>
 </ul>
-<h2 id="四、自定义View的分类"><a href="#四、自定义View的分类" class="headerlink" title="四、自定义View的分类"></a>四、自定义View的分类</h2><ul>
+<h3 id="四、自定义View的分类"><a href="#四、自定义View的分类" class="headerlink" title="四、自定义View的分类"></a>四、自定义View的分类</h3><ul>
 <li>说明:根据有无子view可以分为2类<ul>
 <li>继承自View</li>
 <li>继承自ViewGroup</li>
@@ -783,11 +783,11 @@
 </ul>
 </li>
 </ul>
-<h3 id="继承自View"><a href="#继承自View" class="headerlink" title="继承自View"></a>继承自View</h3><ul>
+<h4 id="继承自View"><a href="#继承自View" class="headerlink" title="继承自View"></a>继承自View</h4><ul>
 <li>第一种:实现不规则的效果,需重写onDraw方法(view中的onDraw方法为空实现)</li>
 <li>第二种:扩展某种已有的View功能(如<a href="https://github.com/chrisbanes/PhotoView" target="_blank" rel="external">PhotoView</a>扩展了ImageView,支持缩放)</li>
 </ul>
-<h3 id="继承ViewGroup"><a href="#继承ViewGroup" class="headerlink" title="继承ViewGroup"></a>继承ViewGroup</h3><ul>
+<h4 id="继承ViewGroup"><a href="#继承ViewGroup" class="headerlink" title="继承ViewGroup"></a>继承ViewGroup</h4><ul>
 <li><p>分类:</p>
 <ul>
 <li>第一种:实现自定义的布局,即除系统的布局之外,重新定义的布局(<a href="https://github.com/nuptboyzhb/SuperSwipeRefreshLayout" target="_blank" rel="external">SuperSwipeRefreshLayout</a>继承自ViewGroup)<ul>

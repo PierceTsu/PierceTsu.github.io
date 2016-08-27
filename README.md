@@ -1,2 +1,0 @@
-# PierceTsu.github.io
-* note

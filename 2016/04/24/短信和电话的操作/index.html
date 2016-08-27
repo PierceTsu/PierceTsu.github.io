@@ -21,7 +21,7 @@
 解析步骤:
 
 123456789Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);for (int i = 0; i">
-<meta property="og:updated_time" content="2016-08-27T12:24:45.563Z">
+<meta property="og:updated_time" content="2016-08-27T12:34:30.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="短信和电话的操作">
 <meta name="twitter:description" content="1.短信的操作1.1短信解析(广播接收中完成)
@@ -332,35 +332,33 @@
 <li><p>来电:</p>
 <ul>
 <li>一般在服务中进行</li>
-<li><p>思路:</p>
-<ul>
-<li>调用系统服务获取TelephonyManager</li>
+<li>思路:<ul>
+<li>调用系统服务获取TelephonyManager<ul>
 <li>调用listen方法</li>
 <li>设置监听事件,在PhoneStateListener中复写onCallStateChanged方法</li>
 <li>获取三种状态</li>
 </ul>
 </li>
-<li><p>挂断电话:(AIDL远程服务)</p>
-<ul>
-<li><p>查看源码(aidl文件sourceInsight无法查看)</p>
-<ul>
+</ul>
+</li>
+<li>挂断电话:(AIDL远程服务)<ul>
+<li>查看源码(aidl文件sourceInsight无法查看)<ul>
 <li>TelephonyManager–&gt;getITelephony(); —android.jar包中没有该方法</li>
 <li>找到aidl文件的路径:com.android.internal.telephony.ITelephony</li>
 <li>文件夹路径: android4.0\frameworks\base\telephony\java\com\android\internal\telephony\ITelephony.aidl</li>
 <li>网站查询:www.grepcode.com–&gt;TelephonyManager–&gt;getITelephony()</li>
 <li>ITelephony接口下有endCall方法</li>
 <li>查找:NeighboringCellInfo.aidl<ul>
-<li>android4.0\frameworks\base\telephony\java\android\telephony\NeighboringCellInfo.aidl</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>思路: </p>
-<ul>
+<li>android4.0\frameworks\base\telephony\java\android\telephony\NeighboringCellInfo.aidl        <ul>
+<li>思路: </li>
 <li>ITelephony接口中才有endCall的方法</li>
 <li>ITelephony接口类型实例的获取可调用getITelephony()方法</li>
-<li>而ITelephony.aidl中提供了获取ITelephony的方法<br>  ITelephony telephony = ITelephony.Stub.asInterface(ServiceManager.getService(Context.TELEPHONY_SERVICE));</li>
+<li>而ITelephony.aidl中提供了获取ITelephony的方法<br>ITelephony telephony = ITelephony.Stub.asInterface(ServiceManager.getService(Context.TELEPHONY_SERVICE));</li>
 <li>ServiceManager未暴露出来,故需使用反射的手段获取其中的getService方法</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -393,7 +391,7 @@
         <p><span>本文标题:</span><a href="/2016/04/24/短信和电话的操作/">短信和电话的操作</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Pierce Tsu</a></p>
         <p><span>发布时间:</span>2016-04-24, 21:23:36</p>
-        <p><span>最后更新:</span>2016-08-27, 20:24:45</p>
+        <p><span>最后更新:</span>2016-08-27, 20:34:30</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/24/短信和电话的操作/" title="短信和电话的操作">http://yaoyuehome.com/2016/04/24/短信和电话的操作/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yaoyuehome.com/2016/04/24/短信和电话的操作/　　作者: Pierce Tsu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

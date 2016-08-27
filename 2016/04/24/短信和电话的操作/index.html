@@ -9,7 +9,8 @@
 参考网站:www.grepcode.com,搜索android.provider.Telephony
 在网中查找SMS_RECEIVED_ACTION
 解析步骤:
-  123456789Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);for (int i = 0; i">
+
+123456789Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);for (int i = 0; i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="短信和电话的操作">
 <meta property="og:url" content="http://yaoyuehome.com/2016/04/24/短信和电话的操作/index.html">
@@ -18,15 +19,17 @@
 参考网站:www.grepcode.com,搜索android.provider.Telephony
 在网中查找SMS_RECEIVED_ACTION
 解析步骤:
-  123456789Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);for (int i = 0; i">
-<meta property="og:updated_time" content="2016-07-02T15:09:26.450Z">
+
+123456789Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);for (int i = 0; i">
+<meta property="og:updated_time" content="2016-08-27T12:24:45.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="短信和电话的操作">
 <meta name="twitter:description" content="1.短信的操作1.1短信解析(广播接收中完成)
 参考网站:www.grepcode.com,搜索android.provider.Telephony
 在网中查找SMS_RECEIVED_ACTION
 解析步骤:
-  123456789Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);for (int i = 0; i">
+
+123456789Object[]messages = (Object[]) intent.getSerializableExtra(&quot;pdus&quot;);for (int i = 0; i">
   
     <link rel="alternative" href="/atom.xml" title="PierceTsu&#39;s Blog" type="application/atom+xml">
   
@@ -281,13 +284,13 @@
         <h3 id="1-短信的操作"><a href="#1-短信的操作" class="headerlink" title="1.短信的操作"></a>1.短信的操作</h3><h4 id="1-1短信解析-广播接收中完成"><a href="#1-1短信解析-广播接收中完成" class="headerlink" title="1.1短信解析(广播接收中完成)"></a>1.1短信解析(广播接收中完成)</h4><ul>
 <li>参考网站:www.grepcode.com,搜索android.provider.Telephony</li>
 <li>在网中查找SMS_RECEIVED_ACTION</li>
-<li><p>解析步骤:</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Object[]messages = (Object[]) intent.getSerializableExtra(<span class="string">"pdus"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; messages.length; i++) &#123;</span><br><span class="line">	<span class="keyword">byte</span>[] pdu = (<span class="keyword">byte</span>[]) messages[i];</span><br><span class="line">	SmsMessage message = SmsMessage.createFromPdu(pdu);</span><br><span class="line">	<span class="comment">//获取短信内容</span></span><br><span class="line">	String body = message.getMessageBody();</span><br><span class="line">	<span class="comment">//获取收到短信的号码</span></span><br><span class="line">	String address = message.getOriginatingAddress();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>动态注册:</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态注册</span></span><br><span class="line">mReceiver = <span class="keyword">new</span> SmsReceiver();</span><br><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);</span><br><span class="line">filter.addAction(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);</span><br><span class="line">registerReceiver(mReceiver, filter);</span><br></pre></td></tr></table></figure>
-</li>
+<li>解析步骤:</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Object[]messages = (Object[]) intent.getSerializableExtra(<span class="string">"pdus"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; messages.length; i++) &#123;</span><br><span class="line">	<span class="keyword">byte</span>[] pdu = (<span class="keyword">byte</span>[]) messages[i];</span><br><span class="line">	SmsMessage message = SmsMessage.createFromPdu(pdu);</span><br><span class="line">	<span class="comment">//获取短信内容</span></span><br><span class="line">	String body = message.getMessageBody();</span><br><span class="line">	<span class="comment">//获取收到短信的号码</span></span><br><span class="line">	String address = message.getOriginatingAddress();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>动态注册:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态注册</span></span><br><span class="line">mReceiver = <span class="keyword">new</span> SmsReceiver();</span><br><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);</span><br><span class="line">filter.addAction(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);</span><br><span class="line">registerReceiver(mReceiver, filter);</span><br></pre></td></tr></table></figure>
 <h4 id="1-2-短信的拦截"><a href="#1-2-短信的拦截" class="headerlink" title="1.2 短信的拦截"></a>1.2 短信的拦截</h4><ul>
 <li>终止广播即可</li>
 </ul>
@@ -304,27 +307,26 @@
 </li>
 </ul>
 <h4 id="1-4-启动发送短信意图-附短信内容"><a href="#1-4-启动发送短信意图-附短信内容" class="headerlink" title="1.4 启动发送短信意图(附短信内容)"></a>1.4 启动发送短信意图(附短信内容)</h4><ul>
-<li><p>参照系统上层应用的意图过滤器:(activity的name为:”.ui.ComposeMessageActivity”)</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;intent-filter&gt;</span><br><span class="line">       &lt;action android:name="android.intent.action.VIEW" /&gt;</span><br><span class="line">       &lt;action android:name="android.intent.action.SENDTO" /&gt;</span><br><span class="line">       &lt;category android:name="android.intent.category.DEFAULT" /&gt;</span><br><span class="line">       &lt;category android:name="android.intent.category.BROWSABLE" /&gt;</span><br><span class="line">       &lt;data android:scheme="sms" /&gt;</span><br><span class="line">       &lt;data android:scheme="smsto" /&gt;</span><br><span class="line">   &lt;/intent-filter&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>附加短信内容:(ComposeMessageActivity.java中getStringExtra的类型)</p>
+<li>参照系统上层应用的意图过滤器:(activity的name为:”.ui.ComposeMessageActivity”)</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.VIEW"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.SENDTO"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.BROWSABLE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"sms"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"smsto"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>可知短信内容为:sms_body(<code>mWorkingMessage.setText(intent.getStringExtra(&quot;sms_body&quot;));</code>)</p>
+<li>附加短信内容:(ComposeMessageActivity.java中getStringExtra的类型)<ul>
+<li>可知短信内容为:sms_body(<code>mWorkingMessage.setText(intent.getStringExtra(&quot;sms_body&quot;));</code>)</li>
+</ul>
+</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();		</span><br><span class="line">intent.setAction(<span class="string">"android.intent.action.SENDTO"</span>);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"sms:"</span>));</span><br><span class="line">intent.putExtra(<span class="string">"sms_body"</span>, <span class="string">"..."</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
 <h4 id="1-5-直接发送短信"><a href="#1-5-直接发送短信" class="headerlink" title="1.5 直接发送短信"></a>1.5 直接发送短信</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SmsManager sm = SmsManager.getDefault();</span><br><span class="line">sm.sendTextMessage(<span class="string">"电话号码"</span>, <span class="keyword">null</span>, <span class="string">"短信内容"</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="2-电话"><a href="#2-电话" class="headerlink" title="2. 电话"></a>2. 电话</h3><h4 id="2-1-获取SIM卡的序列号"><a href="#2-1-获取SIM卡的序列号" class="headerlink" title="2.1 获取SIM卡的序列号"></a>2.1 获取SIM卡的序列号</h4><ul>
 <li>需要添加权限<br>  <code>android.permission.READ_PHONE_STATE</code></li>
-<li><p>调用系统服务获取电话管理者</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);</span><br><span class="line">   String simSerialNumber = tm.getSimSerialNumber();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可用于判断是否有sim卡</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TextUtils.isEmpty(simSerialNumber)) &#123;</span><br><span class="line">	Toast.makeText(<span class="keyword">this</span>, <span class="string">"请插入sim卡"</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>调用系统服务获取电话管理者</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);</span><br><span class="line">String simSerialNumber = tm.getSimSerialNumber();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可用于判断是否有sim卡</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TextUtils.isEmpty(simSerialNumber)) &#123;</span><br><span class="line">	Toast.makeText(<span class="keyword">this</span>, <span class="string">"请插入sim卡"</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="2-2-启动拨打电话的意图-隐式意图"><a href="#2-2-启动拨打电话的意图-隐式意图" class="headerlink" title="2.2 启动拨打电话的意图(隐式意图)"></a>2.2 启动拨打电话的意图(隐式意图)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line"><span class="comment">//拨打电话的界面</span></span><br><span class="line">intent.setAction(Intent.ACTION_DIAL);</span><br><span class="line"><span class="comment">//直接打电话</span></span><br><span class="line"><span class="comment">//intent.setAction(Intent.ACTION_CALL);</span></span><br><span class="line">intent.setData(Uri.parse(<span class="string">"tel://"</span>+childInfo.number));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
 <h4 id="2-3-获取电话的状态"><a href="#2-3-获取电话的状态" class="headerlink" title="2.3 获取电话的状态"></a>2.3 获取电话的状态</h4><ul>
 <li><p>来电:</p>
@@ -391,7 +393,7 @@
         <p><span>本文标题:</span><a href="/2016/04/24/短信和电话的操作/">短信和电话的操作</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Pierce Tsu</a></p>
         <p><span>发布时间:</span>2016-04-24, 21:23:36</p>
-        <p><span>最后更新:</span>2016-07-02, 23:09:26</p>
+        <p><span>最后更新:</span>2016-08-27, 20:24:45</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/24/短信和电话的操作/" title="短信和电话的操作">http://yaoyuehome.com/2016/04/24/短信和电话的操作/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yaoyuehome.com/2016/04/24/短信和电话的操作/　　作者: Pierce Tsu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

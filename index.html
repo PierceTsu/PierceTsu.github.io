@@ -306,7 +306,7 @@
 </blockquote>
 <pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ColorMatrix colorMatrix = <span class="keyword">new</span> ColorMatrix(<span class="keyword">new</span> <span class="keyword">float</span>[]&#123;  </span><br><span class="line">       <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//R</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//G</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//B</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>,  <span class="comment">//A</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-* 这个矩阵不同的位置表示的RGBA值，其范围在0.0F至2.0F之间，1为保持原图的RGB值。每一行的第五列数字表示偏移值
+    * 这个矩阵不同的位置表示的RGBA值，其范围在0.0F至2.0F之间，1为保持原图的RGB值。每一行的第五列数字表示偏移值
 </code></pre><ul>
 <li>LightingColorFilter:光照颜色过滤,构造方法:<code>LightingColorFilter (int mul, int add)</code>,这两个值都是16进制的色彩值0xAARRGGBB<ul>
 <li>mul全称是colorMultiply意为色彩倍增</li>
@@ -368,13 +368,12 @@
 </li>
 <li>breakText,有三个重载方法,设置一个最大宽度在不超过这个宽度的范围内返回实际测量值否则停止测量</li>
 <li>setUnderlineText(boolean underlineText)设置下划线</li>
-<li><p>setTypeface(Typeface typeface)设置字体类型(5种)</p>
-<blockquote>
+<li>setTypeface(Typeface typeface)设置字体类型(5种)<blockquote>
 <p>Typeface这个类中给我们提供了多个方法去个性化我们的字体</p>
 </blockquote>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字体并设置画笔字体  </span></span><br><span class="line">Typeface typeface = Typeface.createFromAsset(context.getAssets(), <span class="string">"kt.ttf"</span>);  </span><br><span class="line">textPaint.setTypeface(typeface);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字体并设置画笔字体  </span></span><br><span class="line">Typeface typeface = Typeface.createFromAsset(context.getAssets(), <span class="string">"kt.ttf"</span>);  </span><br><span class="line">textPaint.setTypeface(typeface);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>同样TextView中可以获取到TextPaint,设置字体调用setTypeface方法</p>
 <ul>
@@ -701,8 +700,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取touchSlop。该值表示系统所能识别出的被认为是滑动的最小距离</span></span><br><span class="line"><span class="keyword">int</span> touchSlop = viewConfiguration.getScaledTouchSlop();</span><br><span class="line"><span class="comment">//获取Fling速度的最小值和最大值</span></span><br><span class="line"><span class="keyword">int</span> minimumVelocity = viewConfiguration.getScaledMinimumFlingVelocity();</span><br><span class="line"><span class="keyword">int</span> maximumVelocity = viewConfiguration.getScaledMaximumFlingVelocity();</span><br><span class="line"><span class="comment">//判断是否有物理按键</span></span><br><span class="line"><span class="keyword">boolean</span> isHavePermanentMenuKey=viewConfiguration.hasPermanentMenuKey();</span><br></pre></td></tr></table></figure>
 <h4 id="3-3-GestureDetector类"><a href="#3-3-GestureDetector类" class="headerlink" title="3.3 GestureDetector类"></a>3.3 GestureDetector类</h4><ul>
 <li>说明:手势监听(单击,滑动,长按,双击等)处理的工具类(内部有一个OnGestureListener接口),当然我们也可以在onTouchEvent()中自己处理手势</li>
-<li><p>使用步骤:</p>
-<ol>
+<li>使用步骤:<ol>
 <li>创建一个类实现OnGestureListener<ul>
 <li>onDown: 触摸屏幕时调用该方法</li>
 <li>onFling: 手指在屏幕拖动时调用该方法</li>
@@ -713,12 +711,11 @@
 </ul>
 </li>
 <li>new 一个GestureDetector对象,构造方法中传一个context和第一步创建的类</li>
-<li><p>将Touch事件交给GestureDetector处理 </p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;  </span><br><span class="line">   		<span class="keyword">return</span> mGestureDetector.onTouchEvent(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>将Touch事件交给GestureDetector处理 </li>
 </ol>
 </li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;  </span><br><span class="line">	<span class="keyword">return</span> mGestureDetector.onTouchEvent(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="3-4-VelocityTracker"><a href="#3-4-VelocityTracker" class="headerlink" title="3.4 VelocityTracker"></a>3.4 VelocityTracker</h4><ul>
 <li>说明:用于跟踪触摸屏事件（比如，Flinging及其他Gestures手势事件等）的速率(包括水平和竖直方向)</li>
 <li>使用步骤:<ol>
@@ -726,15 +723,12 @@
 </ol>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startVelocityTracker</span><span class="params">(MotionEvent event)</span> </span>&#123;  </span><br><span class="line">	<span class="keyword">if</span> (mVelocityTracker == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="comment">//初始化VelocityTracker  </span></span><br><span class="line"> 		mVelocityTracker = VelocityTracker.obtain();  </span><br><span class="line">		&#125; </span><br><span class="line">	<span class="comment">//把要追踪的MotionEvent注册到VelocityTracker的监听中	 </span></span><br><span class="line">		mVelocityTracker.addMovement(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startVelocityTracker</span><span class="params">(MotionEvent event)</span> </span>&#123;  </span><br><span class="line">	<span class="keyword">if</span> (mVelocityTracker == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="comment">//初始化VelocityTracker  </span></span><br><span class="line"> 		mVelocityTracker = VelocityTracker.obtain();  </span><br><span class="line">	&#125; </span><br><span class="line">	<span class="comment">//把要追踪的MotionEvent注册到VelocityTracker的监听中	 </span></span><br><span class="line">	mVelocityTracker.addMovement(event);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <pre><code>2. 获取追踪到的速度
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getScrollVelocity</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">		<span class="comment">// 设置VelocityTracker单位.1000表示1秒时间内运动的像素（pix/second)  </span></span><br><span class="line">		mVelocityTracker.computeCurrentVelocity(<span class="number">1000</span>);  </span><br><span class="line">		<span class="comment">// 获取在1秒内X方向所滑动像素值  </span></span><br><span class="line">		<span class="keyword">int</span> xVelocity = (<span class="keyword">int</span>) mVelocityTracker.getXVelocity();  </span><br><span class="line">		<span class="keyword">return</span> Math.abs(xVelocity);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-3. 解除速度追踪: 在不需要的时候重置并回收内存
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">stopVelocityTracker</span><span class="params">()</span> </span>&#123;  </span><br><span class="line"> 		<span class="keyword">if</span> (mVelocityTracker != <span class="keyword">null</span>) &#123;  </span><br><span class="line">     		mVelocityTracker.recycle();  </span><br><span class="line">     		mVelocityTracker = <span class="keyword">null</span>;  </span><br><span class="line"> 		&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><h4 id="3-5-Scroller"><a href="#3-5-Scroller" class="headerlink" title="3.5 Scroller"></a>3.5 Scroller</h4><ul>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getScrollVelocity</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">	<span class="comment">// 设置VelocityTracker单位.1000表示1秒时间内运动的像素（pix/second)  </span></span><br><span class="line">	mVelocityTracker.computeCurrentVelocity(<span class="number">1000</span>);  </span><br><span class="line">	<span class="comment">// 获取在1秒内X方向所滑动像素值  </span></span><br><span class="line">	<span class="keyword">int</span> xVelocity = (<span class="keyword">int</span>) mVelocityTracker.getXVelocity();  </span><br><span class="line">	<span class="keyword">return</span> Math.abs(xVelocity);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>3. 解除速度追踪: 在不需要的时候重置并回收内存
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">stopVelocityTracker</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">	<span class="keyword">if</span> (mVelocityTracker != <span class="keyword">null</span>) &#123;  </span><br><span class="line">  	mVelocityTracker.recycle();  </span><br><span class="line">  	mVelocityTracker = <span class="keyword">null</span>;  </span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-Scroller"><a href="#3-5-Scroller" class="headerlink" title="3.5 Scroller"></a>3.5 Scroller</h4><ul>
 <li>说明: <ul>
 <li>用于跟踪View的滑动(view的scrollTo/scrollBy滑动是在瞬间完成,没有过度效果)的轨迹，实现过渡效果的滑动.此类不会移动控件，只移动View的内容</li>
 <li>Scroller本身无法让view滑动,需要和view的computeScroll方法结合使用<blockquote>
@@ -743,25 +737,22 @@
 </li>
 </ul>
 </li>
-<li><p>使用步骤:</p>
-<ol>
+<li>使用步骤:<ol>
 <li>传入context,创建Scroller对象</li>
-<li><p>复写view的computeScroll方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (mScroller.computeScrollOffset())&#123;   <span class="comment">//如果mScroller没有调用startScroll，这里将会返回false。</span></span><br><span class="line">           scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</span><br><span class="line">           postInvalidate();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>调用Scroller的startScroll方法,在调用invalidate方法进行重绘</p>
-<pre><code class="java"><span class="comment">//封装缓慢滑动到指定位置方法</span>
-<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">smoothScrollTo</span><span class="params">(<span class="keyword">int</span> desX , <span class="keyword">int</span> desY)</span></span>{
- <span class="keyword">int</span> scrollX = getScrollX();
- <span class="keyword">int</span> deltaX = desX - scrollX;
- <span class="comment">//指定1s内滑动到desX</span>
- mScroller.startScroll(scrollX,<span class="number">0</span>,deltaX,<span class="number">0</span>,<span class="number">1000</span>);
-}
-</code></pre>
-</li>
+<li>复写view的computeScroll方法</li>
 </ol>
 </li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mScroller.computeScrollOffset())&#123;   <span class="comment">//如果mScroller没有调用startScroll，这里将会返回false。</span></span><br><span class="line">        scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</span><br><span class="line">        postInvalidate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>3. 调用Scroller的startScroll方法,在调用invalidate方法进行重绘
+</code></pre><pre><code class="java"><span class="comment">//封装缓慢滑动到指定位置方法</span>
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">smoothScrollTo</span><span class="params">(<span class="keyword">int</span> desX , <span class="keyword">int</span> desY)</span></span>{
+    <span class="keyword">int</span> scrollX = getScrollX();
+    <span class="keyword">int</span> deltaX = desX - scrollX;
+    <span class="comment">//指定1s内滑动到desX</span>
+    mScroller.startScroll(scrollX,<span class="number">0</span>,deltaX,<span class="number">0</span>,<span class="number">1000</span>);
+}
+</code></pre>
 <h4 id="3-6-OverScroller"><a href="#3-6-OverScroller" class="headerlink" title="3.6 OverScroller"></a>3.6 OverScroller</h4><ul>
 <li>官方说明:<blockquote>
 <p>This class encapsulates scrolling with the ability to overshoot the bounds of a scrolling operation. This class is a drop-in replacement for Scroller in most cases.   </p>
@@ -857,13 +848,13 @@
         <h3 id="1-短信的操作"><a href="#1-短信的操作" class="headerlink" title="1.短信的操作"></a>1.短信的操作</h3><h4 id="1-1短信解析-广播接收中完成"><a href="#1-1短信解析-广播接收中完成" class="headerlink" title="1.1短信解析(广播接收中完成)"></a>1.1短信解析(广播接收中完成)</h4><ul>
 <li>参考网站:www.grepcode.com,搜索android.provider.Telephony</li>
 <li>在网中查找SMS_RECEIVED_ACTION</li>
-<li><p>解析步骤:</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Object[]messages = (Object[]) intent.getSerializableExtra(<span class="string">"pdus"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; messages.length; i++) &#123;</span><br><span class="line">	<span class="keyword">byte</span>[] pdu = (<span class="keyword">byte</span>[]) messages[i];</span><br><span class="line">	SmsMessage message = SmsMessage.createFromPdu(pdu);</span><br><span class="line">	<span class="comment">//获取短信内容</span></span><br><span class="line">	String body = message.getMessageBody();</span><br><span class="line">	<span class="comment">//获取收到短信的号码</span></span><br><span class="line">	String address = message.getOriginatingAddress();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>动态注册:</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态注册</span></span><br><span class="line">mReceiver = <span class="keyword">new</span> SmsReceiver();</span><br><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);</span><br><span class="line">filter.addAction(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);</span><br><span class="line">registerReceiver(mReceiver, filter);</span><br></pre></td></tr></table></figure>
-</li>
+<li>解析步骤:</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Object[]messages = (Object[]) intent.getSerializableExtra(<span class="string">"pdus"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; messages.length; i++) &#123;</span><br><span class="line">	<span class="keyword">byte</span>[] pdu = (<span class="keyword">byte</span>[]) messages[i];</span><br><span class="line">	SmsMessage message = SmsMessage.createFromPdu(pdu);</span><br><span class="line">	<span class="comment">//获取短信内容</span></span><br><span class="line">	String body = message.getMessageBody();</span><br><span class="line">	<span class="comment">//获取收到短信的号码</span></span><br><span class="line">	String address = message.getOriginatingAddress();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>动态注册:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态注册</span></span><br><span class="line">mReceiver = <span class="keyword">new</span> SmsReceiver();</span><br><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);</span><br><span class="line">filter.addAction(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);</span><br><span class="line">registerReceiver(mReceiver, filter);</span><br></pre></td></tr></table></figure>
 <h4 id="1-2-短信的拦截"><a href="#1-2-短信的拦截" class="headerlink" title="1.2 短信的拦截"></a>1.2 短信的拦截</h4><ul>
 <li>终止广播即可</li>
 </ul>
@@ -880,27 +871,26 @@
 </li>
 </ul>
 <h4 id="1-4-启动发送短信意图-附短信内容"><a href="#1-4-启动发送短信意图-附短信内容" class="headerlink" title="1.4 启动发送短信意图(附短信内容)"></a>1.4 启动发送短信意图(附短信内容)</h4><ul>
-<li><p>参照系统上层应用的意图过滤器:(activity的name为:”.ui.ComposeMessageActivity”)</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;intent-filter&gt;</span><br><span class="line">       &lt;action android:name="android.intent.action.VIEW" /&gt;</span><br><span class="line">       &lt;action android:name="android.intent.action.SENDTO" /&gt;</span><br><span class="line">       &lt;category android:name="android.intent.category.DEFAULT" /&gt;</span><br><span class="line">       &lt;category android:name="android.intent.category.BROWSABLE" /&gt;</span><br><span class="line">       &lt;data android:scheme="sms" /&gt;</span><br><span class="line">       &lt;data android:scheme="smsto" /&gt;</span><br><span class="line">   &lt;/intent-filter&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>附加短信内容:(ComposeMessageActivity.java中getStringExtra的类型)</p>
+<li>参照系统上层应用的意图过滤器:(activity的name为:”.ui.ComposeMessageActivity”)</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.VIEW"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.SENDTO"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.BROWSABLE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"sms"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"smsto"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>可知短信内容为:sms_body(<code>mWorkingMessage.setText(intent.getStringExtra(&quot;sms_body&quot;));</code>)</p>
+<li>附加短信内容:(ComposeMessageActivity.java中getStringExtra的类型)<ul>
+<li>可知短信内容为:sms_body(<code>mWorkingMessage.setText(intent.getStringExtra(&quot;sms_body&quot;));</code>)</li>
+</ul>
+</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();		</span><br><span class="line">intent.setAction(<span class="string">"android.intent.action.SENDTO"</span>);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"sms:"</span>));</span><br><span class="line">intent.putExtra(<span class="string">"sms_body"</span>, <span class="string">"..."</span>);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
 <h4 id="1-5-直接发送短信"><a href="#1-5-直接发送短信" class="headerlink" title="1.5 直接发送短信"></a>1.5 直接发送短信</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SmsManager sm = SmsManager.getDefault();</span><br><span class="line">sm.sendTextMessage(<span class="string">"电话号码"</span>, <span class="keyword">null</span>, <span class="string">"短信内容"</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="2-电话"><a href="#2-电话" class="headerlink" title="2. 电话"></a>2. 电话</h3><h4 id="2-1-获取SIM卡的序列号"><a href="#2-1-获取SIM卡的序列号" class="headerlink" title="2.1 获取SIM卡的序列号"></a>2.1 获取SIM卡的序列号</h4><ul>
 <li>需要添加权限<br>  <code>android.permission.READ_PHONE_STATE</code></li>
-<li><p>调用系统服务获取电话管理者</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);</span><br><span class="line">   String simSerialNumber = tm.getSimSerialNumber();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可用于判断是否有sim卡</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TextUtils.isEmpty(simSerialNumber)) &#123;</span><br><span class="line">	Toast.makeText(<span class="keyword">this</span>, <span class="string">"请插入sim卡"</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>调用系统服务获取电话管理者</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);</span><br><span class="line">String simSerialNumber = tm.getSimSerialNumber();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可用于判断是否有sim卡</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (TextUtils.isEmpty(simSerialNumber)) &#123;</span><br><span class="line">	Toast.makeText(<span class="keyword">this</span>, <span class="string">"请插入sim卡"</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="2-2-启动拨打电话的意图-隐式意图"><a href="#2-2-启动拨打电话的意图-隐式意图" class="headerlink" title="2.2 启动拨打电话的意图(隐式意图)"></a>2.2 启动拨打电话的意图(隐式意图)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line"><span class="comment">//拨打电话的界面</span></span><br><span class="line">intent.setAction(Intent.ACTION_DIAL);</span><br><span class="line"><span class="comment">//直接打电话</span></span><br><span class="line"><span class="comment">//intent.setAction(Intent.ACTION_CALL);</span></span><br><span class="line">intent.setData(Uri.parse(<span class="string">"tel://"</span>+childInfo.number));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
 <h4 id="2-3-获取电话的状态"><a href="#2-3-获取电话的状态" class="headerlink" title="2.3 获取电话的状态"></a>2.3 获取电话的状态</h4><ul>
 <li><p>来电:</p>

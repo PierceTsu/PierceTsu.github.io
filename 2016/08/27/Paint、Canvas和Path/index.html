@@ -32,7 +32,7 @@ Paint集成了所有“画”的属性
 
   12//初始化画笔,抗锯齿mPa">
 <meta property="og:image" content="http://yaoyuehome.com/img/mixture.jpg">
-<meta property="og:updated_time" content="2016-08-27T10:53:35.623Z">
+<meta property="og:updated_time" content="2016-08-27T12:25:50.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Paint、Canvas和Path类的使用介绍">
 <meta name="twitter:description" content="一、Paint
@@ -339,7 +339,7 @@ Paint集成了所有“画”的属性
 </blockquote>
 <pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ColorMatrix colorMatrix = <span class="keyword">new</span> ColorMatrix(<span class="keyword">new</span> <span class="keyword">float</span>[]&#123;  </span><br><span class="line">       <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//R</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//G</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>,  <span class="comment">//B</span></span><br><span class="line">       <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>,  <span class="comment">//A</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-* 这个矩阵不同的位置表示的RGBA值，其范围在0.0F至2.0F之间，1为保持原图的RGB值。每一行的第五列数字表示偏移值
+    * 这个矩阵不同的位置表示的RGBA值，其范围在0.0F至2.0F之间，1为保持原图的RGB值。每一行的第五列数字表示偏移值
 </code></pre><ul>
 <li>LightingColorFilter:光照颜色过滤,构造方法:<code>LightingColorFilter (int mul, int add)</code>,这两个值都是16进制的色彩值0xAARRGGBB<ul>
 <li>mul全称是colorMultiply意为色彩倍增</li>
@@ -401,13 +401,12 @@ Paint集成了所有“画”的属性
 </li>
 <li>breakText,有三个重载方法,设置一个最大宽度在不超过这个宽度的范围内返回实际测量值否则停止测量</li>
 <li>setUnderlineText(boolean underlineText)设置下划线</li>
-<li><p>setTypeface(Typeface typeface)设置字体类型(5种)</p>
-<blockquote>
+<li>setTypeface(Typeface typeface)设置字体类型(5种)<blockquote>
 <p>Typeface这个类中给我们提供了多个方法去个性化我们的字体</p>
 </blockquote>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字体并设置画笔字体  </span></span><br><span class="line">Typeface typeface = Typeface.createFromAsset(context.getAssets(), <span class="string">"kt.ttf"</span>);  </span><br><span class="line">textPaint.setTypeface(typeface);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取字体并设置画笔字体  </span></span><br><span class="line">Typeface typeface = Typeface.createFromAsset(context.getAssets(), <span class="string">"kt.ttf"</span>);  </span><br><span class="line">textPaint.setTypeface(typeface);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>同样TextView中可以获取到TextPaint,设置字体调用setTypeface方法</p>
 <ul>
@@ -609,7 +608,7 @@ Paint集成了所有“画”的属性
         <p><span>本文标题:</span><a href="/2016/08/27/Paint、Canvas和Path/">Paint、Canvas和Path类的使用介绍</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Pierce Tsu</a></p>
         <p><span>发布时间:</span>2016-08-27, 18:53:54</p>
-        <p><span>最后更新:</span>2016-08-27, 18:53:35</p>
+        <p><span>最后更新:</span>2016-08-27, 20:25:50</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/08/27/Paint、Canvas和Path/" title="Paint、Canvas和Path类的使用介绍">http://yaoyuehome.com/2016/08/27/Paint、Canvas和Path/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yaoyuehome.com/2016/08/27/Paint、Canvas和Path/　　作者: Pierce Tsu" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

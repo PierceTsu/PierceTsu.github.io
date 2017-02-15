@@ -115,13 +115,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -237,6 +237,101 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Ubuntu下搭建LNMP" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/15/Ubuntu下搭建LNMP/" class="article-date">
+      <time datetime="2017-02-15T13:14:52.998Z" itemprop="datePublished">2017-02-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/15/Ubuntu下搭建LNMP/">Ubuntu下搭建LNMP</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h3><ol>
+<li>更新软件源:<br><code>sudo apt-get update</code></li>
+<li>安装nginx<br><code>sudo apt-get install nginx</code></li>
+<li>启动nginx<br><code>sudo /etc/init.d/nginx start</code></li>
+<li>安装php5和mysql<br><code>sudo apt-get install php5-cli php5-cgi mysql-server php5-mysql</code></li>
+</ol>
+<h3 id="二、nginx-配置"><a href="#二、nginx-配置" class="headerlink" title="二、nginx 配置"></a>二、nginx 配置</h3><h4 id="1-主配置文件"><a href="#1-主配置文件" class="headerlink" title="1.主配置文件"></a>1.主配置文件</h4><ul>
+<li>位于: /etc/nginx/nginx.conf</li>
+<li>说明:<ul>
+<li>可以有include指令来包含外部的.conf文件进来，所以server级别的配置可以独立出来放在单独的conf文件里，便于管理和维护</li>
+<li>独立的server级别的conf必须要放置在sites-available目录下，还要在sites-enable目录下对应建立一个软件连接，这样才能生效</li>
+</ul>
+</li>
+<li>层级: nginx配置文件是按块来分的, 顶层的有main、event、http3个块<ul>
+<li>main: 代表的就是nginx.conf整个文件的区域</li>
+<li>event、http都是nginx.conf文件里的顶级块，它们都有自己的范围，使用花括弧来圈定范围</li>
+<li>http块代表的就是nginx服务了，一个nginx只有一个http块, 一个http块可以有多个server块(虚拟主机), 为了方便管理通常会把server块给独立出来，放置到sites-available目录里</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-独立的server配置"><a href="#2-独立的server配置" class="headerlink" title="2.独立的server配置:"></a>2.独立的server配置:</h4><ul>
+<li>配置文件: /etc/nginx/sites-available/default<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server ipv6only=on;</span><br><span class="line"> </span><br><span class="line">    # 如果要支持HTTPS，修改这里</span><br><span class="line">    # 可以使用 https://letsencrypt.org 的免费SSL证书</span><br><span class="line">    #listen 443 ssl;</span><br><span class="line">    #ssl_certificate     www.example.com.crt;</span><br><span class="line">    #ssl_certificate_key www.example.com.key;</span><br><span class="line">    #ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    #ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line"> </span><br><span class="line">    # 重定向所有HTTP到HTTPS</span><br><span class="line">    # rewrite ^(.*)$ https://$host$1 permanent;</span><br><span class="line"> </span><br><span class="line">    # 网站根目录，根据需要修改</span><br><span class="line">    root /usr/share/nginx/html;</span><br><span class="line">    # 增加index.php</span><br><span class="line">    index index.php index.html index.htm;</span><br><span class="line"> </span><br><span class="line">    # 假设域名是 ssl.mcxiaoke.com</span><br><span class="line">    server_name ssl.mcxiaoke.com; #绑定域名</span><br><span class="line"> </span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ =404;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    error_page 404 /404.html;</span><br><span class="line">    error_page 500 502 503 504 /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    #支持php-fpm的配置</span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files $uri =404;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">        fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-修改网站的默认目录"><a href="#3-修改网站的默认目录" class="headerlink" title="3.修改网站的默认目录"></a>3.修改网站的默认目录</h4><ul>
+<li>在default文件的location添加一行配置: <code>fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</code></li>
+</ul>
+<h3 id="三、错误提示"><a href="#三、错误提示" class="headerlink" title="三、错误提示"></a>三、错误提示</h3><ol>
+<li>修改/etc/php5/fpm/php.ini后restart, 报unknown instance on reload <ul>
+<li>解决办法: <code>sudo pkill php5-fpm</code>, <code>sudo service php5-fpm start</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="四、参考"><a href="#四、参考" class="headerlink" title="四、参考:"></a>四、参考:</h3><ul>
+<li><code>http://www.jianshu.com/p/010946a7201d</code></li>
+<li><code>http://blog.mcxiaoke.com/tags/Nginx/</code></li>
+<li>一键安装包: <code>https://lnmp.org/install.html</code></li>
+<li>Nginx配置相关说明 <code>http://blog.csdn.net/five3/article/details/7733937</code></li>
+</ul>
+<h4 id="Nginx实现多个站点使用一个端口-配置Nginx的虚拟主机"><a href="#Nginx实现多个站点使用一个端口-配置Nginx的虚拟主机" class="headerlink" title="Nginx实现多个站点使用一个端口(配置Nginx的虚拟主机)"></a>Nginx实现多个站点使用一个端口(配置Nginx的虚拟主机)</h4><ul>
+<li><code>http://blog.openlg.net/index.php/archives/266</code></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-view的工作流程概述" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1203,17 +1298,17 @@ default:
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016 Pierce Tsu
+                2016-2017 Pierce Tsu
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
+                        <span id="site-visit" >Site Visitors: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -1223,7 +1318,7 @@ default:
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
+                        <span id="page-visit">Page Hits: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
@@ -1256,9 +1351,9 @@ default:
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数据科学 on Patrick's Blog</title><link>/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/</link><description>Recent content in 数据科学 on Patrick's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 25 Dec 2022 09:39:52 +0800</lastBuildDate><atom:link href="/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/rss.xml" rel="self" type="application/rss+xml"/><item><title>Flink Window Trigger 使用的正确姿势</title><link>/post/flinkwindowtrigger-shi-yong-de-zheng-que-zi-shi/</link><pubDate>Sun, 25 Dec 2022 09:39:52 +0800</pubDate><guid>/post/flinkwindowtrigger-shi-yong-de-zheng-que-zi-shi/</guid><description>&lt;h2 id="废话">废话
+&lt;a class="header-anchor" href="#%e5%ba%9f%e8%af%9d">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>在使用 Flink DataStream API 进行流式数据聚合统计时, sink操作时, 都会用到 Trigger.&lt;/li>
+&lt;li>以 Flink 1.11.x 版本为例, 查看 Trigger 的实现类主要有以下常用的 7 种:
+&lt;ul>
+&lt;li>&lt;code>EventTimeTrigger&lt;/code>: 事件时间触发器&lt;/li>
+&lt;li>&lt;code>ProcessTimeTrigger&lt;/code>: 处理时间触发器&lt;/li>
+&lt;li>&lt;code>ContinuousEventTimeTrigger&lt;/code>: 连续的事件时间触发器&lt;/li>
+&lt;li>&lt;code>ContinuousProcessingTimeTrigger&lt;/code>: 连续的处理时间触发器&lt;/li>
+&lt;li>&lt;code>CountTrigger&lt;/code>: 窗口数据条数触发器&lt;/li>
+&lt;li>&lt;code>DeltaTrigger&lt;/code>: 窗口Delta指标触发器&lt;/li>
+&lt;li>&lt;code>PurgingTrigger&lt;/code>: 窗口清除触发器&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>在实际的业务场景中, 使用最多的当属 ContinuousEventTimeTrigger 这个类了.&lt;/li>
+&lt;/ul></description></item><item><title>Flink QuickStart</title><link>/post/quickstart-of-flink/</link><pubDate>Mon, 16 Nov 2020 18:05:05 +0800</pubDate><guid>/post/quickstart-of-flink/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>Apache Flink 是一个框架和分布式处理引擎，用于在无边界和有边界数据流上进行有状态的计算。&lt;/li>
+&lt;li>Flink 能在所有常见集群环境中运行，并能以内存速度和任意规模进行计算。&lt;/li>
+&lt;/ul>
+&lt;h3 id="有界与无界数据流">有界与无界数据流
+&lt;a class="header-anchor" href="#%e6%9c%89%e7%95%8c%e4%b8%8e%e6%97%a0%e7%95%8c%e6%95%b0%e6%8d%ae%e6%b5%81">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>无界流: 有定义流开始, 未定义流的结束; 持续产生数据, 需要以特定顺序摄取事件 (如事件的发生顺序), 以便能够推断结果的完整性.&lt;/li>
+&lt;li>有界流: 既定义流的开始, 又定义流的结束; 可以在摄取所有的数据后进行排序计算, 并需要有序摄取, 有界流处理通常被称为批处理.&lt;/li>
+&lt;/ul></description></item><item><title>Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置</title><link>/post/sync-oracle-data-to-kafka-in-real-time/</link><pubDate>Sat, 31 Oct 2020 19:11:32 +0800</pubDate><guid>/post/sync-oracle-data-to-kafka-in-real-time/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>MySQL实时同步到Kafk可以采用canal, Oracle实时同步到Kafka可以采用OGG, 配置过程比canal略复杂&lt;/li>
+&lt;li>OGG即Oracle GoldenGate是Oracle的同步工具, 能够实现大量交易数据的实时捕捉、变换和投递，实现源数据库与目标数据库的数据同步，保持亚秒级的数据延迟。&lt;/li>
+&lt;/ul></description></item><item><title>单双因素方差分析及Python实现</title><link>/post/anova-by-python/</link><pubDate>Sun, 26 Apr 2020 21:15:09 +0800</pubDate><guid>/post/anova-by-python/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>方差分析 (analysis of variance, ANOVA) 在20世纪20年代发展起来的一种统计方法, 由英国统计学家费希尔在进行试验设计时为解释试验数据而首先引入.&lt;/li>
+&lt;li>方差分析就是通过检验个总体的均值是否相等来判断分类型自变量对数值型因变量是否有显著影响。&lt;/li>
+&lt;li>从表面上看, 方差分析是检验多个总体均值是否相等的方法, 但本质上是它所研究的是分类型自变量对数值型因变量的影响. 例如, 变量之间有没有关系, 关系的强度如何等.&lt;/li>
+&lt;li>根据所分析的分类型自变量多少, 可以分为单因素方差分析 (one-way analysis of variance) 和 双因素方差分析 (two-way analysis of variance) .&lt;/li>
+&lt;/ul></description></item><item><title>机器学习中的特征工程</title><link>/post/featureenginering-of-machinelearning/</link><pubDate>Mon, 03 Feb 2020 15:42:32 +0800</pubDate><guid>/post/featureenginering-of-machinelearning/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>机器学习将数据拟合到数学模型中来获得结论或者做出预测。这些模型吸纳特征作为输入。特征就是原始数据某方面的数学表现。在机器学习流水线中特征位于数据和模型之间。&lt;/li>
+&lt;li>特征工程是一项从数据中提取特征，然后转换成适合机器学习模型的格式的艺术。这是机器学习流水线关键的一步，因为正确的特征可以减轻建模的难度，并因此使流水线能输出更高质量的结果。&lt;/li>
+&lt;li>数据和特征决定了机器学习的上限, 而模型和算法只是逼近这个上限而已.&lt;/li>
+&lt;li>流程:
+&lt;img src="/imgs/img-lazy-loading.gif" data-src="/img/feature_engineering-1.png" alt="img" />&lt;/li>
+&lt;/ul></description></item><item><title>机器学习中的评估指标</title><link>/post/evaluation-of-machinelearning/</link><pubDate>Sun, 08 Sep 2019 22:48:09 +0800</pubDate><guid>/post/evaluation-of-machinelearning/</guid><description>&lt;h2 id="分类问题">分类问题
+&lt;a class="header-anchor" href="#%e5%88%86%e7%b1%bb%e9%97%ae%e9%a2%98">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>当正负样本分布极不均衡时, 准确率将失去意义, 通常使用AUC作为指标&lt;/li>
+&lt;/ul>
+&lt;h3 id="混淆矩阵confusion-matrix">混淆矩阵（Confusion Matrix）
+&lt;a class="header-anchor" href="#%e6%b7%b7%e6%b7%86%e7%9f%a9%e9%98%b5confusion-matrix">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>矩阵中的每一行代表实例的预测类别，每一列代表实例的真实类别。
+&lt;img src="/imgs/img-lazy-loading.gif" data-src="/img/confusion_matrix.png" alt="img" />&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>真正(True Positive , TP)：被模型预测为正的正样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假正(False Positive , FP)：被模型预测为正的负样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假负(False Negative , FN)：被模型预测为负的正样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>真负(True Negative , TN)：被模型预测为负的负样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>真正率(True Positive Rate,TPR)：TPR=TP/(TP+FN)，即被预测为正的正样本数 /正样本实际数。 召回率
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假正率(False Positive Rate,FPR) ：FPR=FP/(FP+TN)，即被预测为正的负样本数 /负样本实际数。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假负率(False Negative Rate,FNR) ：FNR=FN/(TP+FN)，即被预测为负的正样本数 /正样本实际数。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>真负率(True Negative Rate,TNR)：TNR=TN/(TN+FP)，即被预测为负的负样本数 /负样本实际数/2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>数据仓库建模分层设计</title><link>/post/the-modeling-of-data-warehouse/</link><pubDate>Sun, 28 Jul 2019 15:10:48 +1100</pubDate><guid>/post/the-modeling-of-data-warehouse/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>数据仓库 （DataWarehouse）是一个面向主题的（Subject Oriented）、集成的（Integrate）、相对稳定的（Non-Volatile）、反映历史变化（Time Variant）的数据集合, 用于支持管理决策.&lt;/li>
+&lt;li>将所有的业务数据经汇总处理, 构成数据仓库(DW)&lt;/li>
+&lt;/ul>
+&lt;h3 id="趋势">趋势
+&lt;a class="header-anchor" href="#%e8%b6%8b%e5%8a%bf">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>数据仓库是伴随着企业信息化发展起来的, 在企业信息化的过程中, 随着信息化工具的升级和新工具的应用, 数据量变的越来越大, 数据格式越来越多, 决策要求越来越苛刻, 数据仓库技术也在不停的发展.&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>实时数据仓库以满足实时化&amp;amp;自动化决策需求.&lt;/li>
+&lt;li>大数据&amp;amp;数据湖以支持大量&amp;amp;复杂数据类型（文本、图像、视频、音频）.&lt;/li>
+&lt;/ol></description></item><item><title>机器学习之决策树</title><link>/post/decision-tree-of-machinelearning/</link><pubDate>Sun, 19 May 2019 14:15:21 +0800</pubDate><guid>/post/decision-tree-of-machinelearning/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>是一种基本的分类与回归方法, 模型呈树形结构.&lt;/li>
+&lt;li>学习步骤:
+&lt;ol>
+&lt;li>特征选择&lt;/li>
+&lt;li>决策树的生成&lt;/li>
+&lt;li>决策树的修剪&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul></description></item><item><title>多元统计之因子分析</title><link>/post/factor-analysis/</link><pubDate>Sat, 30 Mar 2019 14:01:32 +0800</pubDate><guid>/post/factor-analysis/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>研究观测变量变动的共同原因和特殊原因, 从而达到简化变量结构目的的多元统计方法&lt;/li>
+&lt;/ul>
+&lt;h3 id="应用">应用
+&lt;a class="header-anchor" href="#%e5%ba%94%e7%94%a8">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>寻求变量的基本结构, 简化变量系统&lt;/li>
+&lt;li>用于分类, 根据因子得分值, 在因子轴所构成的空间中将变量或者样本进行分类(能够分析样品间差异的原因)&lt;/li>
+&lt;/ul>
+&lt;h3 id="类型">类型
+&lt;a class="header-anchor" href="#%e7%b1%bb%e5%9e%8b">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>R型因子分析&lt;/li>
+&lt;li>Q型因子分析&lt;/li>
+&lt;/ul></description></item><item><title>多元统计之主成分分析</title><link>/post/principle-component-analysis/</link><pubDate>Sat, 02 Mar 2019 11:55:02 +0800</pubDate><guid>/post/principle-component-analysis/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>主成分分析就是设法将原来指标重新组合成一组新的互相无关的几个综合指标来代替原来指标, 同时根据实际需要从中取几个较少的综合指标尽可能多地反映原来指标的信息。&lt;/li>
+&lt;li>这种将多个指标转化为少数互相无关的综合指标的统计方法叫做主成分分析或称主分量分析。&lt;/li>
+&lt;/ul>
+&lt;h3 id="几何意义">几何意义
+&lt;a class="header-anchor" href="#%e5%87%a0%e4%bd%95%e6%84%8f%e4%b9%89">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>代数观点:
+&lt;ul>
+&lt;li>p个原始变量的一些特殊的线性组合&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>几何意义:
+&lt;ul>
+&lt;li>这些线性组合通过把由$X_1,X_2,\cdots,X_p$构成的坐标系旋转而产生的新坐标系。这样的新坐标轴使其通过样本变差最大的方向(或者说具有最大的样本方差)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>多元统计之判别分析</title><link>/post/discrimination-analysis/</link><pubDate>Sat, 23 Feb 2019 21:04:13 +0800</pubDate><guid>/post/discrimination-analysis/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>判别分析是判别样品所属类型的一种分析方法，是在分类确定的条件下，根据某一研究对象的各种特征值判别其类型归属问题的一种多变量统计分析方法。&lt;/li>
+&lt;li>判别分析于聚类分析的功能差不多，区别在于，聚类分析之前，没有人知道具体的是怎么分的类，分了哪几大类。而判别分析是已经把类别给分好，要做的是把没有分好类的数据观测，按照之前分好的类再进行分类。这里不同于生活中常见的分类先有具体的分类逻辑（这里叫做判别函数）。所以判别分的难点在于先由分好类的数据观测找到一个或者多个判别函数，然后对未进行分类的观测按照该判别公式进行分类。&lt;/li>
+&lt;/ul></description></item><item><title>多元统计之聚类分析</title><link>/post/cluster-analysis/</link><pubDate>Sun, 17 Feb 2019 22:09:27 +0800</pubDate><guid>/post/cluster-analysis/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>聚类分析是研究如何将研究对象按照多个方面的特征进行综合分类的一种统计方法&lt;/li>
+&lt;li>聚类分析就是分析如何对样品(或变量)按照他们在性质上的亲疏程度进行量化分类的问题&lt;/li>
+&lt;li>聚类分析有效解决了科学研究中多因素、多指标的分类问题&lt;/li>
+&lt;/ul>
+&lt;h3 id="类别">类别
+&lt;a class="header-anchor" href="#%e7%b1%bb%e5%88%ab">&lt;/a>
+&lt;/h3>&lt;h4 id="q型聚类">Q型聚类
+&lt;a class="header-anchor" href="#q%e5%9e%8b%e8%81%9a%e7%b1%bb">&lt;/a>
+&lt;/h4>&lt;ul>
+&lt;li>对样品进行分类处理&lt;/li>
+&lt;/ul>
+&lt;h4 id="r型聚类">R型聚类
+&lt;a class="header-anchor" href="#r%e5%9e%8b%e8%81%9a%e7%b1%bb">&lt;/a>
+&lt;/h4>&lt;ul>
+&lt;li>对变量进行分类处理&lt;/li>
+&lt;/ul></description></item><item><title>统计中常用的分布</title><link>/post/the-common-distribution-of-statistics/</link><pubDate>Sun, 06 Jan 2019 13:47:51 +0800</pubDate><guid>/post/the-common-distribution-of-statistics/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;h3 id="相关概念">相关概念
+&lt;a class="header-anchor" href="#%e7%9b%b8%e5%85%b3%e6%a6%82%e5%bf%b5">&lt;/a>
+&lt;/h3>&lt;ol>
+&lt;li>随机变量:
+&lt;ul>
+&lt;li>设随机试验的样本空间为S(e) = {e}. X = X(e)是定义在样本空间S上的实值单值函数. 称X = X(e)为随机变量.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>离散型随机变量:
+&lt;ul>
+&lt;li>有些随机变量, 它全部可能取到的值是有限个或可列无限多个, 这种随机变量称为离散型随机变量.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Spark程序相关调优整理</title><link>/post/optimization-of-spark-program/</link><pubDate>Sun, 29 Jul 2018 11:37:31 +0800</pubDate><guid>/post/optimization-of-spark-program/</guid><description>&lt;h2 id="普通调优">普通调优
+&lt;a class="header-anchor" href="#%e6%99%ae%e9%80%9a%e8%b0%83%e4%bc%98">&lt;/a>
+&lt;/h2>&lt;h2 id="jvm调优">jvm调优
+&lt;a class="header-anchor" href="#jvm%e8%b0%83%e4%bc%98">&lt;/a>
+&lt;/h2>&lt;h2 id="数据倾斜">数据倾斜
+&lt;a class="header-anchor" href="#%e6%95%b0%e6%8d%ae%e5%80%be%e6%96%9c">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>数据倾斜只会发生在 shuffle 过程中&lt;/li>
+&lt;li>在进行 shuffle 的时候，必须将各个节点上相同的 key 拉取到某个节点上的一个 task 来进行处理，比如按照 key 进行聚合或 join 等操作。此时如果某个 key 对应的数据量特别大的话，就会发生数据倾斜。&lt;/li>
+&lt;/ul></description></item><item><title>HDFS快速入门</title><link>/post/quickstart-of-hdfs/</link><pubDate>Sun, 15 Apr 2018 17:34:48 +0800</pubDate><guid>/post/quickstart-of-hdfs/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>简介:
+&lt;ul>
+&lt;li>源自Google的GFS论文的巨大分布式文件系统&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>特点:
+&lt;ol>
+&lt;li>扩展性&lt;/li>
+&lt;li>容错性&lt;/li>
+&lt;li>海量数据存储&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>优缺点:
+&lt;ul>
+&lt;li>优点:
+&lt;ol>
+&lt;li>数据冗余, 硬件容错&lt;/li>
+&lt;li>处理流式(一次写入多次读取)的数据访问&lt;/li>
+&lt;li>适合存储大文件&lt;/li>
+&lt;li>构建在廉价机器上&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>缺点:
+&lt;ol>
+&lt;li>不满足低延迟的数据访问&lt;/li>
+&lt;li>不适合小文件的存储&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>存储:
+&lt;ul>
+&lt;li>将文件切分成指定大小的数据块并以多副本的存储在多个机器上&lt;/li>
+&lt;li>数据的切分,多副本,容错等操作对用户透明&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>NameNode (Filename, numReplicas, block-ids)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul></description></item><item><title>大数据集群CDH5.11.0搭建及配置</title><link>/post/install-and-conf-of-cdh5110/</link><pubDate>Sat, 31 Mar 2018 22:55:51 +0800</pubDate><guid>/post/install-and-conf-of-cdh5110/</guid><description>&lt;h2 id="环境">环境
+&lt;a class="header-anchor" href="#%e7%8e%af%e5%a2%83">&lt;/a>
+&lt;/h2>&lt;h3 id="系统环境">系统环境
+&lt;a class="header-anchor" href="#%e7%b3%bb%e7%bb%9f%e7%8e%af%e5%a2%83">&lt;/a>
+&lt;/h3>&lt;ol>
+&lt;li>CentOS7 3台&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># host&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.237.100 hadoop001
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.237.110 hadoop002
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.237.120 hadoop003
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>SSH免密登录&lt;/li>
+&lt;li>关闭防火墙&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 关闭防火墙&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl stop firewalld
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 关闭开启自启&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl disable firewalld
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>SELINUX关闭&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>setenforce &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sed -i &lt;span style="color:#e6db74">&amp;#34;s/SELINUX=enforcing/SELINUX=disabled/&amp;#34;&lt;/span> /etc/selinux/config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables --flush
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reboot &lt;span style="color:#75715e">#重启生效&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ElasticSearch6.3搭建快速入门</title><link>/post/quickstart-of-elasticsearch63/</link><pubDate>Sun, 25 Feb 2018 20:23:32 +0800</pubDate><guid>/post/quickstart-of-elasticsearch63/</guid><description>&lt;h2 id="快速入门">快速入门
+&lt;a class="header-anchor" href="#%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>Elasticsearch是一个实时分布式搜索和分析引擎&lt;/li>
+&lt;/ul>
+&lt;h3 id="环境">环境
+&lt;a class="header-anchor" href="#%e7%8e%af%e5%a2%83">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>java 1.8+&lt;/li>
+&lt;li>ubuntu 14.04/16.04&lt;/li>
+&lt;/ul>
+&lt;h3 id="版本说明">版本说明
+&lt;a class="header-anchor" href="#%e7%89%88%e6%9c%ac%e8%af%b4%e6%98%8e">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>5.X之后的字段类型不再支持string，由text或keyword取代&lt;/li>
+&lt;li>6.3支持sql&lt;/li>
+&lt;/ul></description></item></channel></rss>

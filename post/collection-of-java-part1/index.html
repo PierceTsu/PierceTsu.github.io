@@ -1,0 +1,301 @@
+<!doctype html><html lang=zh-CN data-theme=dark><head><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: dark)"><meta name=generator content="Hugo 0.121.1"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_16x16_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_32_32_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple_touch_icon_next.png><meta itemprop=name content="java基础之集合（上）"><meta itemprop=description content="collection-of-java-part1"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="/img/avatar.jpg"><meta itemprop=keywords content="Java"><meta property="og:type" content="article"><meta property="og:title" content="java基础之集合（上）"><meta property="og:description" content="collection-of-java-part1"><meta property="og:image" content="/img/avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="/post/collection-of-java-part1/"><meta property="og:site_name" content="Patrick's Blog"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="Patrick"><meta property="article:published_time" content="2015-05-10 17:28:48 +0800 CST"><meta property="article:modified_time" content="2024-03-17 17:28:48 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.a987c3fbca3727259a25c99140afed885cbffe7b77dba717d89bbe0780afcd01.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":false,"isHome":false,"isPage":true,"math":{"css":{"file":"dist/katex.min.css","name":"katex","version":"0.16.0"},"js":[{"file":"dist/katex.min.js","name":"katex","version":"0.16.0"},{"alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.0"}],"render":"katex"},"path":"collection-of-java-part1","permalink":"/post/collection-of-java-part1/","title":"java基础之集合（上）","waline":{"js":[{"alias":"waline","alias_name":"@waline/client","file":"dist/pageview.js","name":"pageview","version":"2.13.0"},{"alias":"waline","alias_name":"@waline/client","file":"dist/comment.js","name":"comment","version":"2.13.0"}]}}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>java基础之集合（上） - Patrick's Blog</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>Patrick's Blog</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>Once start, goes forward!</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/about/ class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-flinks"><a href=/flinks.html class=hvr-icon-pulse rel=section><i class="fa fa-thumbs-up hvr-icon"></i>站点示例</a></li><li class="menu-item menu-item-archives"><a href=/archives/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>33</span></a></li><li class="menu-item menu-item-commonweal"><a href=/404.html class=hvr-icon-pulse rel=section><i class="fa fa-heartbeat hvr-icon"></i>公益 404</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#集合类>集合类</a></li><li><a href=#集合类的构成>集合类的构成：</a><ul><li><a href=#集合框架的构成及分类>集合框架的构成及分类</a></li><li><a href=#collection接口>Collection接口:</a><ul><li><a href=#collection的常见方法>Collection的常见方法：</a></li></ul></li><li><a href=#iterator接口>Iterator接口</a><ul><li><a href=#概述>概述：</a></li><li><a href=#方法>方法：</a></li><li><a href=#子接口>子接口：</a></li></ul></li></ul></li><li><a href=#list>List</a><ul><li><a href=#特有的常见方法>特有的常见方法。</a></li><li><a href=#arraylist>ArrayList</a></li><li><a href=#linkedlist>LinkedList</a><ul><li><a href=#基本方法>基本方法：</a></li></ul></li></ul></li><li><a href=#set>Set</a><ul><li><a href=#hashset>HashSet：</a><ul><li><a href=#概述-1>概述：</a></li><li><a href=#代码示例>代码示例：</a></li><li><a href=#linkedhashset>LinkedHashSet</a></li></ul></li><li><a href=#treeset>TreeSet</a><ul><li><a href=#特点>特点：</a></li><li><a href=#自定义排序>自定义排序：</a></li></ul></li></ul></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=Patrick src=/imgs/img-lazy-loading.gif data-src=/img/avatar.jpg><p class=site-author-name itemprop=name>Patrick</p><div class=site-description itemprop=description>个人学习笔记</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>33</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>8</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://gitee.com/hugo-next/hugo-theme-next title=https://gitee.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li></ul></div></div></div></div><div id=siteinfo-card-widget class=sidebar-card-widget><div class=item-headline><i class="fas fa-chart-line"></i>
+<span>网站资讯</span></div><div class=siteinfo><div class=siteinfo-item><div class=item-name><i class="fa-solid fa-calendar-check"></i>已运行：</div><div class=item-count id=runTimes data-publishdate=2015-04-05T13:57:58+08:00></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-user"></i>总访客数：</div><div class=item-count id=busuanzi_value_site_uv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-eye"></i>页面浏览：</div><div class=item-count id=busuanzi_value_site_pv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-font"></i>总字数：</div><div class=item-count id=wordsCount data-count=22332></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-mug-hot"></i>阅读约：</div><div class=item-count id=readTimes data-times=121></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-clock-rotate-left"></i>最后更新于：</div><div class=item-count id=last-push-date data-lastpushdate=2023-05-31T21:26:21+08:00></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=goto-gtranslate class=button title=多语言翻译><i class="fas fa-globe"></i></div><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script><script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=/post/collection-of-java-part1/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/img/avatar.jpg"><meta itemprop=name content="Patrick"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="Patrick"><meta itemprop=description content="个人学习笔记"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="java基础之集合（上）"><meta itemprop=description content="collection-of-java-part1"></span><header class=post-header><h1 class=post-title itemprop="name headline">java基础之集合（上）
+<a href=https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/post/collection-of-java-part1.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2015-05-10 17:28:48 +0800 CST" itemprop="dateCreated datePublished" datetime="2015-05-10 17:28:48 +0800 CST">2015-05-10
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar-check"></i>
+</span><span class=post-meta-item-text title=更新于>更新于：
+</span><time title=修改时间：2024-03-17T17:28:48+08:00 itemprop=dateModified datetime=2024-03-17T17:28:48+08:00>2024-03-17</time>
+</span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80 itemprop=url rel=index><span itemprop=name>编程语言</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>866</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>5分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="far fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/collection-of-java-part1/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><h2 id=集合类>集合类
+<a class=header-anchor href=#%e9%9b%86%e5%90%88%e7%b1%bb></a></h2><ul><li>面向对象语言对事物的体现都是以对象的形式，所以为了方便对多个对象的操作，就要对对象进行存储，集合就是存储对象最常用的一种方式。</li><li>集合特点：<ul><li>用于存储对象的容器。</li><li>集合的长度是可变的。</li><li>集合中不可以存储基本数据类型值。</li></ul></li><li>集合容器因为内部的数据结构不同，有多种具体容器。不断的向上抽取，就形成了集合框架。</li></ul><h2 id=集合类的构成>集合类的构成：
+<a class=header-anchor href=#%e9%9b%86%e5%90%88%e7%b1%bb%e7%9a%84%e6%9e%84%e6%88%90></a></h2><h3 id=集合框架的构成及分类>集合框架的构成及分类
+<a class=header-anchor href=#%e9%9b%86%e5%90%88%e6%a1%86%e6%9e%b6%e7%9a%84%e6%9e%84%e6%88%90%e5%8f%8a%e5%88%86%e7%b1%bb></a></h3><ul><li><p>Java集合类主要由两个接口（Collection和Map）派生出来：</p></li><li><p>Collection</p><ul><li><p><strong>List</strong>（子接口）：有序（存入和取出的顺序一致），可以重复，有索引</p><ul><li><p>Vector(实现类):</p><ol><li>底层数据结构：数组</li><li>线程：同步</li><li>操作数据：增删，查询都很慢<ul><li>Enumeration<e> elements(): 返回此向量的组件的枚举。</li><li>IO流中SequenceInputStream中用到</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>Vector&lt;FileInputStream&gt; v = new Vector&lt;FileInputStream&gt;();
+</span></span><span style=display:flex><span>Enumeration&lt;FileInputStream&gt; en =v.elements();
+</span></span><span style=display:flex><span>SequenceInputStream sis = new SequenceInputStream(en);
+</span></span></code></pre></div></li></ol></li><li><p><strong>ArrayList</strong> (实现类)： 替代了Vector</p><ol><li>底层数据结构：数组</li><li>线程：不同步</li><li>操作数据：增删稍慢、改查很快</li></ol></li><li><p><strong>LinkedList</strong> (实现类):</p><ol><li>底层数据结构：链表(JDK1.7/8 之后取消了循环，修改为双向链表)</li><li>线程：不同步</li><li>操作数据：增删除很快，改查很慢</li></ol></li></ul></li><li><p><strong>Set</strong>（子接口） ：无序(存入和取出的顺序不一定一致)，不能重复</p><ul><li><code>HashSet</code>(实现类)：底层数据结构是哈希表，不同步<ul><li><code>LinkedHashSet</code>：具有可预知迭代顺序的 Set 接口的哈希表和链接列表实现</li></ul></li><li><code>TreeSet</code>(实现类)：底层数据结构是二叉树，不同步，可以对Set集合中的元素进行排序</li></ul></li></ul></li><li><p>Map：存储键值对，一次添加一对，而且要保证键的唯一性</p><ul><li><p>Hashtable实现类)：</p><ol><li>底层数据结构：哈希表，不可以存入null键null值</li><li>线程：同步</li><li>操作数据：jdk1.0.效率低<ul><li><strong>Properties</strong>：线程同步，用来存储键值对型的配置文件的信息，可以和IO技术相结合</li></ul></li></ol></li><li><p><strong>HashMap</strong> (实现类)：</p><ol><li>底层数据结构：哈希表，允许使用 null值和null键, 底层是基于数组和链表实现</li><li>线程：不同步</li><li>操作数据：将hashtable替代，jdk1.2.效率高</li></ol></li><li><p><strong>TreeMap</strong> (实现类)：</p><ol><li>底层数据结构：二叉树</li><li>线程：不同步</li><li>操作数据：用于给map集合中的键进行排序</li></ol></li></ul></li></ul><h3 id=collection接口>Collection接口:
+<a class=header-anchor href=#collection%e6%8e%a5%e5%8f%a3></a></h3><h4 id=collection的常见方法>Collection的常见方法：
+<a class=header-anchor href=#collection%e7%9a%84%e5%b8%b8%e8%a7%81%e6%96%b9%e6%b3%95></a></h4><ul><li>添加：<ul><li>boolean add(Object obj);</li><li>boolean addAll(Collection coll);</li></ul></li><li>删除：<ul><li>boolean remove(Object obj);</li><li>boolean removeAll(Collection coll);</li><li>void clear( );</li></ul></li><li>判断：<ul><li>boolean contains(Object obj);</li><li>boolean containsAll(Collection coll);</li><li>boolean isEmpty();判断集合中是否有元素。</li></ul></li><li>获取：<ul><li>int size( );返回此 collection 中的元素数。</li><li>Iterator iterator( );</li></ul></li><li>其他：<ul><li>boolean retainAll(Collection coll); 取交集</li><li>Object[ ] toArray( ); 将集合转成数组</li></ul></li></ul><h3 id=iterator接口>Iterator接口
+<a class=header-anchor href=#iterator%e6%8e%a5%e5%8f%a3></a></h3><h4 id=概述>概述：
+<a class=header-anchor href=#%e6%a6%82%e8%bf%b0></a></h4><ul><li>对所有的Collection容器进行元素取出的公共接口，称为迭代器</li><li>Collection中有iterator方法，所以每一个子类集合对象都具备迭代器</li><li>它替代了Vector类中的Enumeration(枚举)。迭代器的next方法是自动向下取元素，要避免出现NoSuchElementException。</li></ul><h4 id=方法>方法：
+<a class=header-anchor href=#%e6%96%b9%e6%b3%95></a></h4><ul><li><p>boolean hasNext()：若被迭代的集合元素还没有被遍历，返回true.</p></li><li><p>Object next():返回集合的下一个元素.</p></li><li><p>void remove():删除集合上一次next()方法返回的元素。(若集合中有多个相同的元素，都可以删掉)</p></li><li><p>取出集合的元素代码示例：</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//方式一：</span>
+</span></span><span style=display:flex><span>Iterator it<span style=color:#f92672>=</span>al.<span style=color:#a6e22e>iterator</span>();<span style=color:#75715e>//获取迭代器，用于取出集合中的元素。</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span>(it.<span style=color:#a6e22e>hasNext</span>())
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(it.<span style=color:#a6e22e>next</span>());
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//方式二：for循环结束，Iterator变量内存释放，更高效</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (Iterator it<span style=color:#f92672>=</span>al.<span style=color:#a6e22e>iterator</span>();it.<span style=color:#a6e22e>hasNext</span>() ; )
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(it.<span style=color:#a6e22e>next</span>());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><blockquote><p>高级for循环
+格式：
+for(数据类型 变量名：被遍历的集合(Collection)或者数组){
+}</p></blockquote><ul><li>对集合进行遍历的特点：只能获取集合元素，但是不能对集合进行操作</li><li>迭代器除了遍历，还可以进行remove集合中的动作。如果是用ListIterator,还可以在遍历过程中对集合进行增删改查的动作。<ul><li>支持迭代器的集合均支持高级for,Map不支持，故需转成Set集合</li></ul></li><li>传统for和高级for区别：<ul><li>高级for有一个局限性。必须有被遍历的目标。</li><li>建议在遍历数组的时候，还是希望用传统for,因为传统for可以定义脚标。</li></ul></li></ul><h4 id=子接口>子接口：
+<a class=header-anchor href=#%e5%ad%90%e6%8e%a5%e5%8f%a3></a></h4><ul><li>ListIterator：专门输出List中的元素<ul><li>方法：<ul><li>boolean hasNext()</li><li>E next() 返回列表中的下一个元素。</li><li>int nextIndex() 返回对 next 的后续调用所返回元素的索引。</li><li>void add(E e) 将指定的元素插入列表（可选操作）</li><li>void set(E e) 用指定元素替换 next 或 previous 返回的最后一个元素（可选操作）。</li><li>void remove()从列表中移除由 next 或 previous 返回的最后一个元素（可选操作）。</li><li>boolean hasPrevious() 如果以逆向遍历列表，列表迭代器有多个元素，则返回 true。</li><li>E previous()返回列表中的前一个元素。</li></ul></li></ul></li></ul><hr><h2 id=list>List
+<a class=header-anchor href=#list></a></h2><ul><li>Collection的子接口，有序（存入和取出的顺序一致），元素都有索引（角标），允许重复元素</li></ul><h3 id=特有的常见方法>特有的常见方法。
+<a class=header-anchor href=#%e7%89%b9%e6%9c%89%e7%9a%84%e5%b8%b8%e8%a7%81%e6%96%b9%e6%b3%95></a></h3><p><strong>特点</strong>：都可以操作角标。</p><ul><li><p>添加</p><ul><li>void add(index,element);</li><li>void addAll(index,collection);</li></ul></li><li><p>删除</p><ul><li>Object remove(index);</li><li>boolean remove(Object o) 从此列表中移除第一次出现的指定元素（如果存在）（可选操作）。</li></ul></li><li><p>修改</p><ul><li>Object set(index,element);</li></ul></li><li><p>获取：</p><ul><li>Object get(index);</li><li>int indexOf(object);</li><li>int lastIndexOf(object)：</li><li>List subList(from,to);</li></ul><blockquote><p>list特有的取出元素的方式之一</p></blockquote><pre><code>  for(int x = 0; x &lt; list.size(); x++){
+  	System.out.println( &quot;get:&quot; + list.get(x));
+  }
+</code></pre></li><li><p>集合变数组：</p><ul><li>Object[ ] toArray() 返回按适当顺序包含列表中的所有元素的数组（从第一个元素到最后一个元素）。</li></ul></li><li><p><strong>List集合特有的迭代器</strong>：ListIterator(列表迭代器)</p><ul><li><strong>在迭代时，不可以通过集合对象的方法操作集合中的元素</strong>，因为会发生ConcurrentModificationException异常；</li><li>所以，在迭代器时，只能用迭代器的方法操作元素，可是Iterator方法是有限的，只能对元素进行判断，取出和删除的操作；</li><li>如果想要其他的操作如添加，修改等，就需要使用其子接口，ListIterator.该接口只能通过List集合的listIterator方法获取 。</li></ul></li></ul><h3 id=arraylist>ArrayList
+<a class=header-anchor href=#arraylist></a></h3><ul><li>基于动态数组实现</li><li>基本方法：增删改查，与List中的方法基本一致</li></ul><h3 id=linkedlist>LinkedList
+<a class=header-anchor href=#linkedlist></a></h3><h4 id=基本方法>基本方法：
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%96%b9%e6%b3%95></a></h4><ul><li>void addFirst(); 1.6以后版本为<strong>offerFirst( )</strong></li><li>void addLast(); 1.6以后版本为<strong>offerLast( )</strong></li><li>E getFirst();获取但不移除，如果链表为空，抛出NoSuchElementException。<br>1.6以后版本为：<strong>peekFirst()</strong>; 获取但不移除，如果链表为空，返回null</li><li>E getLast(); 1.6以后版本为：<strong>peekLast( )</strong>;</li><li>E removeFirst(); 获取并移除，如果链表为空，抛出NoSuchElementException。<br>1.6以后版本为：<strong>pollFirst( )</strong>;获取并移除，如果链表为空，返回null</li><li>E removeLast(); 1.6以后版本为： <strong>pollLast( )</strong>;</li></ul><h2 id=set>Set
+<a class=header-anchor href=#set></a></h2><ul><li>Collection的子接口,元素不可以重复，是无序的，Set接口中的方法和Collection一致</li></ul><h3 id=hashset>HashSet：
+<a class=header-anchor href=#hashset></a></h3><ul><li>成员变量:<ul><li>map: 用于存放最终数据的</li><li>PRESENT: 是所有写入map的value值</li></ul></li><li>构造函数: 利用了HashMap初始化了map</li><li>add方法:<ul><li>将存放的对象当做了 HashMap 的健，value 都是相同的 PRESENT</li><li>由于 HashMap 的 key 是不能重复的，所以每当有重复的值写入到 HashSet 时，value 会被覆盖，但 key 不会收到影响，这样就保证了 HashSet 中只能存放不重复的元素</li><li>HashMap 会出现的问题 HashSet 依然不能避免</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>add</span>(E e) {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> map.<span style=color:#a6e22e>put</span>(e, PRESENT)<span style=color:#f92672>==</span><span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=概述-1>概述：
+<a class=header-anchor href=#%e6%a6%82%e8%bf%b0-1></a></h4><ul><li><p>内部数据结构是哈希表，是不同步的。</p></li><li><p>HashSet是如何保证元素唯一性的呢？</p><blockquote><p>是通过元素的两个方法，haseCode和equals来完成的。<br>如果元素的HashCode值相同，才会判断equals是否为true;<br>如果元素的HashCode值不同，不会调用equals。<br><strong>注意</strong>：对于判断元素是否存在，以及删除等操作，依赖的方法是元素的hashCode和equals方法。</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>	//HashSet集合中添加重复元素时，返回false
+</span></span><span style=display:flex><span>	System.out.println(hs.add(&#34;java01&#34;));
+</span></span><span style=display:flex><span>	System.out.println(hs.add(&#34;java01&#34;));//未存储进去为false
+</span></span></code></pre></div></li></ul><h4 id=代码示例>代码示例：
+<a class=header-anchor href=#%e4%bb%a3%e7%a0%81%e7%a4%ba%e4%be%8b></a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.HashSet;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Iterator;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 往HashSet集合中存入自定义对象姓名和年龄相同为同一个人，重复元素。
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>HashSetDemo</span> {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>		System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;以下为集合中元素存储的比较过程：&#34;</span>);
+</span></span><span style=display:flex><span>		HashSet<span style=color:#f92672>&lt;</span>Person<span style=color:#f92672>&gt;</span> hs <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashSet<span style=color:#f92672>&lt;</span>Person<span style=color:#f92672>&gt;</span>();
+</span></span><span style=display:flex><span>		hs.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Person(<span style=color:#e6db74>&#34;a1&#34;</span>, 11));
+</span></span><span style=display:flex><span>		hs.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Person(<span style=color:#e6db74>&#34;a2&#34;</span>, 12));
+</span></span><span style=display:flex><span>		hs.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Person(<span style=color:#e6db74>&#34;a3&#34;</span>, 13));
+</span></span><span style=display:flex><span>		hs.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Person(<span style=color:#e6db74>&#34;a2&#34;</span>, 12));
+</span></span><span style=display:flex><span>		hs.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Person(<span style=color:#e6db74>&#34;a3&#34;</span>, 14));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;去掉重复元素后的结果：&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		Iterator<span style=color:#f92672>&lt;</span>Person<span style=color:#f92672>&gt;</span> it <span style=color:#f92672>=</span> hs.<span style=color:#a6e22e>iterator</span>();
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>while</span> (it.<span style=color:#a6e22e>hasNext</span>()) {
+</span></span><span style=display:flex><span>			Person p <span style=color:#f92672>=</span> it.<span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span>			System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(p.<span style=color:#a6e22e>getName</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;...&#34;</span> <span style=color:#f92672>+</span> p.<span style=color:#a6e22e>getAge</span>());
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Person</span> {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>private</span> String name;
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> age;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	Person(String name, <span style=color:#66d9ef>int</span> age) {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span> <span style=color:#f92672>=</span> name;
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span> <span style=color:#f92672>=</span> age;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 复写hashCode方法，集合底层内部调用</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>hashCode</span>() {
+</span></span><span style=display:flex><span>		System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;...hashCode&#34;</span>);
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> name.<span style=color:#a6e22e>hashCode</span>() <span style=color:#f92672>+</span> age <span style=color:#f92672>*</span> 3;<span style=color:#75715e>// *3保证hash值的唯一性</span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 复写equals方法</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>equals</span>(Object obj) {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>(obj <span style=color:#66d9ef>instanceof</span> Person))
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>		Person p <span style=color:#f92672>=</span> (Person) obj;
+</span></span><span style=display:flex><span>		System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:equals:&#34;</span> <span style=color:#f92672>+</span> p.<span style=color:#a6e22e>name</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span>.<span style=color:#a6e22e>equals</span>(p.<span style=color:#a6e22e>name</span>) <span style=color:#f92672>&amp;&amp;</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span> <span style=color:#f92672>==</span> p.<span style=color:#a6e22e>age</span>;<span style=color:#75715e>// 此处equals为Object的方法.</span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getName</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> name;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getAge</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> age;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//运行结果</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 以下为集合中元素存储的比较过程：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a1...hashCode</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a2...hashCode</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a3...hashCode</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a2...hashCode</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a2:equals:a2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a3...hashCode</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 去掉重复元素后的结果：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a1...11</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a2...12</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a3...13</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// a3...14</span>
+</span></span></code></pre></div><h4 id=linkedhashset>LinkedHashSet
+<a class=header-anchor href=#linkedhashset></a></h4><ul><li>具有可预知迭代顺序的 Set 接口的哈希表和链接列表实现，该类为HashSet的子类，可以将无序变有序。</li></ul><h3 id=treeset>TreeSet
+<a class=header-anchor href=#treeset></a></h3><h4 id=特点>特点：
+<a class=header-anchor href=#%e7%89%b9%e7%82%b9></a></h4><ul><li>可以对Set集合中的元素进行排序（默认字母的自然顺序），底层数据结构是二叉树</li><li><strong>判断元素唯一性的方式</strong>：就是根据保证元素唯一性的依据比较方法（实现Comparable接口中根据覆盖的compareTo方法返回值，实现Comparator接口中根据覆盖的compare方法）的返回结果是否是0，是0，就是相同元素，不存。</li></ul><h4 id=自定义排序>自定义排序：
+<a class=header-anchor href=#%e8%87%aa%e5%ae%9a%e4%b9%89%e6%8e%92%e5%ba%8f></a></h4><ul><li><p>第一种方式：让<strong>元素自身具备比较性</strong>，元素需要实现Comparable接口，覆盖compareTo方法。这种方式也称为元素的自然顺序，或者叫做默认顺序。</p><ul><li><strong>Comparable接口</strong>：位于java.lang包中，只有一个方法compareTo<ul><li>int compareTo(T o)：比较此对象与指定对象的顺序。如果该对象小于、等于或大于指定对象，则分别返回负整数、零或正整数。</li></ul></li></ul></li><li><p>代码示例：</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Iterator;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.TreeSet;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 需求： 往TreeSet集合中存储自定义对象学生。 年龄和姓名均相同时，视为同一个人，
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 		并按照学生的年龄进行排序, 当年龄相同时，按照名字的自然顺序排序
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TreeSetDemo</span> {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>		TreeSet<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span> ts <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TreeSet<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span>();
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;C&#34;</span>, 19));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;D&#34;</span>, 17));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;C&#34;</span>, 19));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;A&#34;</span>, 20));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;E&#34;</span>, 17));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		Iterator<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span> it <span style=color:#f92672>=</span> ts.<span style=color:#a6e22e>iterator</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>while</span> (it.<span style=color:#a6e22e>hasNext</span>()) {
+</span></span><span style=display:flex><span>			Student s <span style=color:#f92672>=</span> (Student) it.<span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span>			System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(s.<span style=color:#a6e22e>getName</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;...&#34;</span> <span style=color:#f92672>+</span> s.<span style=color:#a6e22e>getAge</span>());
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Student</span> <span style=color:#66d9ef>implements</span> Comparable<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span> { <span style=color:#75715e>// 该接口强制让学生具备比较性。</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>private</span> String name;
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> age;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	Student(String name, <span style=color:#66d9ef>int</span> age) {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span> <span style=color:#f92672>=</span> name;
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span> <span style=color:#f92672>=</span> age;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compareTo</span>(Student s) { <span style=color:#75715e>// 内部底层调用</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>// 存与取的方式相同,将不能除去重复的对象元素</span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>//return 1;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>// 存与取的方式刚好相反，将不能除去重复的对象元素</span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>// return *1;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>// 按自然顺序取出</span>
+</span></span><span style=display:flex><span>		System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:compareto:&#34;</span> <span style=color:#f92672>+</span> s.<span style=color:#a6e22e>name</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span> <span style=color:#f92672>&gt;</span> s.<span style=color:#a6e22e>age</span>) {
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>return</span> 1;
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// 判断次要条件：当年龄相同时，比较姓名是否相同</span>
+</span></span><span style=display:flex><span>		} <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span> <span style=color:#f92672>==</span> s.<span style=color:#a6e22e>age</span>) {
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span>.<span style=color:#a6e22e>compareTo</span>(s.<span style=color:#a6e22e>name</span>);<span style=color:#75715e>// 字符串自有的比较方法。</span>
+</span></span><span style=display:flex><span>		} <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span>1;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>/*简化书写
+</span></span></span><span style=display:flex><span><span style=color:#75715e>		int temp = this.age * s.age;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>		return temp == 0? this.name.compareTo(s.name) : temp;*/</span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getName</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> name;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getAge</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> age;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li><p>第二种方式：当元素自身不具备比较性时，或者具备的比较性不是所需要的，就<strong>让集合自身具备比较功能</strong>，定义一个类实现Comparator接口(java.util包)，覆盖compare方法。
+将该类对象作为参数传递给TreeSet集合的构造函数。</p><blockquote><p><code>TreeSet(Comparator&lt;? super E> comparator) 构造一个新的空 TreeSet，它根据指定比较器进行排序。</code></p></blockquote></li><li><p><strong>注意</strong>：如果自定义类实现了Comparable接口，并且TreeSet的构造函数中也传入了比较器，那么将以比较器的比较规则为准</p></li><li><p>代码示例：</p></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Comparator;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Iterator;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.TreeSet;
+</span></span><span style=display:flex><span><span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e>* 需求：按姓名排序，不修改compareTo方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TreeSetDemo2</span> {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>		TreeSet<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span> ts <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TreeSet<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span>(<span style=color:#66d9ef>new</span> MyCompare());<span style=color:#75715e>// 将比较器对象作为参数传递给TreeSet集合的构造函数</span>
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;A&#34;</span>, 20));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;C&#34;</span>, 19));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;E&#34;</span>, 17));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;D&#34;</span>, 17));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;A&#34;</span>, 18));
+</span></span><span style=display:flex><span>		ts.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Student(<span style=color:#e6db74>&#34;C&#34;</span>, 19));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		Iterator<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span> it <span style=color:#f92672>=</span> ts.<span style=color:#a6e22e>iterator</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>while</span> (it.<span style=color:#a6e22e>hasNext</span>()) {
+</span></span><span style=display:flex><span>			Student s <span style=color:#f92672>=</span> (Student) it.<span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span>			System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(s.<span style=color:#a6e22e>getName</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;...&#34;</span> <span style=color:#f92672>+</span> s.<span style=color:#a6e22e>getAge</span>());
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Student</span> <span style=color:#66d9ef>implements</span> Comparable<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span> {	<span style=color:#75715e>// 该接口强制让学生具备比较性。</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>private</span> String name;
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> age;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	Student(String name, <span style=color:#66d9ef>int</span> age) {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span> <span style=color:#f92672>=</span> name;
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span> <span style=color:#f92672>=</span> age;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compareTo</span>(Student s){	<span style=color:#75715e>// 内部底层调用</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>// 按自然顺序取出</span>
+</span></span><span style=display:flex><span>		System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:compareto:&#34;</span> <span style=color:#f92672>+</span> s.<span style=color:#a6e22e>name</span>);
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> temp <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span> <span style=color:#f92672>*</span> s.<span style=color:#a6e22e>age</span>;
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> temp <span style=color:#f92672>==</span> 0<span style=color:#f92672>?</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>name</span>.<span style=color:#a6e22e>compareTo</span>(s.<span style=color:#a6e22e>name</span>) : temp;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getName</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> name;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getAge</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> age;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 定义一个类，实现Comparator接口</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyCompare</span> <span style=color:#66d9ef>implements</span> Comparator<span style=color:#f92672>&lt;</span>Student<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//覆盖compare方法</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compare</span>(Student s1, Student s2) {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> num <span style=color:#f92672>=</span> s1.<span style=color:#a6e22e>getName</span>().<span style=color:#a6e22e>compareTo</span>(s2.<span style=color:#a6e22e>getName</span>());
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>if</span> (num <span style=color:#f92672>==</span> 0) {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>				<span style=color:#75715e>/*//第一种方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e>				if(s1.getAge()&gt;s2.getAge())
+</span></span></span><span style=display:flex><span><span style=color:#75715e>				return 1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>				if(s1.getAge()==s2.getAge())
+</span></span></span><span style=display:flex><span><span style=color:#75715e>				return 0;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>				return *1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>				*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>			<span style=color:#75715e>/*//第二种方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e>			return new Integer(s1.getAge()).compareTo(new Integer(s2.getAge()));*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// 第三种方法</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>return</span> s1.<span style=color:#a6e22e>getAge</span>() <span style=color:#f92672>*</span> s2.<span style=color:#a6e22e>getAge</span>();
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> num;
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div><footer class=post-footer><div class=post-tags><a href=/tags/java>Java</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-copyright><img src=/imgs/cc/cc.svg width=75 height=75 align=right alt=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+java基础之集合（上）</li><li class=post-copyright-author><strong>本文作者： </strong>Patrick</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=/post/collection-of-java-part1/ title=java基础之集合（上）>/post/collection-of-java-part1/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/collection-of-java-part2/ rel=next title=java基础之集合（下）><i class="fa fa-chevron-left"></i> java基础之集合（下）</a></div><div class="post-nav-prev post-nav-item"><a href=/post/multi-thread-of-java/ rel=prev title=Java基础之多线程>Java基础之多线程
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div id=gtranslate class=google-translate><i class="fa fa-language"></i><div id=google_translate_element></div></div><div class=copyright>&copy;
+<span itemprop=copyrightYear>2015 - 2024
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>Patrick</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.121.1 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.5.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":true,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"username/repo-name","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0c78e5a4df586ee46d02716ffa91a4a322e56763e04e91eb2ba052c9469ed02.js defer></script><script type=text/javascript src=/js/math.min.a6ada19a368d85dad9ead2040d86ae561a867fafef89391d1aa2aa5909366509.js defer></script></body></html>

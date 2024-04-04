@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on Patrick's Blog</title><link>/tags/android/</link><description>Recent content in Android on Patrick's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 03 Sep 2016 21:03:19 +0800</lastBuildDate><atom:link href="/tags/android/rss.xml" rel="self" type="application/rss+xml"/><item><title>Android中的WebView使用总结</title><link>/post/summary-of-android-webview/</link><pubDate>Sat, 03 Sep 2016 21:03:19 +0800</pubDate><guid>/post/summary-of-android-webview/</guid><description>&lt;h2 id="用途">用途
+&lt;a class="header-anchor" href="#%e7%94%a8%e9%80%94">&lt;/a>
+&lt;/h2>&lt;h3 id="加载网页">加载网页
+&lt;a class="header-anchor" href="#%e5%8a%a0%e8%bd%bd%e7%bd%91%e9%a1%b5">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>说明:默认会打开自带的浏览器,使用WebView去加载,则需复写shouldOverrideUrlLoading方法,并返回为true&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>mWebView.&lt;span style="color:#a6e22e">setWebViewClient&lt;/span>(&lt;span style="color:#66d9ef">new&lt;/span> WebViewClient(){
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">boolean&lt;/span> &lt;span style="color:#a6e22e">shouldOverrideUrlLoading&lt;/span>(WebView view, String url) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> view.&lt;span style="color:#a6e22e">loadUrl&lt;/span>(url);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">//返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>return值的说明:
+&lt;ul>
+&lt;li>true: 在打开新的url时WebView就不会再加载这个url了，所有处理都需要在WebView中操作，包含加载&lt;/li>
+&lt;li>false(默认): 系统就认为上层没有做处理，接下来还是会继续加载这个url的
+&lt;ul>
+&lt;li>如果我们拦截了某个url，那么return false 和 return true区别不大，所以一般建议 return false&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

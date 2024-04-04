@@ -1,0 +1,366 @@
+<!doctype html><html lang=zh-CN data-theme=dark><head><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: dark)"><meta name=generator content="Hugo 0.121.1"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_16x16_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_32_32_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple_touch_icon_next.png><meta itemprop=name content="多元统计之判别分析"><meta itemprop=description content="discrimination-analysis"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="/img/avatar.jpg"><meta itemprop=keywords content="数理统计"><meta property="og:type" content="article"><meta property="og:title" content="多元统计之判别分析"><meta property="og:description" content="discrimination-analysis"><meta property="og:image" content="/img/avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="/post/discrimination-analysis/"><meta property="og:site_name" content="Patrick's Blog"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="Patrick"><meta property="article:published_time" content="2019-02-23 21:04:13 +0800 CST"><meta property="article:modified_time" content="2024-04-04 09:41:08 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.a987c3fbca3727259a25c99140afed885cbffe7b77dba717d89bbe0780afcd01.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":false,"isHome":false,"isPage":true,"math":{"css":{"file":"dist/katex.min.css","name":"katex","version":"0.16.0"},"js":[{"file":"dist/katex.min.js","name":"katex","version":"0.16.0"},{"alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.0"}],"render":"katex"},"path":"discrimination-analysis","permalink":"/post/discrimination-analysis/","title":"多元统计之判别分析","waline":{"js":[{"alias":"waline","alias_name":"@waline/client","file":"dist/pageview.js","name":"pageview","version":"2.13.0"},{"alias":"waline","alias_name":"@waline/client","file":"dist/comment.js","name":"comment","version":"2.13.0"}]}}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>多元统计之判别分析 - Patrick's Blog</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>Patrick's Blog</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>Once start, goes forward!</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/about/ class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-flinks"><a href=/flinks.html class=hvr-icon-pulse rel=section><i class="fa fa-thumbs-up hvr-icon"></i>站点示例</a></li><li class="menu-item menu-item-archives"><a href=/archives/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>33</span></a></li><li class="menu-item menu-item-commonweal"><a href=/404.html class=hvr-icon-pulse rel=section><i class="fa fa-heartbeat hvr-icon"></i>公益 404</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#概述>概述</a><ul><li><a href=#分类>分类</a></li></ul></li><li><a href=#距离判别法>距离判别法</a><ul><li><a href=#马氏距离>马氏距离</a></li><li><a href=#距离判别的思想和方法>距离判别的思想和方法</a><ul><li><a href=#两个总体的距离判别>两个总体的距离判别</a></li></ul></li><li><a href=#多个总体的距离判别>多个总体的距离判别</a><ul><li><a href=#实际应用-1>实际应用</a></li></ul></li></ul></li><li><a href=#贝叶斯判别法>贝叶斯判别法</a><ul><li><a href=#基本思想>基本思想</a></li><li><a href=#基本方法>基本方法</a></li><li><a href=#性质>性质</a></li><li><a href=#注意>注意</a></li><li><a href=#示例>示例</a></li></ul></li><li><a href=#费歇fisher判别法>费歇(Fisher)判别法</a><ul><li><a href=#基本思想-1>基本思想</a></li><li><a href=#判别函数的构造>判别函数的构造</a><ul><li><a href=#针对两个总体的情况>针对两个总体的情况</a></li><li><a href=#针对多个总体的情况>针对多个总体的情况</a></li></ul></li><li><a href=#线性判别函数的求法>线性判别函数的求法</a></li><li><a href=#示例-1>示例</a></li></ul></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=Patrick src=/imgs/img-lazy-loading.gif data-src=/img/avatar.jpg><p class=site-author-name itemprop=name>Patrick</p><div class=site-description itemprop=description>个人学习笔记</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>33</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>8</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://gitee.com/hugo-next/hugo-theme-next title=https://gitee.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li></ul></div></div></div></div><div id=siteinfo-card-widget class=sidebar-card-widget><div class=item-headline><i class="fas fa-chart-line"></i>
+<span>网站资讯</span></div><div class=siteinfo><div class=siteinfo-item><div class=item-name><i class="fa-solid fa-calendar-check"></i>已运行：</div><div class=item-count id=runTimes data-publishdate=2015-04-05T13:57:58+08:00></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-user"></i>总访客数：</div><div class=item-count id=busuanzi_value_site_uv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-eye"></i>页面浏览：</div><div class=item-count id=busuanzi_value_site_pv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-font"></i>总字数：</div><div class=item-count id=wordsCount data-count=22332></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-mug-hot"></i>阅读约：</div><div class=item-count id=readTimes data-times=121></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-clock-rotate-left"></i>最后更新于：</div><div class=item-count id=last-push-date data-lastpushdate=2023-05-31T21:26:21+08:00></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=goto-gtranslate class=button title=多语言翻译><i class="fas fa-globe"></i></div><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script><script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=/post/discrimination-analysis/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/img/avatar.jpg"><meta itemprop=name content="Patrick"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="Patrick"><meta itemprop=description content="个人学习笔记"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="多元统计之判别分析"><meta itemprop=description content="discrimination-analysis"></span><header class=post-header><h1 class=post-title itemprop="name headline">多元统计之判别分析
+<a href=https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/post/discrimination-analysis.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2019-02-23 21:04:13 +0800 CST" itemprop="dateCreated datePublished" datetime="2019-02-23 21:04:13 +0800 CST">2019-02-23
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar-check"></i>
+</span><span class=post-meta-item-text title=更新于>更新于：
+</span><time title=修改时间：2024-04-04T09:41:08+08:00 itemprop=dateModified datetime=2024-04-04T09:41:08+08:00>2024-04-04</time>
+</span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6 itemprop=url rel=index><span itemprop=name>数据科学</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>1377</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>7分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="far fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/discrimination-analysis/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><h2 id=概述>概述
+<a class=header-anchor href=#%e6%a6%82%e8%bf%b0></a></h2><ul><li>判别分析是判别样品所属类型的一种分析方法，是在分类确定的条件下，根据某一研究对象的各种特征值判别其类型归属问题的一种多变量统计分析方法。</li><li>判别分析于聚类分析的功能差不多，区别在于，聚类分析之前，没有人知道具体的是怎么分的类，分了哪几大类。而判别分析是已经把类别给分好，要做的是把没有分好类的数据观测，按照之前分好的类再进行分类。这里不同于生活中常见的分类先有具体的分类逻辑（这里叫做判别函数）。所以判别分的难点在于先由分好类的数据观测找到一个或者多个判别函数，然后对未进行分类的观测按照该判别公式进行分类。</li></ul><h3 id=分类>分类
+<a class=header-anchor href=#%e5%88%86%e7%b1%bb></a></h3><ul><li>按判别的总体数来区分: 两个总体判别分析和多总体判别分析</li><li>按区分不同总体所用的数学模型来分: 线性判别和非线性判别</li><li>常用的几种判别分析方法: 距离判别法、Fisher判别法、Bayes判别法和逐步判别法</li><li>按判别时所处理的变量方法不同: 逐步判别和序贯判别等</li></ul><h2 id=距离判别法>距离判别法
+<a class=header-anchor href=#%e8%b7%9d%e7%a6%bb%e5%88%a4%e5%88%ab%e6%b3%95></a></h2><h3 id=马氏距离>马氏距离
+<a class=header-anchor href=#%e9%a9%ac%e6%b0%8f%e8%b7%9d%e7%a6%bb></a></h3><ul><li>定义点到总体G的马氏距离为
+$$D^2(X, G) = (X - \mu)&rsquo;\Sigma^{-1}(X - \mu)$$<ul><li>$当\Sigma = I(单位矩阵)时, 即为欧氏距离的情形$</li></ul></li></ul><h3 id=距离判别的思想和方法>距离判别的思想和方法
+<a class=header-anchor href=#%e8%b7%9d%e7%a6%bb%e5%88%a4%e5%88%ab%e7%9a%84%e6%80%9d%e6%83%b3%e5%92%8c%e6%96%b9%e6%b3%95></a></h3><h4 id=两个总体的距离判别>两个总体的距离判别
+<a class=header-anchor href=#%e4%b8%a4%e4%b8%aa%e6%80%bb%e4%bd%93%e7%9a%84%e8%b7%9d%e7%a6%bb%e5%88%a4%e5%88%ab></a></h4><ul><li>问题:<ul><li>设有协方差矩阵相等的两个总体$G_1$和$G_2$, 其均值分别是$\mu_1$和$\mu_2$, 对于一个新的样品X, 判断它来自哪个总体</li></ul></li><li>思路:<ul><li>求新样品到两个总体的马氏距离的差值$W(X)$, 若$W(X) \le 0, 则X \in G_1; 反之X \in G_2$, 其中$\bar{\mu} = \frac{\mu_1 + \mu_2}{2}$是两个总体均值的平均值, $\alpha = \Sigma^{-1}(\mu_1 - \mu_2)$</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>\begin{aligned}
+</span></span><span style=display:flex><span>  W(X) &amp; = D^2(X, G_1) - D^2(X, G_2) \\
+</span></span><span style=display:flex><span>       &amp; = -2(X - \frac{\mu_1 + \mu_2}{2})&#39;\Sigma^{-1}(\mu_1 - \mu_2) \\
+</span></span><span style=display:flex><span>       &amp; = -2(X - \bar{\mu})&#39;\alpha  \\
+</span></span><span style=display:flex><span>       &amp; = -2\alpha&#39;(X - \bar{\mu})
+</span></span><span style=display:flex><span>\end{aligned} \tag{2.2.1-1}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div><ul><li>记$W(X) = \alpha&rsquo;(X - \bar{\mu})$, 则判别规则</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>\begin{cases}
+</span></span><span style=display:flex><span>    X \in G_1, \quad 如果W(X) \ge 0 \\
+</span></span><span style=display:flex><span>    X \in G_2, \quad 如果W(X) &lt; 0 \\
+</span></span><span style=display:flex><span>\end{cases} \tag{2.2.1-2}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>这里称W(X)为两总体距离判别的判别函数, 由于它是X的线性函数, 故又称为线性判别函数, $\alpha$称为判别系数</li></ul><h5 id=实际应用>实际应用
+<a class=header-anchor href=#%e5%ae%9e%e9%99%85%e5%ba%94%e7%94%a8></a></h5><ul><li>在实际应用中, 总体的均值和协方差矩阵一般是未知的, 可由样本均值和样本协方差矩阵分别进行估计。</li><li>$设X_1^{(1)},\cdots,X_{n_1}^{(1)}$来自总体$G_1$的样本, $设X_2^{(2)},\cdots,X_{n_2}^{(2)}$是来自总体$G_2$的样本, $\mu_1$和$\mu_2$的一个无偏估计分别为
+$$\bar{X}^{(1)} = \frac{1}{n_1}\sum_{i=1}^{n_1} X_i^{(1)} 和 \bar{X}^{(1)} = \frac{1}{n_2}\sum_{i=1}^{n_2} X_i^{(2)}$$
+$\Sigma$的一个联合无偏估计为
+$$\hat{\Sigma} = \frac{1}{n_1 + n_2 -2}(S_1 + S_2)$$
+其中$<code>$S_\alpha = \sum_{1}^{n_\alpha}(X_i^{(\alpha)} - \bar{X}^{(\alpha)})(X_i^{(\alpha)} - \bar{X}^{(\alpha)})', \alpha=1,2\\$</code>$
+此时, 两总体距离判别的判别函数为$<code>$\hat{W}(X) = \hat{\alpha}'(X - \bar{X});$</code>$其中$<code>$\bar{X} = \frac{\bar{X}^{(1)} + \bar{X}^{(2)}}{2}, \hat{\alpha} = \hat{\Sigma}^{-1}(\bar{X}^{(1)} - \bar{X}^{(2)});$</code>$判别规则为<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>  \begin{cases}
+</span></span><span style=display:flex><span>    X \in G_1, \quad 如果\hat{W}(X) \ge 0 \\
+</span></span><span style=display:flex><span>    X \in G_2, \quad 如果\hat{W}(X) &lt; 0 \\
+</span></span><span style=display:flex><span>  \end{cases}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div></li><li>示例</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-r data-lang=r><span style=display:flex><span><span style=color:#75715e>## state_train.csv ##</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># state,life expectancy,literacy ,class</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># USA,76,99,1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Japan,79.5,99,1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Switzerland,78,99,1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Argentina,72.1,95.9,1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># UAE,73.8,77.7,1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Bulgaria,71.2,93,0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Cuba,75.3,94.9,0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Paraguay,70,91.2,0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Georgia,72.8,99,0</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># South Africa,62.9,80.6,0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## state_test.csv ##</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># state,life expectancy,literacy </span>
+</span></span><span style=display:flex><span><span style=color:#75715e># China,68.5,79.3</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Romania,69.9,96.9</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Greece,77.6,93.8</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Columbia,69.3,90.3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>train <span style=color:#f92672>=</span> <span style=color:#a6e22e>read.csv</span>(<span style=color:#e6db74>&#34;state_train.csv&#34;</span>, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;,&#34;</span>, header <span style=color:#f92672>=</span> T)
+</span></span><span style=display:flex><span>test <span style=color:#f92672>=</span> <span style=color:#a6e22e>read.csv</span>(<span style=color:#e6db74>&#34;state_test.csv&#34;</span>, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;,&#34;</span>, header <span style=color:#f92672>=</span> T)
+</span></span><span style=display:flex><span>t_ed <span style=color:#f92672>=</span> <span style=color:#a6e22e>subset</span>(train, train<span style=color:#f92672>$</span>class<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>)[,<span style=color:#ae81ff>-4</span>]
+</span></span><span style=display:flex><span>t_ing <span style=color:#f92672>=</span> <span style=color:#a6e22e>subset</span>(train, train<span style=color:#f92672>$</span>class<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>)[,<span style=color:#ae81ff>-4</span>]
+</span></span><span style=display:flex><span><span style=color:#75715e># class=1</span>
+</span></span><span style=display:flex><span>u1 <span style=color:#f92672>=</span> <span style=color:#a6e22e>apply</span>(t_ed[,<span style=color:#ae81ff>-1</span>], <span style=color:#ae81ff>2</span>, mean)
+</span></span><span style=display:flex><span>s1 <span style=color:#f92672>=</span> <span style=color:#a6e22e>cov</span>(t_ed[,<span style=color:#ae81ff>-1</span>])
+</span></span><span style=display:flex><span><span style=color:#75715e># calss=0</span>
+</span></span><span style=display:flex><span>u2 <span style=color:#f92672>=</span> <span style=color:#a6e22e>apply</span>(t_ing[,<span style=color:#ae81ff>-1</span>], <span style=color:#ae81ff>2</span>, mean)
+</span></span><span style=display:flex><span>s2 <span style=color:#f92672>=</span> <span style=color:#a6e22e>cov</span>(t_ing[,<span style=color:#ae81ff>-1</span>])
+</span></span><span style=display:flex><span><span style=color:#75715e># 联合无偏估计</span>
+</span></span><span style=display:flex><span>s <span style=color:#f92672>=</span> (s1<span style=color:#f92672>*</span><span style=color:#ae81ff>4</span> <span style=color:#f92672>+</span> s2<span style=color:#f92672>*</span><span style=color:#ae81ff>4</span>) <span style=color:#f92672>/</span> (<span style=color:#ae81ff>5+5-2</span>)
+</span></span><span style=display:flex><span>ubar <span style=color:#f92672>=</span> (u1 <span style=color:#f92672>+</span> u2)<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 判别系数</span>
+</span></span><span style=display:flex><span>alpha <span style=color:#f92672>=</span> <span style=color:#a6e22e>solve</span>(s)<span style=color:#f92672>%*%</span>(u1 <span style=color:#f92672>-</span> u2)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 判别函数</span>
+</span></span><span style=display:flex><span>discriminate <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span>(test) {
+</span></span><span style=display:flex><span>  class <span style=color:#f92672>=</span> <span style=color:#66d9ef>NULL</span>
+</span></span><span style=display:flex><span>  w.value <span style=color:#f92672>=</span> <span style=color:#66d9ef>NULL</span>
+</span></span><span style=display:flex><span>  n <span style=color:#f92672>=</span> <span style=color:#a6e22e>dim</span>(test)[1]
+</span></span><span style=display:flex><span>  state <span style=color:#f92672>=</span> test<span style=color:#f92672>$</span>state
+</span></span><span style=display:flex><span>  data <span style=color:#f92672>=</span> <span style=color:#a6e22e>as.matrix</span>(test[,<span style=color:#ae81ff>-1</span>])
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>:</span>n) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 读取每一行的数据</span>
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>=</span> data[i,]
+</span></span><span style=display:flex><span>    w <span style=color:#f92672>=</span> <span style=color:#a6e22e>t</span>(alpha)<span style=color:#f92672>%*%</span>(x <span style=color:#f92672>-</span> ubar)
+</span></span><span style=display:flex><span>    w.value[i] <span style=color:#f92672>=</span> w
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (w <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#75715e># 属于第二类</span>
+</span></span><span style=display:flex><span>      class[i] <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>      class[i] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  result <span style=color:#f92672>=</span> <span style=color:#a6e22e>data.frame</span>(state, w.value, class)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span>(result)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>discriminate</span>(test)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>discriminate</span>(t_ed)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>discriminate</span>(t_ing)
+</span></span></code></pre></div><h3 id=多个总体的距离判别>多个总体的距离判别
+<a class=header-anchor href=#%e5%a4%9a%e4%b8%aa%e6%80%bb%e4%bd%93%e7%9a%84%e8%b7%9d%e7%a6%bb%e5%88%a4%e5%88%ab></a></h3><ul><li><p>问题:</p><ul><li>设有k个总体$G_1,G_2,\cdots,G_k$, 其均值和协方差矩阵分别是$\mu_1,\mu_2,\cdots,\mu_k$和$\Sigma_1,\Sigma_2,\cdots,\Sigma_k$, 而且$\Sigma_1 = \Sigma_2 = \cdots = \Sigma_k = \Sigma$。对于一个新的样品X, 要判断它来自哪个总体</li></ul></li><li><p>思路:</p><ul><li>与两个总体的距离判别问题解决思路一样。计算新样品X到每一个总体的距离, 即</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>  \begin{aligned}
+</span></span><span style=display:flex><span>    D^2(X, G_\alpha) &amp; = (X - \mu_\alpha)&#39;\Sigma^{-1}(X - \mu_\alpha) \\
+</span></span><span style=display:flex><span>                     &amp; = X&#39;\Sigma^{-1}X - \mu_\alpha&#39;(X\Sigma^{-1})&#39; -\mu_\alpha&#39;\Sigma^{-1}X + \mu&#39;_\alpha\Sigma^{-1}\mu_\alpha\\
+</span></span><span style=display:flex><span>                     &amp; = X&#39;\Sigma^{-1}X - 2\mu&#39;_\alpha\Sigma^{-1}X + \mu&#39;_\alpha\Sigma^{-1}\mu_\alpha \\
+</span></span><span style=display:flex><span>                     &amp; = X&#39;\Sigma^{-1}X - 2(I&#39;_\alpha X + C_\alpha)
+</span></span><span style=display:flex><span>  \end{aligned}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div><p>其中$<code>$I_\alpha = \Sigma^{-1}\mu_\alpha, C_\alpha = -\frac{1}{2}\mu'_\alpha\Sigma^{-1}\mu_\alpha, \alpha=1,2,\cdots,k。$</code>$</p><ul><li>线性判别函数为:</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$W_\alpha(X) = I&#39;_\alpha X + C_\alpha, \quad \alpha=1,2,\cdots,k$$ 
+</span></span></code></pre></div><p>相应的判别规则为</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$X \in G_i \quad 如果W_i(X) = \max\limits_{1 \le \alpha le k}(I&#39;_\alpha X + C_a)$$
+</span></span></code></pre></div></li></ul><h4 id=实际应用-1>实际应用
+<a class=header-anchor href=#%e5%ae%9e%e9%99%85%e5%ba%94%e7%94%a8-1></a></h4><ul><li>针对实际问题, 当$\mu_1,\mu_2,\cdots,\mu_k$和$\Sigma$均未知时, 可以通过相应的样本值来替代</li><li>设$X_1^{(\alpha)},\cdots,X_{n_\alpha}^{\alpha}$是来自总体$G_\alpha$中的样本$(\alpha=1,2,\cdots,k)$,则$\mu_\alpha(1,2,\cdots,k)和\Sigma$可估计为</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>\bar{X}^{(\alpha)} = \frac{1}{n_\alpha}\sum_{i=1}^{n_\alpha}X_i^{(\alpha)}, \alpha=1,2,\cdots,k \\
+</span></span><span style=display:flex><span>\hat{\Sigma} = \frac{1}{n - k}\sum_{\alpha=1}^kS_\alpha,n=n_1 + n_2 + \cdots + n_k, \\
+</span></span><span style=display:flex><span>S_\alpha =\sum_{i=1}^{n_\alpha}(X_i^{(\alpha)} - \bar{X}^{(\alpha)})(X_i^{(\alpha)} - \bar{X}^{(\alpha)})&#39;,\alpha = 1,2,\cdots,k
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div><ul><li>如果总体$G_1,G_2,\cdots,G_k$的协方差矩阵分别是$\Sigma_1,\Sigma_2,\cdots,\Sigma_k$, 而且它们不全相等, 则计算X到各总体的马氏距离,即
+$$D^2(D,G_\alpha) = (X - \mu_\alpha)&rsquo;\Sigma_\alpha^{-1}(X - \mu_\alpha) \quad \alpha=1,2,\cdots,k$$
+判别规则为</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$X \in G_i \quad 如果D^2(X, G_i) = \min\limits_{1 \le \alpha \le k}D^2(X, G_\alpha)$$
+</span></span><span style=display:flex><span>当$\mu_1,\mu_2,\cdots,\mu_k和\Sigma_1,\Sigma_2,\cdots,\Sigma_k$均未知时, $\mu_\alpha(\alpha=1,2,\cdots,k)$的估计同前, $\Sigma_\alpha(\alpha=1,2,\cdots,k)$的估计为
+</span></span><span style=display:flex><span>$$\hat{\Sigma}_\alpha = \frac{1}{n_\alpha - 1}S_\alpha, \alpha=1,2,\cdots,k$$
+</span></span></code></pre></div><ul><li>示例</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-r data-lang=r><span style=display:flex><span>x <span style=color:#f92672>=</span> <span style=color:#a6e22e>data.frame</span>(iris)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 计算参数</span>
+</span></span><span style=display:flex><span>sps <span style=color:#f92672>=</span> <span style=color:#a6e22e>as.vector</span>(<span style=color:#a6e22e>unique</span>(x<span style=color:#f92672>$</span>Species))
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>3</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 分类</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>assign</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;g&#34;</span>, i, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>), <span style=color:#a6e22e>subset</span>(x, x<span style=color:#f92672>$</span>Species<span style=color:#f92672>==</span>sps[i])[,<span style=color:#ae81ff>-5</span>])
+</span></span><span style=display:flex><span>  group <span style=color:#f92672>=</span> <span style=color:#a6e22e>get</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;g&#34;</span>, i, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>))
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 计算均值</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>assign</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;u&#34;</span>, i, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>), <span style=color:#a6e22e>apply</span>(group, <span style=color:#ae81ff>2</span>, mean))
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 协方差矩阵</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>assign</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;s&#34;</span>, i, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>), <span style=color:#a6e22e>cov</span>(group))
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e># 联合无偏估计</span>
+</span></span><span style=display:flex><span>s <span style=color:#f92672>=</span> (s1 <span style=color:#f92672>+</span> s2 <span style=color:#f92672>+</span> s3)<span style=color:#f92672>*</span><span style=color:#ae81ff>49</span><span style=color:#f92672>/</span>(<span style=color:#ae81ff>150</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>3</span>) {
+</span></span><span style=display:flex><span>  ubar <span style=color:#f92672>=</span> <span style=color:#a6e22e>get</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;u&#34;</span>, i, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>))
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>assign</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;I&#34;</span>, i, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>), <span style=color:#a6e22e>solve</span>(s)<span style=color:#f92672>%*%</span>ubar)
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>assign</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;C&#34;</span>, i, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>), <span style=color:#a6e22e>t</span>(ubar)<span style=color:#f92672>%*%</span><span style=color:#a6e22e>solve</span>(s)<span style=color:#f92672>%*%</span>ubar<span style=color:#f92672>*</span>(<span style=color:#ae81ff>-1</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>))
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 判别函数</span>
+</span></span><span style=display:flex><span>discriminant <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span>(test) {
+</span></span><span style=display:flex><span>  class <span style=color:#f92672>=</span> <span style=color:#66d9ef>NULL</span>
+</span></span><span style=display:flex><span>  n <span style=color:#f92672>=</span> <span style=color:#a6e22e>dim</span>(test)[1]
+</span></span><span style=display:flex><span>  data <span style=color:#f92672>=</span> <span style=color:#a6e22e>as.matrix</span>(test[,<span style=color:#ae81ff>-5</span>])
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 待分类的n个样品</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>:</span>n) {
+</span></span><span style=display:flex><span>    df <span style=color:#f92672>=</span> data[i,]
+</span></span><span style=display:flex><span>    w <span style=color:#f92672>=</span> <span style=color:#66d9ef>NULL</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 计算每个样品到每一个总体的距离</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (j <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>3</span>) {
+</span></span><span style=display:flex><span>      iv <span style=color:#f92672>=</span> <span style=color:#a6e22e>get</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;I&#34;</span>, j, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>))
+</span></span><span style=display:flex><span>      cv <span style=color:#f92672>=</span> <span style=color:#a6e22e>get</span>(<span style=color:#a6e22e>paste</span>(<span style=color:#e6db74>&#34;C&#34;</span>, j, sep <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>))
+</span></span><span style=display:flex><span>      w[j] <span style=color:#f92672>=</span> <span style=color:#a6e22e>t</span>(iv)<span style=color:#f92672>%*%</span>df <span style=color:#f92672>+</span> cv
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    class[i] <span style=color:#f92672>=</span> sps<span style=color:#a6e22e>[which.max</span>(w)]
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  result <span style=color:#f92672>=</span> <span style=color:#a6e22e>data.frame</span>(test<span style=color:#f92672>$</span>Species, class)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span>(result)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>result <span style=color:#f92672>=</span> <span style=color:#a6e22e>discriminant</span>(x)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>table</span>(result)
+</span></span></code></pre></div><h2 id=贝叶斯判别法>贝叶斯判别法
+<a class=header-anchor href=#%e8%b4%9d%e5%8f%b6%e6%96%af%e5%88%a4%e5%88%ab%e6%b3%95></a></h2><ul><li>在判别分析时, 考虑先验概率, 并利用Bayes公式导出后验概率(posterior probability), 即各个样品属于每一类的概率。判别的准则是按后验概率大小归类。</li></ul><h3 id=基本思想>基本思想
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3></a></h3><ul><li>问题:<ul><li>问题：设有k个总体$G_1,G_2,\cdots,G_k$，其各自的分布密度函数$f_1(x),f_2(x),\cdots,G_k$互不相同的，假设个总体各自出现的概率分别为$q_1,q_2,\cdots,q_k$（先验概率），$q > 0$，$\sum_{i=1}^kq_i=1$。假设已知若将本来属于$G_i$总体的样品错判到总体$G_j$时造成的损失为$C(j|i)，i,j=1,2,\cdots,k$。在这样的情形下，对于新的样品判断其来自哪个总体。</li></ul></li><li>思路<ul><li>设k个总体$G_1,G_2,\cdots,G_k$相应的p维样本空间为$R_1,R_2,\cdots.R_k$, 即为一个划分, 故我们可以简记一个判别规则为$R = R(R_1,R_2,\cdots,R_k)$. 在规则R下, 将属于$G_i$的样品错判到$G_j$的概率为
+$$P(j|i,R) = \int_{R_j}f_i(x)dx \quad i,j=1,2,\cdots,k \quad i \neq j$$
+此概率值等于总体$G_i$的分布密度在区域$R_j$上的面积.</li><li>判别规则R对总体$G_i$而言样品错判后所造成的平均损失为
+$$r(i|R) = \sum_{j=1}^k[C(j|i)P(j|i,R)] \quad i=1,2,\cdots,k$$
+其中$C(i|i) = 0$</li><li>由于$k$个总体$G_1,G_2,\cdots,G_k$出现的先验概率分别为$q_1,q_2,\cdots,q_k$, 则用规则R来进行判别所造成的总平均损失为
+$$\begin{aligned}
+g(R) & = \sum_{i=1}^kq_ir(i,R) \
+& = \sum_{i=1}^kq_i\sum_{j=1}^kC(j|i)P(j|i,R)
+\end{aligned}
+$$</li><li>Bayes判别法则, 就是要选择$R_1,R_2,\cdots,R_k$, 使得g(R)达到极小.</li></ul></li></ul><h3 id=基本方法>基本方法
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%96%b9%e6%b3%95></a></h3><ul><li>已知样品X来自总体$G_i$的先验概率为$q_i,i=1,2,\cdots,k$, 则在规则R下, 误判的总平均损失为<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>\begin{aligned}
+</span></span><span style=display:flex><span>  g(R) &amp; = \sum_{i=1}^kq_i\sum_{j=1}^kC(j|i)P(j|i,R) \\
+</span></span><span style=display:flex><span>       &amp; = \sum_{i=1}^kq_i\sum_{j=1}^kC(j|i)\int_{R_j}f_i(x)dx \\
+</span></span><span style=display:flex><span>       &amp; = \sum_{j=1}^k \int_{R_j}(\sum_{i=1}^kq_iC(j|i)f_i(x))dx \\
+</span></span><span style=display:flex><span>       &amp; = \sum_{j=1}^k\int_{R_j}h_j(x)dx \\
+</span></span><span style=display:flex><span>\end{aligned}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>$$其中, \quad h_j(x) = \sum_{i=1}^kq_iC(j|i)f_i(x) \tag{3.2.1}$$</li><li>如果空间$R^p$有另一种划分$<code>$R^* = (R_1^*, R_2^*, \cdots, R_k^*)$</code>$, 则它的总平均损失为<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$g(R^*) = \sum_{j=1}^k\int_{R_j^*}h_j(x)dx$$
+</span></span></code></pre></div>则两种划分下的总平均损失之差为<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$g(R) - g(R^*) = \sum_{i=1}^k\sum_{j=1}^k\int_{R_i \cap R_i^*}[h_i(x) - h_j(x)]dx \tag{3.2.2}$$
+</span></span></code></pre></div></li><li>由$R_i$的定义, 在$R_i$上$h_i(x) \le h_j(x)$对于一切j成立, 故3.2.2式小于或等于零, 说明$R_1,R_2,\cdots,R_k$确能使总平均损失达到极小, 它是Bayes判别的解.</li><li>这样, 我们以Bayes判别的思想得到的划分$R= (R_1,R_2,\cdots,R_k)$为
+$$R_i={x|h_i(x) = \min \limits_{1 \le j \le k}h_j(x)} \quad i=1,2,\cdots,k$$</li></ul><h3 id=性质>性质
+<a class=header-anchor href=#%e6%80%a7%e8%b4%a8></a></h3><ul><li>当k=2时, 由3.2.1可得<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>h_1(x) = q_2C(1|2)f_2(x) \quad h_2(x) = q_1C(2|1)f_1(x) \\
+</span></span><span style=display:flex><span>令 V(x) = \frac{f_1(x)}{f_2(x)}, \quad d = \frac{q_2C(1|2)}{q_1C(2|1)}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>判别规则表示为<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>  \begin{cases}
+</span></span><span style=display:flex><span>    x \in G_1, \quad 当V(x) \ge d \\
+</span></span><span style=display:flex><span>    x \in G_2 , \quad 当V(x) &lt; d
+</span></span><span style=display:flex><span>  \end{cases} \tag{3.3.1}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>若$f_1(x)$与$f_2(x)$分别为$N(\mu_1, \Sigma)$和$N(\mu_2, \Sigma)$, 那么<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>  \begin{aligned}
+</span></span><span style=display:flex><span>    V(x) &amp; = \frac{f_1(x)}{f_2(x)}  \\
+</span></span><span style=display:flex><span>         &amp; = exp\{-\frac{1}{2}(x - \mu_1)&#39;\Sigma^{-1}(x - \mu_1) + \frac{1}{2}(x - \mu_2)&#39;\Sigma^{-1}(x - \mu_2)\}  \\
+</span></span><span style=display:flex><span>         &amp; = exp\{[x - (\mu_1 + \mu_2)/2]&#39;\Sigma^{-1}(\mu_1 - \mu_2)\} \\
+</span></span><span style=display:flex><span>         &amp; = exp W(x)
+</span></span><span style=display:flex><span>  \end{aligned}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>判定样品X来自该总体时, 判别规则为<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>  \begin{cases}
+</span></span><span style=display:flex><span>    x \in G_1, \quad 当W(x) \ge lnd \\
+</span></span><span style=display:flex><span>    x \in G_2 , \quad 当W(x) &lt; lnd
+</span></span><span style=display:flex><span>  \end{cases} \tag{3.3.2}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>其中$W(x)$由2.2.1-1定义</li></ul><h3 id=注意>注意
+<a class=header-anchor href=#%e6%b3%a8%e6%84%8f></a></h3><ul><li>在实际应用中要确定先验概率是很困难的事</li><li>可将样本的各类样本含量之构成比作为先验概率的估计</li><li>在无法确定时, 可取各类的先验概率相等, 此时Bayes判别失去其优越性</li></ul><h3 id=示例>示例
+<a class=header-anchor href=#%e7%a4%ba%e4%be%8b></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-r data-lang=r><span style=display:flex><span><span style=color:#75715e># bayes判别</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># prior 指定先验概率</span>
+</span></span><span style=display:flex><span>ld <span style=color:#f92672>=</span> <span style=color:#a6e22e>lda</span>(iris[,<span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>4</span>], iris[,<span style=color:#ae81ff>5</span>], prior <span style=color:#f92672>=</span> <span style=color:#a6e22e>c</span>(<span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>0.3</span>, <span style=color:#ae81ff>0.5</span>))
+</span></span><span style=display:flex><span>ld
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> <span style=color:#a6e22e>predict</span>(ld)
+</span></span><span style=display:flex><span>newG <span style=color:#f92672>=</span> Z<span style=color:#f92672>$</span>class
+</span></span><span style=display:flex><span>tab <span style=color:#f92672>=</span> <span style=color:#a6e22e>table</span>(newG, Species)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>sum</span>(<span style=color:#a6e22e>diag</span>(<span style=color:#a6e22e>prop.table</span>(tab)))
+</span></span></code></pre></div><h2 id=费歇fisher判别法>费歇(Fisher)判别法
+<a class=header-anchor href=#%e8%b4%b9%e6%ad%87fisher%e5%88%a4%e5%88%ab%e6%b3%95></a></h2><h3 id=基本思想-1>基本思想
+<a class=header-anchor href=#%e5%9f%ba%e6%9c%ac%e6%80%9d%e6%83%b3-1></a></h3><ul><li>通过将多维数据投影到某个方向上，投影的原则是将总体与总体之间尽可能的放开，然后再选择合适的判别规则，将新的样品进行分类判别.</li><li>从$k$个总体中抽取具有$p$个指标的样品观测数据，借助方差分析的思想构造一个线性判别函数
+$$U(X) = u_1X_1 + u_2X_2 + \cdots + u_pX_p \tag{4.1-1}$$
+其中系数$u = (u_1,u_2,\cdots,u_p)&rsquo;$确定的原则是使得总体之间区别最大，而使每个总体内部的离差最小。</li></ul><h3 id=判别函数的构造>判别函数的构造
+<a class=header-anchor href=#%e5%88%a4%e5%88%ab%e5%87%bd%e6%95%b0%e7%9a%84%e6%9e%84%e9%80%a0></a></h3><h4 id=针对两个总体的情况>针对两个总体的情况
+<a class=header-anchor href=#%e9%92%88%e5%af%b9%e4%b8%a4%e4%b8%aa%e6%80%bb%e4%bd%93%e7%9a%84%e6%83%85%e5%86%b5></a></h4><ul><li>假设有两个总体$G_1,G_2$，其均值分别为$\mu_1$和$\mu_2$，协方差矩阵为$\Sigma_1$和$\Sigma_2$。当$X \in G_i$时，我们可以求出$u&rsquo;X$的均值和方差，即<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>E(u&#39;X) = E(u&#39;X | G_i) = u&#39;E(X|G_i) = u&#39;\mu_i \triangleq \bar{u}_i, \quad i=1,2 \\
+</span></span><span style=display:flex><span>D(u&#39;X) = D(u&#39;X | G_i) = u&#39;D(X|G_i)u = u&#39;\Sigma_iu \triangleq \sigma_i^2, \quad i=1,2 \\
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div></li><li>在求线性判别函数时，尽量使得总体之间差异大，也就是要求$u&rsquo;\mu_1 - u&rsquo;\mu_2$尽可能的大，即$\bar{\mu}_1 - \bar{\mu}_2$变大；同时要求每一个总体内的离差平方和最小，即$\sigma_1^2 + \sigma_2^2$，则我们可以建立一个目标函数
+$$\varPhi(u) = \frac{\bar{u}_1 - \bar{u}_2}{\sigma_1^2 + \sigma_2^2} \tag{4.2.1-2}$$
+这样，我们就将问题转化为，寻找$u$使得目标函数$\varPhi$达到最大。从而可以构造出所要求的线性判别函数。</li></ul><h4 id=针对多个总体的情况>针对多个总体的情况
+<a class=header-anchor href=#%e9%92%88%e5%af%b9%e5%a4%9a%e4%b8%aa%e6%80%bb%e4%bd%93%e7%9a%84%e6%83%85%e5%86%b5></a></h4><ul><li>假设有k个总体$G_1,G_2,\cdots,G_k$，其均值和协方差矩阵分别为$\mu_i$和$\Sigma_i(>0)$。当$X \in G_i$时，我们可以求出$u&rsquo;X$的均值和方差，即<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>E(u&#39;X) = E(u&#39;X | G_i) = u&#39;E(X|G_i) = u&#39;\mu_i, \quad i=1,2,\cdots,k \\
+</span></span><span style=display:flex><span>D(u&#39;X) = D(u&#39;X | G_i) = u&#39;D(X|G_i)u = u&#39;\Sigma_iu, \quad i=1,2,\cdots,k \\
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>令<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>b = \sum_{i=1}^k(u&#39;\mu_i - u&#39;\bar{\mu})^2 \\
+</span></span><span style=display:flex><span>e = \sum_{i=1}^ku&#39;\Sigma_iu = u&#39;(\sum_{i=1}^k\Sigma_i)u = u&#39;Eu \\
+</span></span><span style=display:flex><span>其中\bar{u} = \frac{1}{k}\sum_{i=1}^k\mu_i, \quad E = \sum_{i=1}^k\Sigma_i
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div>b相当于一元方差分析中的组间差, e相当于组内差, 应用方差分析的思想, 选择u使得目标函数
+$$\varPhi(u) = \frac{b}{e} \tag{4.2.2-1}$$
+达到极大.<ul><li>线性判别函数$u&rsquo;X$, 对于一个新的样品$X$可以构造一个判别规则, 如果
+$$|u&rsquo;X - u&rsquo;\mu_j| = \min \limits_{1 \le i \le k}|u&rsquo;X - u&rsquo;\mu_i| \tag{4.2.2-2}$$
+则判定$X$来自总体$G_j$</li></ul></li></ul><h3 id=线性判别函数的求法>线性判别函数的求法
+<a class=header-anchor href=#%e7%ba%bf%e6%80%a7%e5%88%a4%e5%88%ab%e5%87%bd%e6%95%b0%e7%9a%84%e6%b1%82%e6%b3%95></a></h3><ul><li>针对多个总体的情形, 设$X$为$p$维空间的样品, 那么
+$$\bar{\mu} = \frac{1}{k}\sum_{i=1}^k\mu_i = \frac{1}{k}M'1$$
+其中<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$ M = 
+</span></span><span style=display:flex><span>\begin{pmatrix}
+</span></span><span style=display:flex><span>  \mu_{11} &amp; \mu_{21} &amp; \cdots &amp; \mu_{p1} \\
+</span></span><span style=display:flex><span>  \mu_{12} &amp; \mu_{22} &amp; \cdots &amp; \mu_{p2} \\
+</span></span><span style=display:flex><span>  \vdots   &amp; \vdots   &amp; \ddots &amp; \vdots   \\
+</span></span><span style=display:flex><span>  \mu_{1k} &amp; \mu_{2k} &amp; \cdots &amp; \mu_{pk}
+</span></span><span style=display:flex><span>\end{pmatrix} = 
+</span></span><span style=display:flex><span>\begin{pmatrix}
+</span></span><span style=display:flex><span>  \mu&#39;_1 \\
+</span></span><span style=display:flex><span>  \mu&#39;_2 \\
+</span></span><span style=display:flex><span>  \vdots \\
+</span></span><span style=display:flex><span>  \mu&#39;_k
+</span></span><span style=display:flex><span>\end{pmatrix} \quad 1 =
+</span></span><span style=display:flex><span>\begin{pmatrix}
+</span></span><span style=display:flex><span>  1 \\
+</span></span><span style=display:flex><span>  1 \\
+</span></span><span style=display:flex><span>  \vdots \\
+</span></span><span style=display:flex><span>  1
+</span></span><span style=display:flex><span>\end{pmatrix}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div></li></ul><p>注意到</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$M&#39;M = 
+</span></span><span style=display:flex><span>  \begin{pmatrix}
+</span></span><span style=display:flex><span>    \mu_1 &amp; \mu_2 &amp; \cdots &amp; \mu_k
+</span></span><span style=display:flex><span>  \end{pmatrix}
+</span></span><span style=display:flex><span>  \begin{pmatrix}
+</span></span><span style=display:flex><span>    \mu&#39;_1 \\
+</span></span><span style=display:flex><span>    \mu&#39;_2 \\
+</span></span><span style=display:flex><span>    \vdots \\
+</span></span><span style=display:flex><span>    \mu&#39;_k
+</span></span><span style=display:flex><span>  \end{pmatrix} = \sum_{i=1}^k\mu_i\mu&#39;_i
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div><p>从而</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>  \begin{aligned}
+</span></span><span style=display:flex><span>    b &amp; = \sum_{i=1}^k(u&#39;\mu_i - u&#39;\bar{\mu})^2 \\
+</span></span><span style=display:flex><span>      &amp; = u&#39;\sum_{i=1}^k(\mu_i - \bar{\mu})(\mu_i - \bar{\mu})u \\
+</span></span><span style=display:flex><span>      &amp; = u&#39;[\sum_{i=1}^k\mu_i\mu&#39;_i - k\bar{\mu}\bar{\mu}&#39;]u \\
+</span></span><span style=display:flex><span>      &amp; = u&#39;(M&#39;M - \frac{1}{k}M&#39;11&#39;M)u  \\
+</span></span><span style=display:flex><span>      &amp; = u&#39;M&#39;(I - \frac{1}{k}J)Mu \\
+</span></span><span style=display:flex><span>      &amp; = u&#39;Bu
+</span></span><span style=display:flex><span>  \end{aligned}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div><p>这里,</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>$$
+</span></span><span style=display:flex><span>B=M&#39;(I - \frac{1}{k}J)M, \quad I_{p \times p}为p \times p的单位阵, \quad J = \begin{pmatrix}
+</span></span><span style=display:flex><span>  1 &amp; \cdots &amp; 1  \\
+</span></span><span style=display:flex><span>    &amp;  \ddots   \\
+</span></span><span style=display:flex><span>  1 &amp; \cdots &amp; 1
+</span></span><span style=display:flex><span>\end{pmatrix}
+</span></span><span style=display:flex><span>$$
+</span></span></code></pre></div><p>即有
+$$\varPhi(u) = \frac{u&rsquo;Bu}{u&rsquo;Eu} \tag{4.3-1}$$
+求得使$(4.3-1)$式达到极大的$u$.</p><ul><li>为确保解的唯一性, 不妨设$u&rsquo;Eu = 1$, 转化为在该条件下, 求u使得$u&rsquo;Bu$式达到极大。考虑目标函数
+$$
+\varphi(u) = u&rsquo;Bu - \lambda(u&rsquo;Eu - 1) \tag{4.3-2}
+$$
+求导有</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-gdscript3 data-lang=gdscript3><span style=display:flex><span><span style=color:#f92672>$$</span>
+</span></span><span style=display:flex><span>  \left\{
+</span></span><span style=display:flex><span>  \begin{aligned}
+</span></span><span style=display:flex><span>    \frac{\partial \varphi}{\partial u} <span style=color:#f92672>&amp;</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>(B <span style=color:#f92672>-</span> \lambda E)u <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>  \qquad (a)\\
+</span></span><span style=display:flex><span>    \frac{\partial \varphi}{\partial u} <span style=color:#f92672>&amp;</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>u</span><span style=color:#e6db74>&#39;Eu - 1 = 0 \qquad (b)</span>
+</span></span><span style=display:flex><span>  \end{aligned} \right<span style=color:#f92672>.</span> \tag{<span style=color:#ae81ff>4.3</span><span style=color:#f92672>-</span><span style=color:#ae81ff>3</span>}
+</span></span><span style=display:flex><span><span style=color:#f92672>$$</span>
+</span></span></code></pre></div><p>对$(4.3-3)$的(a)式两边同乘$u&rsquo;$, 有$u&rsquo;Bu = \lambda u&rsquo;Eu = \lambda$<br>从而, $u&rsquo;Bu$的极大值为$\lambda$. 再用$E^{-1}$左乘$(4.3-3)$的b式, 有
+$$(E^{-1}B - \lambda I)u = 0 \tag{4.3-4}$$
+由$(4.3-4)$式说明$\lambda$为$E^{-1}B$特征值, u为$E^{-1}B$的特征向量。在此最大特征值所对应的特征向量$u = (u_1, u_2, \cdots, u_p)&rsquo;$即为所求。</p><h3 id=示例-1>示例
+<a class=header-anchor href=#%e7%a4%ba%e4%be%8b-1></a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-r data-lang=r><span style=display:flex><span><span style=color:#a6e22e>library</span>(MASS)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>data</span>(iris)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>attach</span>(iris)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># fisher判别</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 构建公式</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#ld = lda(Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width)</span>
+</span></span><span style=display:flex><span>ld <span style=color:#f92672>=</span> <span style=color:#a6e22e>lda</span>(iris[,<span style=color:#ae81ff>1</span><span style=color:#f92672>:</span><span style=color:#ae81ff>4</span>], iris[,<span style=color:#ae81ff>5</span>])
+</span></span><span style=display:flex><span>ld
+</span></span><span style=display:flex><span><span style=color:#75715e># 预测</span>
+</span></span><span style=display:flex><span>Z <span style=color:#f92672>=</span> <span style=color:#a6e22e>predict</span>(ld)
+</span></span><span style=display:flex><span>newG <span style=color:#f92672>=</span> Z<span style=color:#f92672>$</span>class
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>result <span style=color:#f92672>=</span> <span style=color:#a6e22e>cbind</span>(Species, newG, Z<span style=color:#f92672>$</span>x)
+</span></span><span style=display:flex><span>tab <span style=color:#f92672>=</span> <span style=color:#a6e22e>table</span>(newG, Species)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>sum</span>(<span style=color:#a6e22e>diag</span>(<span style=color:#a6e22e>prop.table</span>(tab)))
+</span></span><span style=display:flex><span><span style=color:#a6e22e>plot</span>(ld)
+</span></span></code></pre></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%e6%95%b0%e7%90%86%e7%bb%9f%e8%ae%a1>数理统计</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-copyright><img src=/imgs/cc/cc.svg width=75 height=75 align=right alt=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+多元统计之判别分析</li><li class=post-copyright-author><strong>本文作者： </strong>Patrick</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=/post/discrimination-analysis/ title=多元统计之判别分析>/post/discrimination-analysis/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/principle-component-analysis/ rel=next title=多元统计之主成分分析><i class="fa fa-chevron-left"></i> 多元统计之主成分分析</a></div><div class="post-nav-prev post-nav-item"><a href=/post/cluster-analysis/ rel=prev title=多元统计之聚类分析>多元统计之聚类分析
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div id=gtranslate class=google-translate><i class="fa fa-language"></i><div id=google_translate_element></div></div><div class=copyright>&copy;
+<span itemprop=copyrightYear>2015 - 2024
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>Patrick</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.121.1 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.5.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":true,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"username/repo-name","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0c78e5a4df586ee46d02716ffa91a4a322e56763e04e91eb2ba052c9469ed02.js defer></script><script type=text/javascript src=/js/math.min.a6ada19a368d85dad9ead2040d86ae561a867fafef89391d1aa2aa5909366509.js defer></script></body></html>

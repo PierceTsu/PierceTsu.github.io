@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大数据 on Patrick's Blog</title><link>/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link><description>Recent content in 大数据 on Patrick's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 25 Dec 2022 09:39:52 +0800</lastBuildDate><atom:link href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/rss.xml" rel="self" type="application/rss+xml"/><item><title>Flink Window Trigger 使用的正确姿势</title><link>/post/flinkwindowtrigger-shi-yong-de-zheng-que-zi-shi/</link><pubDate>Sun, 25 Dec 2022 09:39:52 +0800</pubDate><guid>/post/flinkwindowtrigger-shi-yong-de-zheng-que-zi-shi/</guid><description>&lt;h2 id="废话">废话
+&lt;a class="header-anchor" href="#%e5%ba%9f%e8%af%9d">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>在使用 Flink DataStream API 进行流式数据聚合统计时, sink操作时, 都会用到 Trigger.&lt;/li>
+&lt;li>以 Flink 1.11.x 版本为例, 查看 Trigger 的实现类主要有以下常用的 7 种:
+&lt;ul>
+&lt;li>&lt;code>EventTimeTrigger&lt;/code>: 事件时间触发器&lt;/li>
+&lt;li>&lt;code>ProcessTimeTrigger&lt;/code>: 处理时间触发器&lt;/li>
+&lt;li>&lt;code>ContinuousEventTimeTrigger&lt;/code>: 连续的事件时间触发器&lt;/li>
+&lt;li>&lt;code>ContinuousProcessingTimeTrigger&lt;/code>: 连续的处理时间触发器&lt;/li>
+&lt;li>&lt;code>CountTrigger&lt;/code>: 窗口数据条数触发器&lt;/li>
+&lt;li>&lt;code>DeltaTrigger&lt;/code>: 窗口Delta指标触发器&lt;/li>
+&lt;li>&lt;code>PurgingTrigger&lt;/code>: 窗口清除触发器&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>在实际的业务场景中, 使用最多的当属 ContinuousEventTimeTrigger 这个类了.&lt;/li>
+&lt;/ul></description></item><item><title>Flink QuickStart</title><link>/post/quickstart-of-flink/</link><pubDate>Mon, 16 Nov 2020 18:05:05 +0800</pubDate><guid>/post/quickstart-of-flink/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>Apache Flink 是一个框架和分布式处理引擎，用于在无边界和有边界数据流上进行有状态的计算。&lt;/li>
+&lt;li>Flink 能在所有常见集群环境中运行，并能以内存速度和任意规模进行计算。&lt;/li>
+&lt;/ul>
+&lt;h3 id="有界与无界数据流">有界与无界数据流
+&lt;a class="header-anchor" href="#%e6%9c%89%e7%95%8c%e4%b8%8e%e6%97%a0%e7%95%8c%e6%95%b0%e6%8d%ae%e6%b5%81">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>无界流: 有定义流开始, 未定义流的结束; 持续产生数据, 需要以特定顺序摄取事件 (如事件的发生顺序), 以便能够推断结果的完整性.&lt;/li>
+&lt;li>有界流: 既定义流的开始, 又定义流的结束; 可以在摄取所有的数据后进行排序计算, 并需要有序摄取, 有界流处理通常被称为批处理.&lt;/li>
+&lt;/ul></description></item><item><title>Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置</title><link>/post/sync-oracle-data-to-kafka-in-real-time/</link><pubDate>Sat, 31 Oct 2020 19:11:32 +0800</pubDate><guid>/post/sync-oracle-data-to-kafka-in-real-time/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>MySQL实时同步到Kafk可以采用canal, Oracle实时同步到Kafka可以采用OGG, 配置过程比canal略复杂&lt;/li>
+&lt;li>OGG即Oracle GoldenGate是Oracle的同步工具, 能够实现大量交易数据的实时捕捉、变换和投递，实现源数据库与目标数据库的数据同步，保持亚秒级的数据延迟。&lt;/li>
+&lt;/ul></description></item><item><title>数据仓库建模分层设计</title><link>/post/the-modeling-of-data-warehouse/</link><pubDate>Sun, 28 Jul 2019 15:10:48 +1100</pubDate><guid>/post/the-modeling-of-data-warehouse/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>数据仓库 （DataWarehouse）是一个面向主题的（Subject Oriented）、集成的（Integrate）、相对稳定的（Non-Volatile）、反映历史变化（Time Variant）的数据集合, 用于支持管理决策.&lt;/li>
+&lt;li>将所有的业务数据经汇总处理, 构成数据仓库(DW)&lt;/li>
+&lt;/ul>
+&lt;h3 id="趋势">趋势
+&lt;a class="header-anchor" href="#%e8%b6%8b%e5%8a%bf">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>数据仓库是伴随着企业信息化发展起来的, 在企业信息化的过程中, 随着信息化工具的升级和新工具的应用, 数据量变的越来越大, 数据格式越来越多, 决策要求越来越苛刻, 数据仓库技术也在不停的发展.&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>实时数据仓库以满足实时化&amp;amp;自动化决策需求.&lt;/li>
+&lt;li>大数据&amp;amp;数据湖以支持大量&amp;amp;复杂数据类型（文本、图像、视频、音频）.&lt;/li>
+&lt;/ol></description></item><item><title>Spark程序相关调优整理</title><link>/post/optimization-of-spark-program/</link><pubDate>Sun, 29 Jul 2018 11:37:31 +0800</pubDate><guid>/post/optimization-of-spark-program/</guid><description>&lt;h2 id="普通调优">普通调优
+&lt;a class="header-anchor" href="#%e6%99%ae%e9%80%9a%e8%b0%83%e4%bc%98">&lt;/a>
+&lt;/h2>&lt;h2 id="jvm调优">jvm调优
+&lt;a class="header-anchor" href="#jvm%e8%b0%83%e4%bc%98">&lt;/a>
+&lt;/h2>&lt;h2 id="数据倾斜">数据倾斜
+&lt;a class="header-anchor" href="#%e6%95%b0%e6%8d%ae%e5%80%be%e6%96%9c">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>数据倾斜只会发生在 shuffle 过程中&lt;/li>
+&lt;li>在进行 shuffle 的时候，必须将各个节点上相同的 key 拉取到某个节点上的一个 task 来进行处理，比如按照 key 进行聚合或 join 等操作。此时如果某个 key 对应的数据量特别大的话，就会发生数据倾斜。&lt;/li>
+&lt;/ul></description></item><item><title>HDFS快速入门</title><link>/post/quickstart-of-hdfs/</link><pubDate>Sun, 15 Apr 2018 17:34:48 +0800</pubDate><guid>/post/quickstart-of-hdfs/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>简介:
+&lt;ul>
+&lt;li>源自Google的GFS论文的巨大分布式文件系统&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>特点:
+&lt;ol>
+&lt;li>扩展性&lt;/li>
+&lt;li>容错性&lt;/li>
+&lt;li>海量数据存储&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>优缺点:
+&lt;ul>
+&lt;li>优点:
+&lt;ol>
+&lt;li>数据冗余, 硬件容错&lt;/li>
+&lt;li>处理流式(一次写入多次读取)的数据访问&lt;/li>
+&lt;li>适合存储大文件&lt;/li>
+&lt;li>构建在廉价机器上&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>缺点:
+&lt;ol>
+&lt;li>不满足低延迟的数据访问&lt;/li>
+&lt;li>不适合小文件的存储&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>存储:
+&lt;ul>
+&lt;li>将文件切分成指定大小的数据块并以多副本的存储在多个机器上&lt;/li>
+&lt;li>数据的切分,多副本,容错等操作对用户透明&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>NameNode (Filename, numReplicas, block-ids)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul></description></item><item><title>大数据集群CDH5.11.0搭建及配置</title><link>/post/install-and-conf-of-cdh5110/</link><pubDate>Sat, 31 Mar 2018 22:55:51 +0800</pubDate><guid>/post/install-and-conf-of-cdh5110/</guid><description>&lt;h2 id="环境">环境
+&lt;a class="header-anchor" href="#%e7%8e%af%e5%a2%83">&lt;/a>
+&lt;/h2>&lt;h3 id="系统环境">系统环境
+&lt;a class="header-anchor" href="#%e7%b3%bb%e7%bb%9f%e7%8e%af%e5%a2%83">&lt;/a>
+&lt;/h3>&lt;ol>
+&lt;li>CentOS7 3台&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># host&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.237.100 hadoop001
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.237.110 hadoop002
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.237.120 hadoop003
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>SSH免密登录&lt;/li>
+&lt;li>关闭防火墙&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 关闭防火墙&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl stop firewalld
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 关闭开启自启&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl disable firewalld
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>SELINUX关闭&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>setenforce &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sed -i &lt;span style="color:#e6db74">&amp;#34;s/SELINUX=enforcing/SELINUX=disabled/&amp;#34;&lt;/span> /etc/selinux/config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables --flush
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reboot &lt;span style="color:#75715e">#重启生效&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ElasticSearch6.3搭建快速入门</title><link>/post/quickstart-of-elasticsearch63/</link><pubDate>Sun, 25 Feb 2018 20:23:32 +0800</pubDate><guid>/post/quickstart-of-elasticsearch63/</guid><description>&lt;h2 id="快速入门">快速入门
+&lt;a class="header-anchor" href="#%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>Elasticsearch是一个实时分布式搜索和分析引擎&lt;/li>
+&lt;/ul>
+&lt;h3 id="环境">环境
+&lt;a class="header-anchor" href="#%e7%8e%af%e5%a2%83">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>java 1.8+&lt;/li>
+&lt;li>ubuntu 14.04/16.04&lt;/li>
+&lt;/ul>
+&lt;h3 id="版本说明">版本说明
+&lt;a class="header-anchor" href="#%e7%89%88%e6%9c%ac%e8%af%b4%e6%98%8e">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>5.X之后的字段类型不再支持string，由text或keyword取代&lt;/li>
+&lt;li>6.3支持sql&lt;/li>
+&lt;/ul></description></item></channel></rss>

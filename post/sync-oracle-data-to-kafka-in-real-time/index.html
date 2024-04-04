@@ -1,0 +1,325 @@
+<!doctype html><html lang=zh-CN data-theme=dark><head><meta charset=UTF-8><meta name=viewport content="width=device-width"><meta name=theme-color content="#222" media="(prefers-color-scheme: dark)"><meta name=generator content="Hugo 0.121.1"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon_16x16_next.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon_32_32_next.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple_touch_icon_next.png><meta itemprop=name content="Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置"><meta itemprop=description content="sync-oracle-data-to-kafka-in-real-time"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="/img/avatar.jpg"><meta itemprop=keywords content="大数据"><meta property="og:type" content="article"><meta property="og:title" content="Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置"><meta property="og:description" content="sync-oracle-data-to-kafka-in-real-time"><meta property="og:image" content="/img/avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="/post/sync-oracle-data-to-kafka-in-real-time/"><meta property="og:site_name" content="Patrick's Blog"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="Patrick"><meta property="article:published_time" content="2020-10-31 19:11:32 +0800 CST"><meta property="article:modified_time" content="2024-04-04 11:49:03 +0800 CST"><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/font-awesome/6.1.2/css/all.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.css><link rel=stylesheet href=/css/main.min.a987c3fbca3727259a25c99140afed885cbffe7b77dba717d89bbe0780afcd01.css><style type=text/css>.post-footer,.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return void 0;const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),void 0):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script class=next-config data-name=page type=application/json>{"comments":false,"isHome":false,"isPage":true,"math":{"css":{"file":"dist/katex.min.css","name":"katex","version":"0.16.0"},"js":[{"file":"dist/katex.min.js","name":"katex","version":"0.16.0"},{"alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.0"}],"render":"katex"},"path":"sync-oracle-data-to-kafka-in-real-time","permalink":"/post/sync-oracle-data-to-kafka-in-real-time/","title":"Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置","waline":{"js":[{"alias":"waline","alias_name":"@waline/client","file":"dist/pageview.js","name":"pageview","version":"2.13.0"},{"alias":"waline","alias_name":"@waline/client","file":"dist/comment.js","name":"comment","version":"2.13.0"}]}}</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置 - Patrick's Blog</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>Patrick's Blog</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>Once start, goes forward!</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-about"><a href=/about/ class=hvr-icon-pulse rel=section><i class="fa fa-user hvr-icon"></i>关于</a></li><li class="menu-item menu-item-flinks"><a href=/flinks.html class=hvr-icon-pulse rel=section><i class="fa fa-thumbs-up hvr-icon"></i>站点示例</a></li><li class="menu-item menu-item-archives"><a href=/archives/ class=hvr-icon-pulse rel=section><i class="fa fa-archive hvr-icon"></i>归档
+<span class=badge>33</span></a></li><li class="menu-item menu-item-commonweal"><a href=/404.html class=hvr-icon-pulse rel=section><i class="fa fa-heartbeat hvr-icon"></i>公益 404</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#简介>简介</a><ul><li><a href=#相关进程>相关进程</a></li><li><a href=#ogg相关目录>OGG相关目录</a></li></ul></li><li><a href=#源端安装配置>源端安装配置</a></li><li><a href=#目标端-kafka-配置>目标端 (kafka) 配置</a></li><li><a href=#ogg源端配置>OGG源端配置</a></li><li><a href=#ogg目标端配置>OGG目标端配置</a></li><li><a href=#测试>测试</a></li><li><a href=#参考>参考</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=Patrick src=/imgs/img-lazy-loading.gif data-src=/img/avatar.jpg><p class=site-author-name itemprop=name>Patrick</p><div class=site-description itemprop=description>个人学习笔记</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/archives/><span class=site-state-item-count>33</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>8</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div><div class="links-of-blogroll site-overview-item animated"><div class=links-of-blogroll-title><i class="fa fa-globe fa-fw"></i>
+友情链接</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://gitee.com/hugo-next/hugo-theme-next title=https://gitee.com/hugo-next/hugo-theme-next target=_blank>Hugo-NexT</a></li></ul></div></div></div></div><div id=siteinfo-card-widget class=sidebar-card-widget><div class=item-headline><i class="fas fa-chart-line"></i>
+<span>网站资讯</span></div><div class=siteinfo><div class=siteinfo-item><div class=item-name><i class="fa-solid fa-calendar-check"></i>已运行：</div><div class=item-count id=runTimes data-publishdate=2015-04-05T13:57:58+08:00></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-user"></i>总访客数：</div><div class=item-count id=busuanzi_value_site_uv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fas fa fa-eye"></i>页面浏览：</div><div class=item-count id=busuanzi_value_site_pv><i class="fa fa-sync fa-spin"></i></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-font"></i>总字数：</div><div class=item-count id=wordsCount data-count=22332></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-mug-hot"></i>阅读约：</div><div class=item-count id=readTimes data-times=121></div></div><div class=siteinfo-item><div class=item-name><i class="fa fa-clock-rotate-left"></i>最后更新于：</div><div class=item-count id=last-push-date data-lastpushdate=2023-05-31T21:26:21+08:00></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=goto-gtranslate class=button title=多语言翻译><i class="fas fa-globe"></i></div><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><script type=text/javascript src=//sidecar.gitter.im/dist/sidecar.v1.js async></script><script type=text/javascript>((window.gitter={}).chat={}).options={room:"hugo-next/community"}</script><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=/post/sync-oracle-data-to-kafka-in-real-time/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/img/avatar.jpg"><meta itemprop=name content="Patrick"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="Patrick"><meta itemprop=description content="个人学习笔记"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置"><meta itemprop=description content="sync-oracle-data-to-kafka-in-real-time"></span><header class=post-header><h1 class=post-title itemprop="name headline">Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置
+<a href=https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/post/sync-oracle-data-to-kafka-in-real-time.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2020-10-31 19:11:32 +0800 CST" itemprop="dateCreated datePublished" datetime="2020-10-31 19:11:32 +0800 CST">2020-10-31
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-calendar-check"></i>
+</span><span class=post-meta-item-text title=更新于>更新于：
+</span><time title=修改时间：2024-04-04T11:49:03+08:00 itemprop=dateModified datetime=2024-04-04T11:49:03+08:00>2024-04-04</time>
+</span><span class=post-meta-item><span class=post-meta-item-icon><i class="far fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6 itemprop=url rel=index><span itemprop=name>数据科学</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="far fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>789</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="far fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>4分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="far fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/sync-oracle-data-to-kafka-in-real-time/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><h2 id=简介>简介
+<a class=header-anchor href=#%e7%ae%80%e4%bb%8b></a></h2><ul><li>MySQL实时同步到Kafk可以采用canal, Oracle实时同步到Kafka可以采用OGG, 配置过程比canal略复杂</li><li>OGG即Oracle GoldenGate是Oracle的同步工具, 能够实现大量交易数据的实时捕捉、变换和投递，实现源数据库与目标数据库的数据同步，保持亚秒级的数据延迟。</li></ul><h3 id=相关进程>相关进程
+<a class=header-anchor href=#%e7%9b%b8%e5%85%b3%e8%bf%9b%e7%a8%8b></a></h3><ul><li>GoldenGate主要包含Manager进程、Extract进程、Pump进程、Replicat进程</li></ul><h3 id=ogg相关目录>OGG相关目录
+<a class=header-anchor href=#ogg%e7%9b%b8%e5%85%b3%e7%9b%ae%e5%bd%95></a></h3><ul><li>dirchk：检查点文件，记录了该进程的检查点信息</li><li>dirdat：trail日志文件，存放收取接手的日志文件</li><li>dirdef：用来存放通过DEFGEN工具生成的源或目标端数据定义文件</li><li>dirpcs：用来存放进程状态文件</li><li>dirprm：用来存放参数文件，该进程所配置的参数（edit param 进程组名 就是配置该文件）</li><li>dirrpt：用来存放进程报告（report）文件，可以查看该进程运行时的报错信息等（view report 进程组名 就是看该文件）</li><li>dirsql：用来存放SQL脚本文件</li><li>dirtmp：当事物所需要的内存超过已分配内存时，缺省存在此目录</li></ul><h2 id=源端安装配置>源端安装配置
+<a class=header-anchor href=#%e6%ba%90%e7%ab%af%e5%ae%89%e8%a3%85%e9%85%8d%e7%bd%ae></a></h2><ol><li>下载解压</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span># 查询所需要的版本: https://edelivery.oracle.com/osdc/faces/SoftwareDelivery
+</span></span><span style=display:flex><span># 下载 Oracle GoldenGate 11.2.1.0.3 for Oracle on Linux x86-64
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>tar xf fbo_ggs_Linux_x64_ora11g_64bit.tar -C /opt/ogg
+</span></span><span style=display:flex><span># 使oracle用户有ogg的权限，后面有些需要在oracle用户下执行才能成功
+</span></span><span style=display:flex><span>chown -R oracle:oinstall /opt/ogg
+</span></span></code></pre></div><ol start=2><li>配置</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># /home/oracle/.bash_profile</span>
+</span></span><span style=display:flex><span>export OGG_HOME<span style=color:#f92672>=</span>/opt/ogg
+</span></span><span style=display:flex><span>export LD_LIBRARY_PATH<span style=color:#f92672>=</span>$ORACLE_HOME/lib:/usr/lib
+</span></span><span style=display:flex><span>export PATH<span style=color:#f92672>=</span>$OGG_HOME:$PATH
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>source .bash_profile
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 测试</span>
+</span></span><span style=display:flex><span>ggsci
+</span></span></code></pre></div><ol start=3><li>oracle打开归档模式</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>sqlplus / as sysdba
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看当前是否为归档模式, Disabled为关闭</span>
+</span></span><span style=display:flex><span>archive log list
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Database log mode	       No Archive Mode</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Automatic archival	       Disabled</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Archive destination	       USE_DB_RECOVERY_FILE_DEST</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Oldest online log sequence     18</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Current log sequence	       20</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 执行</span>
+</span></span><span style=display:flex><span>conn / as sysdba  <span style=color:#75715e># 以DBA身份连接数据库</span>
+</span></span><span style=display:flex><span>shutdown immediate <span style=color:#75715e># 立即关闭数据库</span>
+</span></span><span style=display:flex><span>startup mount <span style=color:#75715e># 启动实例并加载数据库，但不打开</span>
+</span></span><span style=display:flex><span>alter database archivelog; <span style=color:#75715e># 更改数据库为归档模式</span>
+</span></span><span style=display:flex><span>alter database open; <span style=color:#75715e># 打开数据库</span>
+</span></span><span style=display:flex><span>alter system archive log start; <span style=color:#75715e># 启用自动归档</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看</span>
+</span></span><span style=display:flex><span>archive log list
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Database log mode	       Archive Mode</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Automatic archival	       Enabled</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Archive destination	       USE_DB_RECOVERY_FILE_DEST</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Oldest online log sequence     18</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Next log sequence to archive   20</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Current log sequence	       20</span>
+</span></span></code></pre></div><ol start=4><li>Oracle打开日志相关: OGG基于辅助日志等进行实时传输，故需要打开相关日志确保可获取事务内容，通过下面的命令查看该状态</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>select</span> force_logging, supplemental_log_data_min <span style=color:#66d9ef>from</span> v$database;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>-- FORCE_ SUPPLEMENTAL_LOG
+</span></span></span><span style=display:flex><span><span style=color:#75715e>-- ------ ----------------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>-- NO     NO
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>-- 修改命令
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>alter</span> <span style=color:#66d9ef>database</span> <span style=color:#66d9ef>force</span> logging;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>alter</span> <span style=color:#66d9ef>database</span> <span style=color:#66d9ef>add</span> supplemental log <span style=color:#66d9ef>data</span>;
+</span></span><span style=display:flex><span><span style=color:#75715e>-- 再次查看
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>select</span> force_logging, supplemental_log_data_min <span style=color:#66d9ef>from</span> v$database;
+</span></span></code></pre></div><ol start=5><li>Oracle 创建复制用户</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 首先root用户建立相关文件夹，并赋予权限</span>
+</span></span><span style=display:flex><span>cd $ORACLE_BASE
+</span></span><span style=display:flex><span>mkdir -p oggdata/orcl
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>-- 执行sql
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>create</span> tablespace oggtbs datafile <span style=color:#e6db74>&#39;/ora/oracle/oggdata/orcl/oggtbs01.dbf&#39;</span> <span style=color:#66d9ef>size</span> <span style=color:#ae81ff>1000</span>M autoextend <span style=color:#66d9ef>on</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>create</span> <span style=color:#66d9ef>user</span> ogg identified <span style=color:#66d9ef>by</span> ogg <span style=color:#66d9ef>default</span> tablespace oggtbs;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>grant</span> dba <span style=color:#66d9ef>to</span> ogg;
+</span></span></code></pre></div><ol start=5><li>OGG初始化</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>ggsci
+</span></span><span style=display:flex><span><span style=color:#75715e># 在当前目录创建文件夹</span>
+</span></span><span style=display:flex><span>create 
+</span></span></code></pre></div><ol start=6><li>Oracle创建测试表</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>create</span> <span style=color:#66d9ef>user</span> test_ogg  identified <span style=color:#66d9ef>by</span> test_ogg <span style=color:#66d9ef>default</span> tablespace users;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>grant</span> dba <span style=color:#66d9ef>to</span> test_ogg;
+</span></span><span style=display:flex><span>conn test_ogg<span style=color:#f92672>/</span>test_ogg;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>create</span> <span style=color:#66d9ef>table</span> test_ogg(id int ,name varchar(<span style=color:#ae81ff>20</span>),<span style=color:#66d9ef>primary</span> <span style=color:#66d9ef>key</span>(id));
+</span></span></code></pre></div><h2 id=目标端-kafka-配置>目标端 (kafka) 配置
+<a class=header-anchor href=#%e7%9b%ae%e6%a0%87%e7%ab%af-kafka-%e9%85%8d%e7%bd%ae></a></h2><ol><li>下载解压</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查询所需要的版本: https://edelivery.oracle.com/osdc/faces/SoftwareDelivery</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Oracle GoldenGate for Big Data 12.3.0.1.0 on Linux x86-64</span>
+</span></span><span style=display:flex><span>tar -xf ggs_Adapters_Linux_x64.tar -C /opt/ogg/
+</span></span></code></pre></div><ol start=2><li>配置</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># vim /etc/profile</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>export OGG_HOME<span style=color:#f92672>=</span>/opt/ogg
+</span></span><span style=display:flex><span>export LD_LIBRARY_PATH<span style=color:#f92672>=</span>$JAVA_HOME/jre/lib/amd64:$JAVA_HOME/jre/lib/amd64/server:$JAVA_HOME/jre/lib/amd64/libjsig.so:$JAVA_HOME/jre/lib/amd64/server/libjvm.so:$OGG_HOME/lib
+</span></span><span style=display:flex><span>export PATH<span style=color:#f92672>=</span>$OGG_HOME:$PATH
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 测试</span>
+</span></span><span style=display:flex><span>source /etc/profile
+</span></span><span style=display:flex><span>cd $OGG_HOME
+</span></span><span style=display:flex><span>ggsci
+</span></span></code></pre></div><ol start=3><li>初始化目录</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>cd $OGG_HOME
+</span></span><span style=display:flex><span>create subdirs
+</span></span></code></pre></div><h2 id=ogg源端配置>OGG源端配置
+<a class=header-anchor href=#ogg%e6%ba%90%e7%ab%af%e9%85%8d%e7%bd%ae></a></h2><ol><li>配置OGG的全局变量</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>su oracle
+</span></span><span style=display:flex><span>cd $OGG_HOME
+</span></span><span style=display:flex><span>ggsci
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 配置用户</span>
+</span></span><span style=display:flex><span>dblogin userid ogg password ogg
+</span></span><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param ./globals
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加</span>
+</span></span><span style=display:flex><span>oggschema ogg
+</span></span></code></pre></div><ol start=2><li>配置管理器mgr</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param mgr
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加</span>
+</span></span><span style=display:flex><span>PORT <span style=color:#ae81ff>7809</span>
+</span></span><span style=display:flex><span>DYNAMICPORTLIST 7810-7909
+</span></span><span style=display:flex><span>AUTORESTART EXTRACT *,RETRIES 5,WAITMINUTES <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>PURGEOLDEXTRACTS ./dirdat/*,usecheckpoints, minkeepdays <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># PORT 即mgr的默认监听端口；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># DYNAMICPORTLIST 动态端口列表，当指定的mgr端口不可用时，会在这个端口列表中选择一个，最大指定范围为256个；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># AUTORESTART 重启参数设置表示重启所有EXTRACT进程，最多5次，每次间隔3分钟；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># PURGEOLDEXTRACTS 即TRAIL文件的定期清理</span>
+</span></span></code></pre></div><ol start=3><li>添加复制表</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>add trandata test_ogg.test_ogg
+</span></span><span style=display:flex><span>info trandata test_ogg.test_ogg
+</span></span></code></pre></div><ol start=4><li>配置extract进程</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param extkafka
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加</span>
+</span></span><span style=display:flex><span>extract extkafka
+</span></span><span style=display:flex><span>dynamicresolution
+</span></span><span style=display:flex><span>SETENV <span style=color:#f92672>(</span>ORACLE_SID <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;orcl&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>SETENV <span style=color:#f92672>(</span>NLS_LANG <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;american_america.AL32UTF8&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>GETUPDATEBEFORES
+</span></span><span style=display:flex><span>NOCOMPRESSDELETES
+</span></span><span style=display:flex><span>NOCOMPRESSUPDATES
+</span></span><span style=display:flex><span>userid ogg,password ogg
+</span></span><span style=display:flex><span>exttrail /opt/ogg/dirdat/to
+</span></span><span style=display:flex><span>table test_ogg.test_ogg;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 第一行指定extract进程名称；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># dynamicresolution动态解析；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># SETENV设置环境变量，这里分别设置了Oracle数据库以及字符集；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># userid ggs,password ggs即OGG连接Oracle数据库的帐号密码，这里使用2.5中特意创建的复制帐号；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># exttrail定义trail文件的保存位置以及文件名，注意这里文件名只能是2个字母，其余部分OGG会补齐；table即复制表的表名，支持*通配，必须以 &#34;;&#34; 结尾</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加extract进程</span>
+</span></span><span style=display:flex><span>add extract extkafka,tranlog,begin now
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加trail文件的定义与extract进程绑定</span>
+</span></span><span style=display:flex><span>add exttrail /opt/ogg/dirdat/to,extract extkafka
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 启停命令</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># stop extkafka</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># start extkafka</span>
+</span></span></code></pre></div><ol start=5><li>配置pump进程: pump进程本质上来说也是一个extract，只不过他的作用仅仅是把trail文件传递到目标端，配置过程和extract进程类似，只是逻辑上称之为pump进程</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param pukafka
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加</span>
+</span></span><span style=display:flex><span>extract pukafka
+</span></span><span style=display:flex><span>passthru
+</span></span><span style=display:flex><span>dynamicresolution
+</span></span><span style=display:flex><span>userid ogg,password ogg
+</span></span><span style=display:flex><span>rmthost cdh01 mgrport <span style=color:#ae81ff>7809</span>
+</span></span><span style=display:flex><span>rmttrail /opt/ogg/dirdat/to
+</span></span><span style=display:flex><span>table test_ogg.test_ogg;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 第一行指定extract进程名称；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># passthru即禁止OGG与Oracle交互，我们这里使用pump逻辑传输，故禁止即可；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># dynamicresolution动态解析；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># userid ogg,password ogg即OGG连接Oracle数据库的帐号密码</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># rmthost和mgrhost即目标端(kafka)OGG的mgr服务的地址以及监听端口；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># rmttrail即目标端trail文件存储位置以及名称。</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 分别将本地trail文件和目标端的trail文件绑定到extract进程</span>
+</span></span><span style=display:flex><span>add extract pukafka,exttrailsource /opt/ogg/dirdat/to
+</span></span><span style=display:flex><span>add rmttrail /opt/ogg/dirdat/to,extract pukafka
+</span></span></code></pre></div><ol start=6><li>配置define文件: Oracle与MySQL，Hadoop集群（HDFS，Hive，kafka等）等之间数据传输可以定义为异构数据类型的传输，故需要定义表之间的关系映射</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param test_ogg
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加</span>
+</span></span><span style=display:flex><span>defsfile /opt/ogg/dirdef/test_ogg.test_ogg
+</span></span><span style=display:flex><span>userid ogg,password ogg
+</span></span><span style=display:flex><span>table test_ogg.test_ogg;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 退出</span>
+</span></span><span style=display:flex><span>quit
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 进行OGG主目录下执行以下命令</span>
+</span></span><span style=display:flex><span>./defgen paramfile dirprm/test_ogg.prm
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 将生成的/opt/ogg/dirdef/test_ogg.test_ogg发送的目标端ogg目录下的dirdef里</span>
+</span></span><span style=display:flex><span>scp -r /opt/ogg/dirdef/test_ogg.test_ogg root@cdh01:/opt/ogg/dirdef/
+</span></span></code></pre></div><h2 id=ogg目标端配置>OGG目标端配置
+<a class=header-anchor href=#ogg%e7%9b%ae%e6%a0%87%e7%ab%af%e9%85%8d%e7%bd%ae></a></h2><ol><li>开启kafka服务</li><li>配置管理器mgr</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>cd $OGG_HOME
+</span></span><span style=display:flex><span>ggsci
+</span></span><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param mgr
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加</span>
+</span></span><span style=display:flex><span>PORT <span style=color:#ae81ff>7809</span>
+</span></span><span style=display:flex><span>DYNAMICPORTLIST 7810-7909
+</span></span><span style=display:flex><span>AUTORESTART EXTRACT *,RETRIES 5,WAITMINUTES <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>PURGEOLDEXTRACTS ./dirdat/*,usecheckpoints, minkeepdays <span style=color:#ae81ff>3</span>
+</span></span></code></pre></div><ol start=3><li>配置checkpoint: checkpoint即复制可追溯的一个偏移量记录，在全局配置里添加checkpoint表即可</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param ./GLOBALS
+</span></span><span style=display:flex><span><span style=color:#75715e># 配置</span>
+</span></span><span style=display:flex><span>CHECKPOINTTABLE test_ogg.checkpoint
+</span></span></code></pre></div><ol start=4><li>配置replicate进程</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 编辑</span>
+</span></span><span style=display:flex><span>edit param rekafka
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加</span>
+</span></span><span style=display:flex><span>REPLICAT rekafka
+</span></span><span style=display:flex><span>sourcedefs /opt/ogg/dirdef/test_ogg.test_ogg
+</span></span><span style=display:flex><span>TARGETDB LIBFILE libggjava.so SET property<span style=color:#f92672>=</span>dirprm/kafka.props
+</span></span><span style=display:flex><span>REPORTCOUNT EVERY <span style=color:#ae81ff>1</span> MINUTES, RATE 
+</span></span><span style=display:flex><span>GROUPTRANSOPS <span style=color:#ae81ff>10000</span>
+</span></span><span style=display:flex><span>MAP test_ogg.test_ogg, TARGET test_ogg.test_ogg;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># REPLICATE rekafka定义rep进程名称；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># sourcedefs即在4.6中在源服务器上做的表映射文件；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># TARGETDB LIBFILE即定义kafka一些适配性的库文件以及配置文件，配置文件位于OGG主目录下的dirprm/kafka.props；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># REPORTCOUNT即复制任务的报告生成频率；</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># GROUPTRANSOPS为以事务传输时，事务合并的单位，减少IO操作；MAP即源端与目标端的映射关系</span>
+</span></span></code></pre></div><ol start=5><li>配置kafka.props</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># cd /opt/ogg/dirprm/ &amp;&amp; vim kafka.props</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># handler类型</span>
+</span></span><span style=display:flex><span>gg.handlerlist<span style=color:#f92672>=</span>kafkahandler
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.type<span style=color:#f92672>=</span>kafka
+</span></span><span style=display:flex><span><span style=color:#75715e># Kafka生产者配置文件</span>
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.KafkaProducerConfigFile<span style=color:#f92672>=</span>custom_kafka_producer.properties
+</span></span><span style=display:flex><span><span style=color:#75715e># kafka的topic名称，无需手动创建</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># gg.handler.kafkahandler.topicMappingTemplate=test_ogg（新版topicName属性的设置方式）</span>
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.topicName<span style=color:#f92672>=</span>test_ogg
+</span></span><span style=display:flex><span><span style=color:#75715e># 传输文件的格式，支持json，xml等</span>
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.format<span style=color:#f92672>=</span>json
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.format.insertOpKey <span style=color:#f92672>=</span> I  
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.format.updateOpKey <span style=color:#f92672>=</span> U  
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.format.deleteOpKey <span style=color:#f92672>=</span> D
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.format.truncateOpKey<span style=color:#f92672>=</span>T
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.format.includePrimaryKeys<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span><span style=color:#75715e># OGG for Big Data中传输模式，即op为一次SQL传输一次，tx为一次事务传输一次</span>
+</span></span><span style=display:flex><span>gg.handler.kafkahandler.mode<span style=color:#f92672>=</span>op
+</span></span><span style=display:flex><span><span style=color:#75715e># 类路径</span>
+</span></span><span style=display:flex><span>gg.classpath<span style=color:#f92672>=</span>dirprm/:/opt/cloudera/parcels/KAFKA/lib/kafka/libs/*:/opt/ogg/:/opt/ogg/lib/*
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># vim custom_kafka_producer.properties</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># kafkabroker的地址</span>
+</span></span><span style=display:flex><span>bootstrap.servers<span style=color:#f92672>=</span>cdh01:9092,cdh02:9092,cdh03:9092
+</span></span><span style=display:flex><span>acks<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 压缩类型</span>
+</span></span><span style=display:flex><span>compression.type<span style=color:#f92672>=</span>gzip
+</span></span><span style=display:flex><span><span style=color:#75715e># 重连延时</span>
+</span></span><span style=display:flex><span>reconnect.backoff.ms<span style=color:#f92672>=</span><span style=color:#ae81ff>1000</span>
+</span></span><span style=display:flex><span>value.serializer<span style=color:#f92672>=</span>org.apache.kafka.common.serialization.ByteArraySerializer
+</span></span><span style=display:flex><span>key.serializer<span style=color:#f92672>=</span>org.apache.kafka.common.serialization.ByteArraySerializer
+</span></span><span style=display:flex><span>batch.size<span style=color:#f92672>=</span><span style=color:#ae81ff>102400</span>
+</span></span><span style=display:flex><span>linger.ms<span style=color:#f92672>=</span><span style=color:#ae81ff>10000</span>
+</span></span></code></pre></div><ol start=6><li>添加trail文件到replicate进程</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>cd $OGG_HOME
+</span></span><span style=display:flex><span>ggsci
+</span></span><span style=display:flex><span>add replicat rekafka exttrail /opt/ogg/dirdat/to,checkpointtable test_ogg.checkpoint
+</span></span></code></pre></div><h2 id=测试>测试
+<a class=header-anchor href=#%e6%b5%8b%e8%af%95></a></h2><ol><li>创建topic</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics --create --zookeeper cdh01:2181 --replication-factor <span style=color:#ae81ff>3</span> --partitions <span style=color:#ae81ff>3</span> --topic test_ogg
+</span></span></code></pre></div><ol start=2><li>启动所有进程</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 在源端和目标端的OGG命令行下使用start [进程名]的形式启动所有进程。</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 启动顺序按照源mgr——目标mgr——源extract——源pump——目标replicate来完成。</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 全部需要在ogg目录下执行ggsci目录进入ogg命令行。</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 源端</span>
+</span></span><span style=display:flex><span>start mgr
+</span></span><span style=display:flex><span>start extkafka
+</span></span><span style=display:flex><span>start pukafka
+</span></span><span style=display:flex><span><span style=color:#75715e># 目标端</span>
+</span></span><span style=display:flex><span>start mgr
+</span></span><span style=display:flex><span>start rekafka
+</span></span></code></pre></div><ol start=3><li>查看: 通过<code>info all</code> 或者<code>info [进程名]</code> 查看状态，所有的进程都为RUNNING才算成功</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 源端</span>
+</span></span><span style=display:flex><span>info all
+</span></span><span style=display:flex><span><span style=color:#75715e># 目标端</span>
+</span></span><span style=display:flex><span>info all
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 日志查看</span>
+</span></span><span style=display:flex><span>less ggser.log
+</span></span><span style=display:flex><span>ggsci &gt; view report rekafka
+</span></span></code></pre></div><ol start=4><li>测试同步更新效果<ul><li>源端执行sql</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>-- 源端执行sql
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>conn test_ogg<span style=color:#f92672>/</span>test_ogg
+</span></span><span style=display:flex><span><span style=color:#66d9ef>insert</span> <span style=color:#66d9ef>into</span> test_ogg <span style=color:#66d9ef>values</span>(<span style=color:#ae81ff>1</span>,<span style=color:#e6db74>&#39;test&#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>commit</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>update</span> test_ogg <span style=color:#66d9ef>set</span> name<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;zhangsan&#39;</span> <span style=color:#66d9ef>where</span> id<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>commit</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>delete</span> test_ogg <span style=color:#66d9ef>where</span> id<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>commit</span>;
+</span></span></code></pre></div><ul><li>查看文件状态</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 源端</span>
+</span></span><span style=display:flex><span>ls -l /opt/ogg/dirdat/to*
+</span></span><span style=display:flex><span><span style=color:#75715e># 目标端</span>
+</span></span><span style=display:flex><span>ls -l /opt/ogg/dirdat/to*
+</span></span></code></pre></div><ul><li>查看kafka中数据</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-console-consumer --bootstrap-server cdh01:9092,cdh02:9092,cdh03:9092 --topic test_ogg --from-beginning
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;I&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:43:30.247674&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:43:35.632000&#34;,&#34;pos&#34;:&#34;00000000000000001061&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;after&#34;:{&#34;ID&#34;:1,&#34;NAME&#34;:&#34;test&#34;}}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;I&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:44:05.247770&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:44:10.707000&#34;,&#34;pos&#34;:&#34;00000000000000001201&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;after&#34;:{&#34;ID&#34;:2,&#34;NAME&#34;:&#34;orcal&#34;}}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;I&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:44:31.247814&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:44:35.728000&#34;,&#34;pos&#34;:&#34;00000000000000001343&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;after&#34;:{&#34;ID&#34;:3,&#34;NAME&#34;:&#34;db&#34;}}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;I&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:45:06.247722&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:45:11.755000&#34;,&#34;pos&#34;:&#34;00000000000000001480&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;after&#34;:{&#34;ID&#34;:4,&#34;NAME&#34;:&#34;ok&#34;}}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;I&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:45:06.247722&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:45:11.757000&#34;,&#34;pos&#34;:&#34;00000000000000001617&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;after&#34;:{&#34;ID&#34;:5,&#34;NAME&#34;:&#34;sd&#34;}}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;U&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:45:54.247822&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:45:59.790000&#34;,&#34;pos&#34;:&#34;00000000000000001871&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;before&#34;:{&#34;ID&#34;:1,&#34;NAME&#34;:&#34;test&#34;},&#34;after&#34;:{&#34;ID&#34;:1,&#34;NAME&#34;:&#34;oracle&#34;}}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;D&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:50:37.247804&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:50:42.948000&#34;,&#34;pos&#34;:&#34;00000000000000001990&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;before&#34;:{&#34;ID&#34;:4,&#34;NAME&#34;:&#34;ok&#34;}}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># {&#34;table&#34;:&#34;TEST_OGG.TEST_OGG&#34;,&#34;op_type&#34;:&#34;D&#34;,&#34;op_ts&#34;:&#34;2020-10-30 17:50:37.247804&#34;,&#34;current_ts&#34;:&#34;2020-10-30T17:50:42.949000&#34;,&#34;pos&#34;:&#34;00000000000000002127&#34;,&#34;primary_keys&#34;:[&#34;ID&#34;],&#34;before&#34;:{&#34;ID&#34;:2,&#34;NAME&#34;:&#34;orcal&#34;}}</span>
+</span></span></code></pre></div></li></ol><h2 id=参考>参考
+<a class=header-anchor href=#%e5%8f%82%e8%80%83></a></h2><ul><li><a href=https://gjtmaster.com/2018/09/13/%e5%88%a9%e7%94%a8ogg%e5%ae%9e%e7%8e%b0oracle%e5%88%b0kafka%e7%9a%84%e5%a2%9e%e9%87%8f%e6%95%b0%e6%8d%ae%e5%ae%9e%e6%97%b6%e5%90%8c%e6%ad%a5/ title=利用ogg实现oracle到kafka的增量数据实时同步 rel="noopener external nofollow noreferrer" target=_blank class=exturl>利用ogg实现oracle到kafka的增量数据实时同步
+<i class="fa fa-external-link-alt"></i></a></li><li><a href=https://docs.oracle.com/goldengate/bd123010/gg-bd/GADBD/GUID-2561CA12-9BAC-454B-A2E3-2D36C5C60EE5.htm#GADBD449 title="Using the Kafka Handler" rel="noopener external nofollow noreferrer" target=_blank class=exturl>Using the Kafka Handler
+<i class="fa fa-external-link-alt"></i></a></li></ul></div><footer class=post-footer><div class=post-tags><a href=/tags/%e5%a4%a7%e6%95%b0%e6%8d%ae>大数据</a></div><div class=addthis_inline_share_toolbox style=text-align:center></div><hr><div class=post-copyright><img src=/imgs/cc/cc.svg width=75 height=75 align=right alt=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置</li><li class=post-copyright-author><strong>本文作者： </strong>Patrick</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=/post/sync-oracle-data-to-kafka-in-real-time/ title="Oracle GoldenGate 实时同步Oracle数据到Kafka安装及配置">/post/sync-oracle-data-to-kafka-in-real-time/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/quickstart-of-flink/ rel=next title="Flink QuickStart"><i class="fa fa-chevron-left"></i> Flink QuickStart</a></div><div class="post-nav-prev post-nav-item"><a href=/post/anova-by-python/ rel=prev title=单双因素方差分析及Python实现>单双因素方差分析及Python实现
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div id=gtranslate class=google-translate><i class="fa fa-language"></i><div id=google_translate_element></div></div><div class=copyright>&copy;
+<span itemprop=copyrightYear>2015 - 2024
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>Patrick</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.121.1 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.5.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script type=text/javascript src=https://cdn.staticfile.org/animejs/3.2.1/anime.min.js defer></script><script type=text/javascript src=https://cdn.staticfile.org/viewerjs/1.11.0/viewer.min.js defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":true,"giscus":{"cfg":{"category":"Comments","categoryid":null,"emit":false,"inputposition":"top","mapping":"title","reactions":false,"repo":"username/repo-name","repoid":null,"theme":"preferred_color_scheme"},"js":"https://giscus.app/client.js"},"hostname":"/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"fadeInLeft","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"qiniu","router":"https://cdn.staticfile.org"},"version":"4.5.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"waline","file":"dist/waline.css","name":"@waline/client","version":"2.13.0"},"js":{"alias":"waline","file":"dist/waline.js","name":"@waline/client","version":"2.13.0"}}}</script><script type=text/javascript src=/js/main.min.b0c78e5a4df586ee46d02716ffa91a4a322e56763e04e91eb2ba052c9469ed02.js defer></script><script type=text/javascript src=/js/math.min.a6ada19a368d85dad9ead2040d86ae561a867fafef89391d1aa2aa5909366509.js defer></script></body></html>

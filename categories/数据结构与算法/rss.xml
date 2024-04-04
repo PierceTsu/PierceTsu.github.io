@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数据结构与算法 on Patrick's Blog</title><link>/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</link><description>Recent content in 数据结构与算法 on Patrick's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 May 2023 21:26:21 +0800</lastBuildDate><atom:link href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/rss.xml" rel="self" type="application/rss+xml"/><item><title>力扣-准时到达的列车最小时速</title><link>/post/ledtcode-1870/</link><pubDate>Wed, 31 May 2023 21:26:21 +0800</pubDate><guid>/post/ledtcode-1870/</guid><description>&lt;h2 id="描述">描述
+&lt;a class="header-anchor" href="#%e6%8f%8f%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;p>
+&lt;a href="https://leetcode.cn/problems/minimum-speed-to-arrive-on-time/" title="力扣1870" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+ 力扣1870
+ 
+ &lt;i class="fa fa-external-link-alt">&lt;/i>
+ 
+&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>给你一个浮点数 hour ，表示你到达办公室可用的总通勤时间。要到达办公室，你必须按给定次序乘坐 n 趟列车。另给你一个长度为 n 的整数数组 dist ，其中 dist[i] 表示第 i 趟列车的行驶距离（单位是千米）。每趟列车均只能在整点发车，所以你可能需要在两趟列车之间等待一段时间。例如，第 1 趟列车需要 1.5 小时，那你必须再等待 0.5 小时，搭乘在第 2 小时发车的第 2 趟列车。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 返回能满足你准时到达办公室所要求全部列车的 最小正整数 时速（单位：千米每小时），如果无法准时到达，则返回 -1 。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 生成的测试用例保证答案不超过 10^7 ，且 hour 的小数点后最多存在两位数字 。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>牛客-合唱队解法</title><link>/post/niu-ke---he-chang-dui-jie-fa/</link><pubDate>Mon, 22 May 2023 20:23:21 +0800</pubDate><guid>/post/niu-ke---he-chang-dui-jie-fa/</guid><description>&lt;h2 id="描述">描述
+&lt;a class="header-anchor" href="#%e6%8f%8f%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;p>牛客网题目: 
+&lt;a href="https://www.nowcoder.com/practice/6d9d69e3898f45169a441632b325c7b4" title="合唱队" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+ 合唱队
+ 
+ &lt;i class="fa fa-external-link-alt">&lt;/i>
+ 
+&lt;/a>
+N 位同学站成一排，音乐老师要请最少的同学出列，使得剩下的 K 位同学排成合唱队形。
+通俗来说，能找到一个同学，他的两边的同学身高都依次严格降低的队形就是合唱队形。&lt;/p></description></item><item><title>牛客-四则运算解法</title><link>/post/niu-ke---si-ze-yun-suan-jie-fa/</link><pubDate>Sun, 21 May 2023 19:28:21 +0800</pubDate><guid>/post/niu-ke---si-ze-yun-suan-jie-fa/</guid><description>&lt;h2 id="描述">描述
+&lt;a class="header-anchor" href="#%e6%8f%8f%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;p>牛客网题目: 
+&lt;a href="https://www.nowcoder.com/practice/9999764a61484d819056f807d2a91f1e" title="四则运算" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl">
+ 四则运算
+ 
+ &lt;i class="fa fa-external-link-alt">&lt;/i>
+ 
+&lt;/a>
+输入一个表达式（用字符串表示）, 求这个表达式的值.
+保证字符串中的有效字符包括[‘0’-‘9’],‘+’,‘-’, ‘*’,‘/’ ,‘(’， ‘)’,‘[’, ‘]’,‘{’ ,‘}’. 且表达式一定合法.&lt;/p>
+&lt;p>数据范围：表达式计算结果和过程中满足∣val∣≤1000 ，字符串长度满足 1≤n≤1000&lt;/p></description></item><item><title>数据结构基础之图</title><link>/post/graph-of-datastructure/</link><pubDate>Sun, 24 Dec 2017 22:44:10 +0800</pubDate><guid>/post/graph-of-datastructure/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>概念:
+&lt;ul>
+&lt;li>由顶点的有穷非空集合和顶点之间边的集合组成, 通常表示为: G(V,E), 其中, G表示一个图, V是图G中顶点的集合, E是图G中边的集合&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>异同:
+&lt;ul>
+&lt;li>线性表中把数据元素叫做元素, 树中将数据元素叫结点, 在图中数据元素叫做顶点(Vertex)&lt;/li>
+&lt;li>线性表中可以没有数据元素,称为空表; 树中可以没有结点,叫做空树; 图中不允许没有顶点,若V是顶点的集合, 则集合V有穷且非空&lt;/li>
+&lt;li>线性表中, 相邻的数据元素具有线性关系; 树结构中, 相邻两层的结点具有层次关系; 图中, 任意两个顶点之间都可能有关系, 顶点之间的逻辑关系用边来表示, 边集可以是空&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="相关定义">相关定义
+&lt;a class="header-anchor" href="#%e7%9b%b8%e5%85%b3%e5%ae%9a%e4%b9%89">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>无向边:
+&lt;ul>
+&lt;li>若顶点vi, vj之间的边没有方向, 则称这条边为无向边, 用无序偶对(vi,vj)来表示&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>无向图:
+&lt;ul>
+&lt;li>如果图中任意两个顶点之间的边都是无向边, 则称该图为无向图&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>无向完全图:
+&lt;ul>
+&lt;li>在无向图中, 如果任意两个顶点之间都存在边, 则称该图为无向完全图&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>有向边:
+&lt;ul>
+&lt;li>若从顶点vi到vj之间的边有方向, 则称这条边为有向边, 也称为弧(Arc), 用有序偶&amp;lt;vi,vj&amp;gt;来表示, vi称为狐尾(Tail), vj称为弧头(Head)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>有向图(Directed graphs):
+&lt;ul>
+&lt;li>如果图中任意两个顶点之间的边都是有向边, 则称该图为有向图&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>有向完全图:
+&lt;ul>
+&lt;li>在有向图中, 如果任意两个顶点之间都存在方向互为相反的两条弧, 则称该图为有向完全图&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>简单图:
+&lt;ul>
+&lt;li>在图中, 若不存在顶点到其自身的边, 且同一条边不重复出现, 则称这样的图为简单图&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>权(Weight): 与图的边或弧相关的数&lt;/li>
+&lt;li>网(NetWork): 带权的图&lt;/li>
+&lt;li>子图:
+&lt;ul>
+&lt;li>假设有两个图G=(V,{E}), G&amp;rsquo;=(V&amp;rsquo;,{E&amp;rsquo;}), 如果V&amp;rsquo;包含于V, 且E&amp;rsquo;包含于E, 则称G&amp;rsquo;为G的子图&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>数据结构基础之树</title><link>/post/tree-of-datastructure/</link><pubDate>Sat, 18 Nov 2017 12:34:41 +0800</pubDate><guid>/post/tree-of-datastructure/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>概念: 为n(n&amp;gt;=0)个结点的有限集。n=0时为空树。&lt;/li>
+&lt;li>特点: 在任意一棵非空树中
+&lt;ul>
+&lt;li>有且仅有一个特定的称为根(Root)的结点&lt;/li>
+&lt;li>当n&amp;gt;1时, 其余结点可以分为m(m&amp;gt;0)个互不相交的有限集T1、T2、&amp;hellip;&amp;hellip;、Tm, 其中每一个集合本身又是一棵树, 并且称为根的子树(SubTree)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="结点分类">结点分类
+&lt;a class="header-anchor" href="#%e7%bb%93%e7%82%b9%e5%88%86%e7%b1%bb">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>根结点: 无双亲, 唯一&lt;/li>
+&lt;li>叶结点: 无孩子, 可以多个&lt;/li>
+&lt;li>中间结点: 一个双亲多个孩子&lt;/li>
+&lt;/ul></description></item><item><title>数据结构之线性表</title><link>/post/linerlist-of-datastructure/</link><pubDate>Sun, 15 Oct 2017 16:49:20 +0800</pubDate><guid>/post/linerlist-of-datastructure/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>概念: 零个或多个数据元素的有限序列&lt;/li>
+&lt;/ul>
+&lt;h2 id="抽象数据类型定义">抽象数据类型定义
+&lt;a class="header-anchor" href="#%e6%8a%bd%e8%b1%a1%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b%e5%ae%9a%e4%b9%89">&lt;/a>
+&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>ADT 线性表List
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	线性表的数据对象集合为{a1,a2,...,an}, 每个元素的类型均为DataType, 除第一个元素a1外,每一个元素有且只有一个直接前驱元素, 除了最后一个元素an外, 每一个元素有且只有直接后驱元素。数据元素之间的关系是一对一的关系
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Operation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> InitList(*L): 初始化操作, 构造一个空的线性表L
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ListEmpty(L): 若线性表L为空表，则返回TRUE，否则返回FALSE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClearList(*L): 将线性表置空
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GetElem(L,i,*e):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 初始条件：线性表已存在（1≤i≤ListLenght(L)）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 操作结果：用e返回线性表L中第i个数据元素的值
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> locatElem(L,e): 在线性表中查找与给定值e相等的元素, 如果查找成功, 返回该元素在表中的序号表示成功; 否则, 返回0表示失败
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ListInsert(*L,i,e)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 初始条件：线性表已存在（1≤i≤ListLenght(L)+1）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 操作结果：在线性表L中第i个数据元素之前插入新元素e，L长度加1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ListDelete(*L,i,&amp;amp;e)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 初始条件：线性表已存在（1≤i≤ListLenght(L)）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 操作结果：删除线性表L中第i个数据元素，用e返回其值，L长度减1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ListLenght(L)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 初始条件：线性表已存在
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 操作结果：返回线性表L数据元素个数
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>end ADT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java中的常见7种排序算法</title><link>/post/seven-common-sort-algorithm-of-java/</link><pubDate>Sun, 13 Mar 2016 10:21:17 +0800</pubDate><guid>/post/seven-common-sort-algorithm-of-java/</guid><description>&lt;h2 id="简介">简介
+&lt;a class="header-anchor" href="#%e7%ae%80%e4%bb%8b">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>定义:
+&lt;ul>
+&lt;li>假设有n个记录的序列为{r1,r2,&amp;hellip;,rn}, 其相应的关键字分别为{k1,k2,&amp;hellip;,kn}, 需确定1,2,&amp;hellip;,n的一种排列p1,p2,&amp;hellip;,pn, 使其相应的关键字满足k_p1 &amp;lt;= k_p2 &amp;lt;= &amp;hellip; &amp;lt;= k_pn (非递减或非递增)关系, 即使得序列成为一个按关键字 有序的序列{r_p1,r_p2,&amp;hellip;,r_pn}, 这样的操作就称为排序&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>说明:
+&lt;ul>
+&lt;li>排序可以看成是线性表的一种操作&lt;/li>
+&lt;li>排序的依据是关键字之间的大小关系&lt;/li>
+&lt;li>组合排序可以将主关键字与次关键字拼成字符串, 转化成单关键字排序&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

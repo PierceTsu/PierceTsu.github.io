@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>机器学习 on Patrick's Blog</title><link>/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link><description>Recent content in 机器学习 on Patrick's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 03 Feb 2020 15:42:32 +0800</lastBuildDate><atom:link href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/rss.xml" rel="self" type="application/rss+xml"/><item><title>机器学习中的特征工程</title><link>/post/featureenginering-of-machinelearning/</link><pubDate>Mon, 03 Feb 2020 15:42:32 +0800</pubDate><guid>/post/featureenginering-of-machinelearning/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>机器学习将数据拟合到数学模型中来获得结论或者做出预测。这些模型吸纳特征作为输入。特征就是原始数据某方面的数学表现。在机器学习流水线中特征位于数据和模型之间。&lt;/li>
+&lt;li>特征工程是一项从数据中提取特征，然后转换成适合机器学习模型的格式的艺术。这是机器学习流水线关键的一步，因为正确的特征可以减轻建模的难度，并因此使流水线能输出更高质量的结果。&lt;/li>
+&lt;li>数据和特征决定了机器学习的上限, 而模型和算法只是逼近这个上限而已.&lt;/li>
+&lt;li>流程:
+&lt;img src="/imgs/img-lazy-loading.gif" data-src="/img/feature_engineering-1.png" alt="img" />&lt;/li>
+&lt;/ul></description></item><item><title>机器学习中的评估指标</title><link>/post/evaluation-of-machinelearning/</link><pubDate>Sun, 08 Sep 2019 22:48:09 +0800</pubDate><guid>/post/evaluation-of-machinelearning/</guid><description>&lt;h2 id="分类问题">分类问题
+&lt;a class="header-anchor" href="#%e5%88%86%e7%b1%bb%e9%97%ae%e9%a2%98">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>当正负样本分布极不均衡时, 准确率将失去意义, 通常使用AUC作为指标&lt;/li>
+&lt;/ul>
+&lt;h3 id="混淆矩阵confusion-matrix">混淆矩阵（Confusion Matrix）
+&lt;a class="header-anchor" href="#%e6%b7%b7%e6%b7%86%e7%9f%a9%e9%98%b5confusion-matrix">&lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>矩阵中的每一行代表实例的预测类别，每一列代表实例的真实类别。
+&lt;img src="/imgs/img-lazy-loading.gif" data-src="/img/confusion_matrix.png" alt="img" />&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>真正(True Positive , TP)：被模型预测为正的正样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假正(False Positive , FP)：被模型预测为正的负样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假负(False Negative , FN)：被模型预测为负的正样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>真负(True Negative , TN)：被模型预测为负的负样本。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>真正率(True Positive Rate,TPR)：TPR=TP/(TP+FN)，即被预测为正的正样本数 /正样本实际数。 召回率
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假正率(False Positive Rate,FPR) ：FPR=FP/(FP+TN)，即被预测为正的负样本数 /负样本实际数。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>假负率(False Negative Rate,FNR) ：FNR=FN/(TP+FN)，即被预测为负的正样本数 /正样本实际数。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>真负率(True Negative Rate,TNR)：TNR=TN/(TN+FP)，即被预测为负的负样本数 /负样本实际数/2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>机器学习之决策树</title><link>/post/decision-tree-of-machinelearning/</link><pubDate>Sun, 19 May 2019 14:15:21 +0800</pubDate><guid>/post/decision-tree-of-machinelearning/</guid><description>&lt;h2 id="概述">概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0">&lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>是一种基本的分类与回归方法, 模型呈树形结构.&lt;/li>
+&lt;li>学习步骤:
+&lt;ol>
+&lt;li>特征选择&lt;/li>
+&lt;li>决策树的生成&lt;/li>
+&lt;li>决策树的修剪&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

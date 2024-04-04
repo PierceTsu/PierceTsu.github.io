@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Patrick's Blog</title><link>/tags/python/</link><description>Recent content in Python on Patrick's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 05 Oct 2016 17:40:03 +0800</lastBuildDate><atom:link href="/tags/python/rss.xml" rel="self" type="application/rss+xml"/><item><title>Pyhton中的时间模块</title><link>/post/datetime-module-of-python/</link><pubDate>Wed, 05 Oct 2016 17:40:03 +0800</pubDate><guid>/post/datetime-module-of-python/</guid><description>&lt;h2 id="获取当前日期和时间">获取当前日期和时间
+&lt;a class="header-anchor" href="#%e8%8e%b7%e5%8f%96%e5%bd%93%e5%89%8d%e6%97%a5%e6%9c%9f%e5%92%8c%e6%97%b6%e9%97%b4">&lt;/a>
+&lt;/h2>&lt;h3 id="使用time模块">使用time模块
+&lt;a class="header-anchor" href="#%e4%bd%bf%e7%94%a8time%e6%a8%a1%e5%9d%97">&lt;/a>
+&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> time
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(time&lt;span style="color:#f92672">.&lt;/span>strftime(&lt;span style="color:#e6db74">&amp;#39;%Y-%m-&lt;/span>&lt;span style="color:#e6db74">%d&lt;/span>&lt;span style="color:#e6db74"> %H:%M:%S&amp;#39;&lt;/span>, time&lt;span style="color:#f92672">.&lt;/span>localtime(time&lt;span style="color:#f92672">.&lt;/span>time())))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Out: 2016-12-08 17:14:29&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用datetime模块">使用datetime模块
+&lt;a class="header-anchor" href="#%e4%bd%bf%e7%94%a8datetime%e6%a8%a1%e5%9d%97">&lt;/a>
+&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> datetime &lt;span style="color:#f92672">import&lt;/span> datetime
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> datetime &lt;span style="color:#f92672">import&lt;/span> date
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>today &lt;span style="color:#f92672">=&lt;/span> date&lt;span style="color:#f92672">.&lt;/span>today()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(str(today&lt;span style="color:#f92672">.&lt;/span>year) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;-&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> str(today&lt;span style="color:#f92672">.&lt;/span>month) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#39;-&amp;#39;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> str(today&lt;span style="color:#f92672">.&lt;/span>day)) 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Out: 2016-12-8&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(today&lt;span style="color:#f92672">.&lt;/span>strftime(&lt;span style="color:#e6db74">&amp;#39;%Y-%m-&lt;/span>&lt;span style="color:#e6db74">%d&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Out: 2016-12-08&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>now &lt;span style="color:#f92672">=&lt;/span> datetime&lt;span style="color:#f92672">.&lt;/span>now()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(now&lt;span style="color:#f92672">.&lt;/span>strftime(&lt;span style="color:#e6db74">&amp;#39;%Y-%m-&lt;/span>&lt;span style="color:#e6db74">%d&lt;/span>&lt;span style="color:#e6db74"> %H:%M:%S&amp;#39;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Out: 2016-12-08 17:14:29&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

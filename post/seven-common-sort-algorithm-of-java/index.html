@@ -28,7 +28,7 @@
 </span><span id=busuanzi_value_page_pv data-path=/post/seven-common-sort-algorithm-of-java/><i class="fa fa-sync fa-spin"></i>
 </span></span><span class=post-meta-item title><span class=post-meta-item-icon><i class="far fa-comments"></i>
 </span><span class=post-meta-item-text title=评论>评论：
-</span><span id=comments-count class=waline-comment-count data-path=/post/seven-common-sort-algorithm-of-java/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><h2 id=简介>简介
+</span><span id=comments-count class=waline-comment-count data-path=/post/seven-common-sort-algorithm-of-java/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class=post-body itemprop=articleBody><h2 id=简介>简介
 <a class=header-anchor href=#%e7%ae%80%e4%bb%8b></a></h2><ul><li>定义:<ul><li>假设有n个记录的序列为{r1,r2,&mldr;,rn}, 其相应的关键字分别为{k1,k2,&mldr;,kn}, 需确定1,2,&mldr;,n的一种排列p1,p2,&mldr;,pn, 使其相应的关键字满足k_p1 &lt;= k_p2 &lt;= &mldr; &lt;= k_pn (非递减或非递增)关系, 即使得序列成为一个按关键字 有序的序列{r_p1,r_p2,&mldr;,r_pn}, 这样的操作就称为排序</li></ul></li><li>说明:<ul><li>排序可以看成是线性表的一种操作</li><li>排序的依据是关键字之间的大小关系</li><li>组合排序可以将主关键字与次关键字拼成字符串, 转化成单关键字排序</li></ul></li></ul><h3 id=排序的稳定性>排序的稳定性
 <a class=header-anchor href=#%e6%8e%92%e5%ba%8f%e7%9a%84%e7%a8%b3%e5%ae%9a%e6%80%a7></a></h3><ul><li>假设ki=kj (1&lt;=i&lt;=n, 1&lt;=j&lt;=n, i&lt;>j), 且在排序前的序列中ri领先与rj (i&lt;j)。如果排序后ri仍领先rj, 则称所用的排序方法是稳定的; 反之, 若可能使得排序后rj领先ri, 则称所用排序方法是不稳定的。</li></ul><h2 id=内排序与外排序>内排序与外排序
 <a class=header-anchor href=#%e5%86%85%e6%8e%92%e5%ba%8f%e4%b8%8e%e5%a4%96%e6%8e%92%e5%ba%8f></a></h2><h3 id=内排序>内排序

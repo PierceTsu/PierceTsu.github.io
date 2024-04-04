@@ -28,7 +28,7 @@
 </span><span id=busuanzi_value_page_pv data-path=/post/quickstart-of-hdfs/><i class="fa fa-sync fa-spin"></i>
 </span></span><span class=post-meta-item title><span class=post-meta-item-icon><i class="far fa-comments"></i>
 </span><span class=post-meta-item-text title=评论>评论：
-</span><span id=comments-count class=waline-comment-count data-path=/post/quickstart-of-hdfs/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><h2 id=概述>概述
+</span><span id=comments-count class=waline-comment-count data-path=/post/quickstart-of-hdfs/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class=post-body itemprop=articleBody><h2 id=概述>概述
 <a class=header-anchor href=#%e6%a6%82%e8%bf%b0></a></h2><ul><li>简介:<ul><li>源自Google的GFS论文的巨大分布式文件系统</li></ul></li><li>特点:<ol><li>扩展性</li><li>容错性</li><li>海量数据存储</li></ol></li><li>优缺点:<ul><li>优点:<ol><li>数据冗余, 硬件容错</li><li>处理流式(一次写入多次读取)的数据访问</li><li>适合存储大文件</li><li>构建在廉价机器上</li></ol></li><li>缺点:<ol><li>不满足低延迟的数据访问</li><li>不适合小文件的存储</li></ol></li></ul></li><li>存储:<ul><li>将文件切分成指定大小的数据块并以多副本的存储在多个机器上</li><li>数据的切分,多副本,容错等操作对用户透明</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-fallback data-lang=fallback><span style=display:flex><span>NameNode (Filename, numReplicas, block-ids)
 </span></span></code></pre></div></li></ul><h2 id=架构>架构
 <a class=header-anchor href=#%e6%9e%b6%e6%9e%84></a></h2><ul><li>简介:<ol><li>一个Master(NameNode/NN)带N个Slaves(DataNode/DN)</li><li>一个文件会被拆分成多个Block, 默认blocksize:128M</li></ol></li></ul><h3 id=namenode>NameNode

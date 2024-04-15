@@ -548,4 +548,5 @@ N 位同学站成一排，音乐老师要请最少的同学出列，使得剩下
 &lt;a class="header-anchor" href="#object%e7%b1%bb">&lt;/a>
 &lt;/h2>&lt;ul>
 &lt;li>类 Object 是类层次结构的根类。每个类都使用 Object 作为&lt;strong>超类&lt;/strong>。所有对象（包括数组）都实现这个类的方法。&lt;/li>
-&lt;/ul></description></item><item><title>关于</title><link>/about/</link><pubDate>Sun, 05 Apr 2015 13:54:22 +0800</pubDate><guid>/about/</guid><description/></item></channel></rss>
+&lt;/ul></description></item><item><title>关于</title><link>/about/</link><pubDate>Sun, 05 Apr 2015 13:54:22 +0800</pubDate><guid>/about/</guid><description/></item><item><title>站点示例</title><link>/flinks.html</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/flinks.html</guid><description>如想交换本站友情链接，请在评论区留下你的站点信息，格式参考如下：
+- name: Patrick desc: Once start, goes forward! avatar: https://blog.yaoyuehome.com/img/avatar.jpg link: https://blog.yaoyuehome.com</description></item></channel></rss>
